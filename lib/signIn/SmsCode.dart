@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sharify_2/HomePage/navigator.dart';
+import 'package:sharify/HomePage/navigator.dart';
 import 'signUp.dart';
 
 class SmsCode extends StatelessWidget {
@@ -17,7 +17,7 @@ class SmsCode extends StatelessWidget {
             flex: 1,
             child: Container(
               child: Image(
-                image: AssetImage('images/sharifyLogo.png'),
+                image: AssetImage('assets/sharifyLogo.png'),
                 width: 124.0,
                 height: 62.0,
               ),
@@ -52,12 +52,14 @@ class SmsCode extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Column(
-              children: [
-                newTextField(
-                  givenText: 'SMS CODE',
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  newTextField(
+                    givenText: 'SMS CODE',
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(

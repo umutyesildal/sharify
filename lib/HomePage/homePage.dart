@@ -2,10 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'homeCard1.dart' as homeCard1;
 
-
-
-
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();

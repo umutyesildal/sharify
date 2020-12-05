@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sharify/HomePage/navigator.dart';
 import 'SmsCode.dart';
 import 'signUp.dart';
 
@@ -112,7 +113,7 @@ class newButton extends StatelessWidget {
           ),
           onPressed: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SmsCode()),
+            MaterialPageRoute(builder: (context) => navigator()),
           ),
         ),
         decoration: BoxDecoration(

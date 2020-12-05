@@ -1,13 +1,11 @@
 
 import 'package:flutter/material.dart';
 import '../Forum/forumTabs.dart';
-import 'forum_page.dart';
 import 'add_page.dart';
-import 'message_page.dart';
 import 'profile_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'homePage.dart';
-import 'package:sharify_2/Message/messageHomeScreen.dart';
+import 'package:sharify/Message/messageHomeScreen.dart';
 
 class navigator extends StatefulWidget {
   @override

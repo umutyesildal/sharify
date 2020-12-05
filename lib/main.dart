@@ -3,8 +3,8 @@ import 'Forum/constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'Forum/constants.dart';
 import 'onBoarding/onBoarding.dart';
-import 'package:sharify_2/signIn/signIn.dart';
-import 'package:sharify_2/signIn/signUp.dart';
+import 'package:sharify/signIn/signIn.dart';
+import 'package:sharify/signIn/signUp.dart';
 
 
 

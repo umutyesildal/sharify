@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sharify_2/HomePage/navigator.dart';
+import 'package:sharify/HomePage/navigator.dart';
 import 'homePage.dart';
 
 class addPage extends StatefulWidget {
@@ -71,7 +71,7 @@ class _addPageState extends State<addPage> {
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/add.png'),
+                  image: AssetImage('assets/add.png'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -96,7 +96,7 @@ class _addPageState extends State<addPage> {
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/add.png'),
+                  image: AssetImage('assets/add.png'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -121,7 +121,7 @@ class _addPageState extends State<addPage> {
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/add.png'),
+                  image: AssetImage('assets/add.png'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
@@ -146,7 +146,7 @@ class _addPageState extends State<addPage> {
               margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/add.png'),
+                  image: AssetImage('assets/add.png'),
                   fit: BoxFit.cover,
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
-import 'package:sharify_2/signIn/entryPage.dart';
+import 'package:sharify/signIn/entryPage.dart';
 import '../Forum/constants.dart';
 
 
@@ -37,7 +37,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/onBoarding1.png",
+        pathImage: "assets/onBoarding1.png",
       ),
     );
     slides.add(
@@ -54,7 +54,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/onBoarding2.png",
+        pathImage: "assets/onBoarding2.png",
       ),
     );
     slides.add(
@@ -71,7 +71,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/onBoarding3.png",
+        pathImage: "assets/onBoarding3.png",
       ),
     );
     slides.add(
@@ -88,7 +88,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/onBoarding4.png",
+        pathImage: "assets/onBoarding4.png",
       ),
     );
   }
