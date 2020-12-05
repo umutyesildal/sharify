@@ -6,10 +6,7 @@ import 'onBoarding/onBoarding.dart';
 import 'package:sharify/signIn/signIn.dart';
 import 'package:sharify/signIn/signUp.dart';
 
-
-
 main() => runApp(MyApp());
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
