@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'package:sharify_2/HomePage/navigator.dart';
+import 'homePage.dart';
 
 class addPage extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _addPageState extends State<addPage> {
           ),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Home()));
+                context, MaterialPageRoute(builder: (context) => navigator()));
           },
         ),
         actions: <Widget>[

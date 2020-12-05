@@ -1,31 +1,14 @@
 import 'package:flutter/material.dart';
-import 'signup.dart';
+import 'signUp.dart';
 import 'SmsCode.dart';
 import 'signIn.dart';
 
-void main() => runApp(new MyApp());
-
-class MyApp extends StatelessWidget {
+class entryPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new MyHomePage(),
-      initialRoute: "/",
-      routes: {
-        "/signin": (context) => SignIn(),
-        "/signup": (context) => SignUp(),
-        "/smscode": (context) => SmsCode(),
-      },
-    );
-  }
+  _entryPageState createState() => new _entryPageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _entryPageState extends State<entryPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -41,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
             flex: 1,
             child: Container(
               child: Image(
-                image: AssetImage('images/logo.png'),
+                image: AssetImage('assets/sharifyLogo.png'),
                 width: 124.0,
                 height: 62.0,
               ),
@@ -86,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: <Widget>[
                         Center(
                             child: new Image(
-                          image: new AssetImage("images/apple.png"),
+                          image: new AssetImage("assets/apple.png"),
                           color: null,
                           width: 22.49,
                           height: 27.71,
@@ -123,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         new Image(
-                          image: new AssetImage("images/search.png"),
+                          image: new AssetImage("assets/search.png"),
                           color: null,
                           width: 22.49,
                           height: 27.71,

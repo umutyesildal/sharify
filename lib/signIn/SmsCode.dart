@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'signup.dart';
+import 'package:sharify_2/HomePage/navigator.dart';
+import 'signUp.dart';
 
 class SmsCode extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class SmsCode extends StatelessWidget {
             flex: 1,
             child: Container(
               child: Image(
-                image: AssetImage('images/logo.png'),
+                image: AssetImage('images/sharifyLogo.png'),
                 width: 124.0,
                 height: 62.0,
               ),
@@ -120,7 +121,7 @@ class newButton extends StatelessWidget {
           ),
           onPressed: () => Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SmsCode()),
+            MaterialPageRoute(builder: (context) => navigator()),
           ),
         ),
         decoration: BoxDecoration(

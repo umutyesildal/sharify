@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:sharify_2/signIn/entryPage.dart';
+import '../Forum/constants.dart';
+
 
 class onBoarding extends StatefulWidget {
   @override
@@ -8,7 +11,6 @@ class onBoarding extends StatefulWidget {
     return _MyApp();
   }
 }
-
 class _MyApp extends State<onBoarding> {
   // 1 Step: Create List of Slides
   List<Slide> slides = new List();
@@ -35,7 +37,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/1.png",
+        pathImage: "/assets/onBoarding1.png",
       ),
     );
     slides.add(
@@ -52,7 +54,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/2.png",
+        pathImage: "/assets/onBoarding2.png",
       ),
     );
     slides.add(
@@ -69,7 +71,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/3.png",
+        pathImage: "/assets/onBoarding3.png",
       ),
     );
     slides.add(
@@ -86,7 +88,7 @@ class _MyApp extends State<onBoarding> {
           color: Colors.black,
           fontSize: 20.0,
         ),
-        pathImage: "/assets/4.png",
+        pathImage: "/assets/onBoarding4.png",
       ),
     );
   }
@@ -94,7 +96,8 @@ class _MyApp extends State<onBoarding> {
   // 4 Step: Create Other functions
   void onDonePress() {
     // Back to the first tab
-    this.goToTab(0);
+    Navigator.push(context,
+    MaterialPageRoute(builder: (context) => entryPage()));
   }
 
   void onTabChangeCompleted(index) {
@@ -103,8 +106,8 @@ class _MyApp extends State<onBoarding> {
 
   Widget renderNextBtn() {
     return Icon(
-      Icons.navigate_next,
-      color: Colors.black,
+      Icons.arrow_forward,
+      color: kalphaGreen,
       size: 35.0,
     );
   }
@@ -112,14 +115,16 @@ class _MyApp extends State<onBoarding> {
   Widget renderDoneBtn() {
     return Icon(
       Icons.done,
-      color: Colors.black,
+      color: kalphaGreen,
     );
   }
 
   Widget renderSkipBtn() {
-    return Icon(
-      Icons.skip_next,
-      color: Colors.black,
+    return Text(
+      "Skip",
+      style: TextStyle(
+        fontSize: 20.0,
+      ),
     );
   }
 
@@ -179,8 +184,8 @@ class _MyApp extends State<onBoarding> {
 
           // Skip button
           renderSkipBtn: this.renderSkipBtn(),
-          colorSkipBtn: Colors.green,
-          highlightColorSkipBtn: Colors.black,
+          colorSkipBtn: Colors.white,
+          highlightColorSkipBtn: Colors.white,
 
           // Next button
           renderNextBtn: this.renderNextBtn(),
@@ -188,11 +193,11 @@ class _MyApp extends State<onBoarding> {
           // Done button
           renderDoneBtn: this.renderDoneBtn(),
           onDonePress: this.onDonePress,
-          colorDoneBtn: Colors.green,
-          highlightColorDoneBtn: Colors.black,
+          colorDoneBtn: Colors.white,
+          highlightColorDoneBtn: Colors.white,
 
           // Dot indicator
-          colorDot: Colors.green,
+          colorDot: kalphaGreen,
           sizeDot: 13.0,
 
           // Tabs

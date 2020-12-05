@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'SmsCode.dart';
-import 'signup.dart';
+import 'signUp.dart';
 
 class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class SignIn extends StatelessWidget {
             flex: 1,
             child: Container(
               child: Image(
-                image: AssetImage('images/logo.png'),
+                image: AssetImage('assets/sharifyLogo.png'),
                 width: 124.0,
                 height: 62.0,
               ),

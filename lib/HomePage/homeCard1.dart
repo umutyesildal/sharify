@@ -23,13 +23,12 @@ class _homeCard1State extends State<homeCard1> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('images/yemek1.png'),
+                  image: AssetImage('assets/happyMan.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
               ),
          );
-
         }
         ),
       ),

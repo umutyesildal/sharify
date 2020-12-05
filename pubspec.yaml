@@ -27,6 +27,7 @@ dependencies:
   convex_bottom_bar: ^2.6.0
   intro_slider: ^2.3.3
   animations: ^1.1.2
+  flutter_spinkit: ^4.1.2
 
 dev_dependencies:
   flutter_test:
