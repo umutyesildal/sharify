@@ -1,4 +1,4 @@
-# sharify_2
+# sharify
 
 A new Flutter application.
 
