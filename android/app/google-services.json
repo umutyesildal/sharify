@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "496330817705",
+    "firebase_url": "https://sharify-b784b.firebaseio.com",
+    "project_id": "sharify-b784b",
+    "storage_bucket": "sharify-b784b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496330817705:android:a0f02a470ec40c73d969b8",
+        "android_client_info": {
+          "package_name": "com.hepsi1.sharify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496330817705-clg96jg261c5365j6do4775lm4i1qiqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbPKhDZGZFoUtiiHTqu5PcMcvby2VzaKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496330817705-clg96jg261c5365j6do4775lm4i1qiqn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "496330817705-qf86bsoe03g3bd8bmal364otqt0cgdh4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hepsi1.sharify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

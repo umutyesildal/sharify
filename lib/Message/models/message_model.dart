@@ -17,21 +17,21 @@ class Message {
 
 // YOU - current user
 final User currentUser =
-    User(id: 0, name: 'Current User', imageUrl: 'images/greg.jpg');
+    User(id: 0, name: 'Current User', imageUrl: 'assets/greg.jpg');
 
 // USERS
-final User greg = User(id: 1, name: 'Greg', imageUrl: 'images/greg.jpg');
+final User greg = User(id: 1, name: 'Greg', imageUrl: 'assets/greg.jpg');
 
-final User james = User(id: 2, name: 'James', imageUrl: 'images/james.jpg');
+final User james = User(id: 2, name: 'James', imageUrl: 'assets/james.jpg');
 
-final User john = User(id: 3, name: 'John', imageUrl: 'images/john.jpg');
+final User john = User(id: 3, name: 'John', imageUrl: 'assets/john.jpg');
 
-final User olivia = User(id: 4, name: 'Olivia', imageUrl: 'images/olivia.jpg');
+final User olivia = User(id: 4, name: 'Olivia', imageUrl: 'assets/olivia.jpg');
 
-final User sam = User(id: 5, name: 'Sam', imageUrl: 'images/sam.jpg');
+final User sam = User(id: 5, name: 'Sam', imageUrl: 'assets/sam.jpg');
 
-final User sophia = User(id: 6, name: 'Sophia', imageUrl: 'images/sophia.jpg');
-final User steven = User(id: 7, name: 'Steven', imageUrl: 'images/steven.jpg');
+final User sophia = User(id: 6, name: 'Sophia', imageUrl: 'assets/sophia.jpg');
+final User steven = User(id: 7, name: 'Steven', imageUrl: 'assets/steven.jpg');
 
 // EXAMPLE CHATS ON HOME SCREEN
 List<Message> chats = [
