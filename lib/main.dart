@@ -1,29 +1,42 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'Forum/constants.dart';
+import 'package:sharify/signIn/entryPage.dart';
+import 'constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'Forum/constants.dart';
 import 'onBoarding/onBoarding.dart';
 import 'package:sharify/signIn/signIn.dart';
 import 'package:sharify/signIn/signUp.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:sharify/services/authService.dart';
 
-main() => runApp(MyApp());
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primaryColor: kbackgroundWhite,
-        accentColor: kalphaGreen,
-        scaffoldBackgroundColor: kbackgroundGrey,
+    return MultiProvider(
+      providers: [
+        Provider<AuthenticationService>(
+          create: (_) => AuthenticationService(FirebaseAuth.instance),
+        ),
+        StreamProvider(
+          create: (context) => context.read<AuthenticationService>().authStateChanges,
+        )
+      ],
+      child: MaterialApp(
+        theme: ThemeData(
+          primaryColor: kbackgroundWhite,
+          accentColor: kalphaGreen,
+          scaffoldBackgroundColor: kbackgroundGrey,
+        ),
+        home: Splash(),
       ),
-      home: Splash(),
-      initialRoute: "/",
-      routes: {
-        "/signin": (context) => SignIn(),
-        "/signup": (context) => SignUp(),
-      },
     );
   }
 }
@@ -49,7 +62,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
     Future.delayed(const Duration(seconds: 3), () async {
       Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => new onBoarding()));
+          context, new MaterialPageRoute(builder: (context) => new entryPage()));
     });
   }
 

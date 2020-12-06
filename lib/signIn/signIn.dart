@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/navigator.dart';
-import 'SmsCode.dart';
-import 'signUp.dart';
+import 'package:sharify/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
+  @override
+  _SignInState createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -54,11 +61,29 @@ class SignIn extends StatelessWidget {
                 flex: 2,
                 child: Column(
                   children: [
-                    newTextField(
-                      givenText: 'E-mail Address',
+                    Container(
+                      padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
+                      child: TextFormField(
+                        controller: emailController,
+                        decoration: textFieldDecoration.copyWith(
+                          labelText: "E-mail Adress",
+                          labelStyle: TextStyle(
+                            color: Colors.black45,
+                          ),
+                        ),
+                      ),
                     ),
-                    newTextField(
-                      givenText: 'Password',
+                    Container(
+                      padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
+                      child: TextFormField(
+                        controller: passwordController,
+                        decoration: textFieldDecoration.copyWith(
+                          labelText: "Password",
+                          labelStyle: TextStyle(
+                            color: Colors.black45,
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -97,9 +122,13 @@ class SignIn extends StatelessWidget {
 }
 
 class newButton extends StatelessWidget {
-  const newButton({@required this.givenButton});
-  final String givenButton;
+  const newButton(
+      {@required this.givenButton, this.givenEmail, this.givenPassword});
 
+  final String givenButton;
+  final String givenEmail;
+  final String givenPassword;
+  static final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -117,10 +146,21 @@ class newButton extends StatelessWidget {
               ),
             ),
           ),
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => navigator()),
-          ),
+          onPressed: () async {
+            try {
+              print(givenPassword);
+              print(givenEmail);
+              final user = await _auth.signInWithEmailAndPassword(email: givenEmail, password: givenPassword);
+              if(user != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => navigator()),
+                );
+              }
+            }catch(e){
+              print(e);
+            }
+          },
         ),
         decoration: BoxDecoration(
           border: Border.all(
@@ -133,34 +173,4 @@ class newButton extends StatelessWidget {
   }
 }
 
-class newTextField extends StatelessWidget {
-  const newTextField({@required this.givenText});
-  final String givenText;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderRadius:BorderRadius.circular(10.0) ,
-            borderSide: BorderSide(
-              color: Colors.teal[700],
-            ),
-          ),
-          labelText: givenText,
-          border: OutlineInputBorder(
-            borderRadius: new BorderRadius.circular(10.0),
-            borderSide: new BorderSide(
-              style: BorderStyle.solid,
-            ),
-          ),
-          labelStyle: TextStyle(
-            color: Colors.black45,
-          ),
-        ),
-      ),
-    );
-  }
-}

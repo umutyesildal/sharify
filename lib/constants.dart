@@ -47,4 +47,13 @@ const kbackgroundGrey = Color(0xFFF8F8F8);
 const klikeAndCommentGrey = Color(0xFFACADB5);
 const kForumRepliesGrey = Color(0xFF707070);
 
+var textFieldDecoration = InputDecoration(
+  fillColor: Colors.white,
+  border: OutlineInputBorder(
+    borderRadius: new BorderRadius.circular(10.0),
+    borderSide: new BorderSide(
+      style: BorderStyle.solid,
+    ),
+  ),
+);
 
