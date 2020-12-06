@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sharify/HomePage/addItem.dart';
 import 'package:sharify/HomePage/navigator.dart';
 import 'homePage.dart';
 
@@ -33,7 +34,9 @@ class _addPageState extends State<addPage> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> addItem()));
+              },
               child: Text(
                 'Next',
                 style: TextStyle(color: Colors.white),
@@ -78,15 +81,12 @@ class _addPageState extends State<addPage> {
               ),
               child: Row(
                 children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      'food',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0,
-                          color: Colors.white),
-                    ),
+                  Text(
+                    'food',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0,
+                        color: Colors.white),
                   ),
                 ],
               ),
@@ -103,15 +103,12 @@ class _addPageState extends State<addPage> {
               ),
               child: Row(
                 children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      'books',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0,
-                          color: Colors.white),
-                    ),
+                  Text(
+                    'books',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0,
+                        color: Colors.white),
                   )
                 ],
               ),
@@ -128,15 +125,12 @@ class _addPageState extends State<addPage> {
               ),
               child: Row(
                 children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      'clothes',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0,
-                          color: Colors.white),
-                    ),
+                  Text(
+                    'clothes',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0,
+                        color: Colors.white),
                   )
                 ],
               ),
@@ -153,15 +147,12 @@ class _addPageState extends State<addPage> {
               ),
               child: Row(
                 children: <Widget>[
-                  FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      'techs',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25.0,
-                          color: Colors.white),
-                    ),
+                  Text(
+                    'techs',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25.0,
+                        color: Colors.white),
                   )
                 ],
               ),
