@@ -48,10 +48,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
         title: !isSearching
             ? Text('')
             : TextField(
-               decoration: InputDecoration(
-               hintText: 'Search for items...'),
+                 decoration: InputDecoration(
+                 hintText: 'Search for items...'),
 
         ),
+
 
 
         bottom: TabBar(
