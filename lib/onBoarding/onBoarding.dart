@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:sharify/constants.dart';
 import 'package:sharify/signIn/entryPage.dart';
-import '../Forum/constants.dart';
+
 
 
 class onBoarding extends StatefulWidget {
@@ -25,69 +26,42 @@ class _MyApp extends State<onBoarding> {
 
     slides.add(
       new Slide(
+        marginDescription: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
         title: "Share & Get",
-        styleTitle: TextStyle(
-          color: Colors.black,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-        ),
+        styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
-        styleDescription: TextStyle(
-          color: Colors.black,
-          fontSize: 20.0,
-        ),
+        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
         pathImage: "assets/onBoarding1.png",
       ),
     );
     slides.add(
       new Slide(
         title: "Search & Find",
-        styleTitle: TextStyle(
-          color: Colors.black,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-        ),
+        styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Ye indulgence unreserved connection alteration appearance",
-        styleDescription: TextStyle(
-          color: Colors.black,
-          fontSize: 20.0,
-        ),
+        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
         pathImage: "assets/onBoarding2.png",
       ),
     );
     slides.add(
       new Slide(
         title: "Contact & Meet",
-        styleTitle: TextStyle(
-          color: Colors.black,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-        ),
+        styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
-        styleDescription: TextStyle(
-          color: Colors.black,
-          fontSize: 20.0,
-        ),
+        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
         pathImage: "assets/onBoarding3.png",
       ),
     );
     slides.add(
       new Slide(
         title: "Let's Share !",
-        styleTitle: TextStyle(
-          color: Colors.black,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-        ),
+        styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Ye indulgence unreserved connection alteration appearance",
-        styleDescription: TextStyle(
-          color: Colors.black,
-          fontSize: 20.0,
-        ),
+        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
         pathImage: "assets/onBoarding4.png",
       ),
     );
@@ -115,6 +89,7 @@ class _MyApp extends State<onBoarding> {
   Widget renderDoneBtn() {
     return Icon(
       Icons.done,
+      size: 35.0,
       color: kalphaGreen,
     );
   }
@@ -138,6 +113,7 @@ class _MyApp extends State<onBoarding> {
         width: double.infinity,
         height: double.infinity,
         child: Container(
+          padding: EdgeInsets.fromLTRB(30.0, 100.0, 30.0, 100.0),
           margin: EdgeInsets.only(bottom: 60.0, top: 60.0),
           child: ListView(
             children: <Widget>[
@@ -197,9 +173,9 @@ class _MyApp extends State<onBoarding> {
           highlightColorDoneBtn: Colors.white,
 
           // Dot indicator
-          colorDot: kalphaGreen,
+          colorDot: klikeAndCommentGrey,
           sizeDot: 13.0,
-
+          colorActiveDot: kalphaGreen,
           // Tabs
           listCustomTabs: this.renderListCustomTabs(),
           backgroundColorAllSlides: Colors.white,

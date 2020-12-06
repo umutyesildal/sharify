@@ -6,95 +6,101 @@ class SmsCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: SizedBox(),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              child: Image(
-                image: AssetImage('assets/sharifyLogo.png'),
-                width: 124.0,
-                height: 62.0,
+      resizeToAvoidBottomInset: true,
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: SizedBox(),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                Text('     Please validate',
-                    style: TextStyle(
-                      fontSize: 28.0,
-                    )),
-                Text(
-                  '  your account',
-                  style: TextStyle(
-                    fontSize: 28.0,
+              Expanded(
+                flex: 1,
+                child: Container(
+                  child: Image(
+                    image: AssetImage('assets/sharifyLogo.png'),
+                    width: 124.0,
+                    height: 62.0,
                   ),
                 ),
-                Text(
-                  'to continue.',
-                  style: TextStyle(
-                    fontSize: 28.0,
+              ),
+              Expanded(
+                flex: 2,
+                child: Column(
+                  children: [
+                    Text('     Please validate',
+                        style: TextStyle(
+                          fontSize: 28.0,
+                        )),
+                    Text(
+                      '  your account',
+                      style: TextStyle(
+                        fontSize: 28.0,
+                      ),
+                    ),
+                    Text(
+                      'to continue.',
+                      style: TextStyle(
+                        fontSize: 28.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: SizedBox(),
+              ),
+              Expanded(
+                flex: 1,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      newTextField(
+                        givenText: 'SMS CODE',
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: SizedBox(),
-          ),
-          Expanded(
-            flex: 1,
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  newTextField(
-                    givenText: 'SMS CODE',
+              ),
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+                  child: newButton(
+                    givenButton: 'CHECK',
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
-              child: newButton(
-                givenButton: 'CHECK',
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              child: Center(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed('/signin');
-                  },
-                  child: new Padding(
-                    padding: new EdgeInsets.all(10.0),
-                    child: new Text(
-                      "You’ve already registered?",
-                      style: TextStyle(color: Colors.teal[700]),
+              Expanded(
+                flex: 1,
+                child: Container(
+                  child: Center(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed('/signin');
+                      },
+                      child: new Padding(
+                        padding: new EdgeInsets.all(10.0),
+                        child: new Text(
+                          "You’ve already registered?",
+                          style: TextStyle(color: Colors.teal[700]),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+              Expanded(
+                flex: 1,
+                child: SizedBox(),
+              ),
+            ],
           ),
-          Expanded(
-            flex: 1,
-            child: SizedBox(),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -146,13 +152,21 @@ class newTextField extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
       child: TextFormField(
         decoration: InputDecoration(
-          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius:BorderRadius.circular(10.0) ,
+            borderSide: BorderSide(
+              color: Colors.teal[700],
+            ),
+          ),
           labelText: givenText,
           border: OutlineInputBorder(
             borderRadius: new BorderRadius.circular(10.0),
             borderSide: new BorderSide(
               style: BorderStyle.solid,
             ),
+          ),
+          labelStyle: TextStyle(
+            color: Colors.black45,
           ),
         ),
       ),

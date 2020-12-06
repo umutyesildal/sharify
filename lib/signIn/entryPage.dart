@@ -34,7 +34,7 @@ class _entryPageState extends State<entryPage> {
             flex: 2,
             child: Column(
               children: [
-                Text('     Welcome',
+                Text('    Welcome',
                     style: TextStyle(
                       fontSize: 28.0,
                     )),
