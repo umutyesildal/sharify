@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../signIn/entryPage.dart';
 import 'homeCard1.dart' as homeCard1;
 
 class Home extends StatefulWidget {
@@ -8,8 +9,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
-  Icon cusIcon = Icon(Icons.search);
-  Widget cusSearchBar;
+  bool isSearching = false;
+
   final List<Tab> myTabs = <Tab>[
     Tab(text: "food"),
     Tab(text: "books"),
@@ -44,6 +45,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
           ]
       ),
       appBar: AppBar(
+        title: !isSearching
+            ? Text('')
+            : TextField(
+               decoration: InputDecoration(
+               hintText: 'Search for items...'),
+
+        ),
+
+
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.green,
@@ -64,33 +74,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin{
 
         ),
         actions: <Widget>[
+          isSearching ?
           IconButton(
               color: Colors.black,
-              icon: cusIcon,
-              iconSize: 40.0,
-              onPressed: (){
+              icon: Icon(Icons.cancel),
+              iconSize: 30.0,
+              onPressed: () {
                 setState(() {
-                  if(this.cusIcon.icon == Icons.search){
-                    this.cusIcon = Icon(Icons.cancel);
-                    this.cusSearchBar = TextField(
-                      textInputAction: TextInputAction.go,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: ('Search for items...'),
-                      ),
-                      style: TextStyle(
-                        color: Colors.black45,
-                        fontSize: 16.0,
-                      ),
-                    );
-                  }
-                  else{
-                    this.cusIcon = Icon(Icons.search);
-                  }
+                  this.isSearching = false;
                 });
               }
           )
-        ],
+          : IconButton(
+              color: Colors.black,
+              icon: Icon(Icons.search),
+              iconSize: 40.0,
+              onPressed: () {
+                setState(() {
+                  this.isSearching = true;
+                });
+              }
+          ),
+          ],
 
       ),
     );
