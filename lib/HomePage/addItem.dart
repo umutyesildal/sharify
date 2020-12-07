@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'add_page.dart';
 
 class addItem extends StatefulWidget {
@@ -117,7 +116,7 @@ class _addItemState extends State<addItem> {
                 child: GestureDetector(
                   child: TextField(
                     decoration: InputDecoration(
-                      icon: Icon(Icons.calendar_today_rounded, color: Colors.black,),
+                      icon: Icon(Icons.calendar_today, color: Colors.black,),
                       border: InputBorder.none,
                       hintText: ' Pick-up Times',
                       hintStyle: TextStyle(
@@ -134,7 +133,7 @@ class _addItemState extends State<addItem> {
                 child: GestureDetector(
                   child: TextField(
                     decoration: InputDecoration(
-                      icon: Icon(Icons.location_on_outlined, color: Colors.black,),
+                      icon: Icon(Icons.calendar_today, color: Colors.black,),
                       border: InputBorder.none,
                       hintText: ' Location',
                       hintStyle: TextStyle(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sharify/signIn/entryPage.dart';
 
 
 class profilePage extends StatelessWidget {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,7 +12,18 @@ class profilePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Center(
-            child: Text('PROFILE PAGE', style: TextStyle(fontSize: 20.0),),
+            child: RaisedButton(
+              child: Text("BAS BANAAAAAAA"),
+              onPressed: () async {
+                await _auth.signOut();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => entryPage(),
+                  ),
+                );
+              },
+            ),
           ),
 
         ],

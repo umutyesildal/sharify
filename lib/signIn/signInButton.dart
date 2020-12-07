@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/HomePage/navigator.dart';
-class signInButton extends StatelessWidget {
+import 'package:sharify/services/globalSnackBar.dart';
+import 'package:sharify/signIn/signIn.dart';
+class signInButton extends StatefulWidget {
   const signInButton(
       {@required this.givenButton, this.givenEmail, this.givenPassword});
 
@@ -9,6 +11,13 @@ class signInButton extends StatelessWidget {
   final String givenEmail;
   final String givenPassword;
   static final _auth = FirebaseAuth.instance;
+
+  @override
+  _signInButtonState createState() => _signInButtonState();
+}
+
+class _signInButtonState extends State<signInButton> {
+  SignIn signIn = new SignIn();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +28,7 @@ class signInButton extends StatelessWidget {
           color: Colors.teal[700],
           child: Center(
             child: Text(
-              givenButton,
+              widget.givenButton,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
@@ -28,9 +37,9 @@ class signInButton extends StatelessWidget {
           ),
           onPressed: () async {
             try {
-              print(givenPassword);
-              print(givenEmail);
-              final user = await _auth.signInWithEmailAndPassword(email: givenEmail, password: givenPassword);
+              print(widget.givenPassword);
+              print(widget.givenEmail);
+              final user = await signInButton._auth.signInWithEmailAndPassword(email: widget.givenEmail.trim(), password: widget.givenPassword.trim());
               if(user != null) {
                 Navigator.push(
                   context,

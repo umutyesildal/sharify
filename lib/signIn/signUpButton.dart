@@ -38,7 +38,11 @@ class signUpButton extends StatelessWidget {
                 );
               }
             }catch(e){
-              print(e);
+              Scaffold.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(e),
+                ),
+              );
             }
           },
         ),

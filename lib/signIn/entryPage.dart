@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'signUp.dart';
-import 'SmsCode.dart';
+import 'package:sharify/HomePage/navigator.dart';
 import 'signIn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class entryPage extends StatefulWidget {
   @override
@@ -9,6 +10,55 @@ class entryPage extends StatefulWidget {
 }
 
 class _entryPageState extends State<entryPage> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth =
+      await googleUser.authentication;
+      final GoogleAuthCredential googleAuthCredential =
+      GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      final UserCredential userCredential =
+      await _auth.signInWithCredential(googleAuthCredential);
+      final user = userCredential.user;
+
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${user.displayName}, Google ile giriş yaptı."),
+        ),
+      );
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => navigator(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      debugPrint(e.toString());
+
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text("${e.message}"),
+        ),
+      );
+    } catch (e) {
+      debugPrint(e.toString());
+
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Google ile giriş yaparken bir hata oluştu!"),
+        ),
+      );
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -69,11 +119,11 @@ class _entryPageState extends State<entryPage> {
                       children: <Widget>[
                         Center(
                             child: new Image(
-                          image: new AssetImage("assets/apple.png"),
-                          color: null,
-                          width: 22.49,
-                          height: 27.71,
-                        )),
+                              image: new AssetImage("assets/apple.png"),
+                              color: null,
+                              width: 22.49,
+                              height: 27.71,
+                            )),
                         SizedBox(
                           width: 10.0,
                         ),
@@ -90,40 +140,45 @@ class _entryPageState extends State<entryPage> {
                     ),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-                  height: 70.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Colors.black,
-                          style: BorderStyle.solid,
-                          width: 2.0),
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Image(
-                          image: new AssetImage("assets/search.png"),
-                          color: null,
-                          width: 22.49,
-                          height: 27.71,
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        ),
-                        Center(
-                          child: Text(
-                            ' Sign in with Google',
-                            style: TextStyle(
+                Builder(
+                  builder: (context) => FlatButton(
+                    onPressed: () async => _signInWithGoogle(),
+                    child: Container(
+                      padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+                      height: 70.0,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
                               color: Colors.black,
-                              fontSize: 20.0,
-                            ),
-                          ),
+                              style: BorderStyle.solid,
+                              width: 2.0),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
-                      ],
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            new Image(
+                              image: new AssetImage("assets/search.png"),
+                              color: null,
+                              width: 22.49,
+                              height: 27.71,
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            Center(
+                              child: Text(
+                                ' Sign in with Google',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -141,10 +196,11 @@ class _entryPageState extends State<entryPage> {
                           ),
                         ),
                       ),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignIn()),
-                      ),
+                      onPressed: () =>
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                          ),
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -169,67 +225,6 @@ class _entryPageState extends State<entryPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class newButton extends StatelessWidget {
-  const newButton({@required this.givenButton});
-  final String givenButton;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
-      height: 60.0,
-      child: Container(
-        child: FlatButton(
-          color: Colors.teal[700],
-          child: Center(
-            child: Text(
-              givenButton,
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => SmsCode()),
-          ),
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.teal[700], style: BorderStyle.solid, width: 2.0),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-    );
-  }
-}
-
-class newTextField extends StatelessWidget {
-  const newTextField({@required this.givenText});
-  final String givenText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          fillColor: Colors.white,
-          labelText: givenText,
-          border: OutlineInputBorder(
-            borderRadius: new BorderRadius.circular(10.0),
-            borderSide: new BorderSide(
-              style: BorderStyle.solid,
-            ),
-          ),
-        ),
       ),
     );
   }

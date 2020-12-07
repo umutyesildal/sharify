@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:sharify/constants.dart';
 import 'signInButton.dart';
 import 'package:sharify/signIn/signUp.dart';
+import 'package:sharify/services/globalSnackBar.dart';
+
+
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
+
 }
 
 class _SignInState extends State<SignIn> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -122,6 +127,7 @@ class _SignInState extends State<SignIn> {
     );
   }
 }
+
 
 
 
