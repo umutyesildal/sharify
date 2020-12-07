@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sharify/HomePage/navigator.dart';
 import 'package:sharify/constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'signInButton.dart';
+import 'package:sharify/signIn/signUp.dart';
 class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
@@ -92,7 +91,9 @@ class _SignInState extends State<SignIn> {
                 flex: 1,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
-                  child: newButton(
+                  child: signInButton(
+                    givenEmail: emailController.text,
+                    givenPassword: passwordController.text,
                     givenButton: 'SIGN IN',
                   ),
                 ),
@@ -103,7 +104,8 @@ class _SignInState extends State<SignIn> {
                   child: Center(
                     child: InkWell(
                       onTap: () {
-                        Navigator.of(context).pushNamed('/signup');
+                        Navigator.pushReplacement(
+                            context, new MaterialPageRoute(builder: (context) => new SignUp()));
                       },
                       child: new Text(
                         "Don’t you have an account?",
@@ -121,56 +123,5 @@ class _SignInState extends State<SignIn> {
   }
 }
 
-class newButton extends StatelessWidget {
-  const newButton(
-      {@required this.givenButton, this.givenEmail, this.givenPassword});
-
-  final String givenButton;
-  final String givenEmail;
-  final String givenPassword;
-  static final _auth = FirebaseAuth.instance;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
-      height: 60.0,
-      child: Container(
-        child: FlatButton(
-          color: Colors.teal[700],
-          child: Center(
-            child: Text(
-              givenButton,
-              style: TextStyle(
-                fontSize: 20,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          onPressed: () async {
-            try {
-              print(givenPassword);
-              print(givenEmail);
-              final user = await _auth.signInWithEmailAndPassword(email: givenEmail, password: givenPassword);
-              if(user != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => navigator()),
-                );
-              }
-            }catch(e){
-              print(e);
-            }
-          },
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(
-              color: Colors.teal[700], style: BorderStyle.solid, width: 2.0),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-    );
-  }
-}
 
 
