@@ -49,6 +49,12 @@ const kForumRepliesGrey = Color(0xFF707070);
 
 var textFieldDecoration = InputDecoration(
   fillColor: Colors.white,
+  focusedBorder: OutlineInputBorder(
+    borderRadius:BorderRadius.circular(10.0),
+    borderSide: BorderSide(
+      color: Colors.teal[700],
+    ),
+  ),
   border: OutlineInputBorder(
     borderRadius: new BorderRadius.circular(10.0),
     borderSide: new BorderSide(
