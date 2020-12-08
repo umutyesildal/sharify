@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/HomePage/navigator.dart';
+
 class signUpButton extends StatelessWidget {
   const signUpButton(
       {@required this.givenButton, this.givenEmail, this.givenPassword});

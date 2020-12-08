@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/itemAdd.dart';
 import '../Forum/forumTabs.dart';
-import 'add_page.dart';
 import 'profile_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'homePage.dart';

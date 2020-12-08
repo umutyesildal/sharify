@@ -1,8 +1,7 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'recent_chats.dart';
 import 'package:flutter/cupertino.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class messageHomeScreen extends StatefulWidget {
   @override
@@ -15,24 +14,29 @@ class _messageHomeScreenState extends State<messageHomeScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Row(
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            RichText(
-              text: TextSpan(
-                children: [
-                  WidgetSpan(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                      child: kLocationIcon,
-                    ),
+            Row(
+              children: [
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      WidgetSpan(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
+                          child: kLocationIcon,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Kağıthane, İstanbul',
+                        style: kSFProRegular.copyWith(
+                            color: kGreencolor, fontSize: 17),
+                      ),
+                    ],
                   ),
-                  TextSpan(
-                    text: 'Kağıthane, İstanbul',
-                    style: kSFProRegular.copyWith(
-                        color: kGreencolor, fontSize: 17),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ],
         ),

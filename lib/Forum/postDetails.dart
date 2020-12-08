@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'addNewPost.dart';
 import 'commentCard.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'fullCommentPage.dart';
 import 'imageDialog.dart';
-import 'package:animations/animations.dart';
 
 class postDetails extends StatefulWidget {
   const postDetails(

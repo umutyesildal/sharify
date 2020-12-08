@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/addItem.dart';
 import 'package:sharify/HomePage/navigator.dart';
-import 'homePage.dart';
 
 class addPage extends StatefulWidget {
   @override

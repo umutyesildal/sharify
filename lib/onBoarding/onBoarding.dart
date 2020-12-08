@@ -4,8 +4,6 @@ import 'package:intro_slider/slide_object.dart';
 import 'package:sharify/constants.dart';
 import 'package:sharify/signIn/entryPage.dart';
 
-
-
 class onBoarding extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

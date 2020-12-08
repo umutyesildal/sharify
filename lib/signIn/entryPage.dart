@@ -141,43 +141,40 @@ class _entryPageState extends State<entryPage> {
                   ),
                 ),
                 Builder(
-                  builder: (context) => FlatButton(
-                    onPressed: () async => _signInWithGoogle(),
+                  builder: (context) => Container(
+                    padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+                    height: 70.0,
                     child: Container(
-                      padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-                      height: 70.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.black,
-                              style: BorderStyle.solid,
-                              width: 2.0),
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(25.0),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            new Image(
-                              image: new AssetImage("assets/search.png"),
-                              color: null,
-                              width: 22.49,
-                              height: 27.71,
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Center(
-                              child: Text(
-                                ' Sign in with Google',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20.0,
-                                ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.black,
+                            style: BorderStyle.solid,
+                            width: 2.0),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new Image(
+                            image: new AssetImage("assets/search.png"),
+                            color: null,
+                            width: 22.49,
+                            height: 27.71,
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          ),
+                          Center(
+                            child: Text(
+                              ' Sign in with Google',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20.0,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:sharify/HomePage/homeCard1.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -37,6 +36,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return Scaffold(
       body: TabBarView(controller: _tabController, children: <Widget>[
         Scaffold(
+          backgroundColor: Colors.white,
           body: StreamBuilder(
             stream: FirebaseFirestore.instance.collection('items').snapshots(),
             builder: (context, snapshot) {
@@ -80,6 +80,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
         Scaffold(
+          backgroundColor: Colors.white,
           body: StreamBuilder(
             stream: FirebaseFirestore.instance.collection('items').snapshots(),
             builder: (context, snapshot) {
@@ -118,6 +119,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
         Scaffold(
+          backgroundColor: Colors.white,
           body: StreamBuilder(
             stream: FirebaseFirestore.instance.collection('items').snapshots(),
             builder: (context, snapshot) {
@@ -156,6 +158,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ),
         ),
         Scaffold(
+          backgroundColor: Colors.white,
           body: StreamBuilder(
             stream: FirebaseFirestore.instance.collection('items').snapshots(),
             builder: (context, snapshot) {

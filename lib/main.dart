@@ -1,15 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sharify/signIn/entryPage.dart';
 import 'constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'onBoarding/onBoarding.dart';
-import 'package:sharify/signIn/signIn.dart';
-import 'package:sharify/signIn/signUp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:sharify/services/authService.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +58,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
     Future.delayed(const Duration(seconds: 3), () async {
       Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => new entryPage()));
+          context, new MaterialPageRoute(builder: (context) => new onBoarding()));
     });
   }
 

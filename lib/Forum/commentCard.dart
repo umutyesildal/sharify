@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'postCard.dart';
-import 'getPosts.dart';
-import 'postDetails.dart';
 
 class commentCard extends StatelessWidget {
   const commentCard(

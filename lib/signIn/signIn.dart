@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sharify/constants.dart';
 import 'signInButton.dart';
 import 'package:sharify/signIn/signUp.dart';
-import 'package:sharify/services/globalSnackBar.dart';
-
 
 class SignIn extends StatefulWidget {
   @override
@@ -80,6 +78,7 @@ class _SignInState extends State<SignIn> {
                     Container(
                       padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
                       child: TextFormField(
+                        obscureText: true,
                         controller: passwordController,
                         decoration: textFieldDecoration.copyWith(
                           labelText: "Password",

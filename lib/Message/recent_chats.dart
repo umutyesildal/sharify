@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 import 'models/message_model.dart';
-import 'chat_screen.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class RecentChats extends StatelessWidget {
   @override

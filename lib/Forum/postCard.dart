@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'imageDialog.dart';
-import 'package:animations/animations.dart';
 
 class postCard extends StatelessWidget {
   const postCard(

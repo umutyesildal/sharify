@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
+import '../constants.dart';
 import 'getPosts.dart';
-import 'postCard.dart';
-import 'constants.dart';
 
 class forumTabs extends StatefulWidget {
   @override

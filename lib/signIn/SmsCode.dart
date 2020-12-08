@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/navigator.dart';
-import 'signUp.dart';
 
 class SmsCode extends StatelessWidget {
   Widget build(BuildContext context) {

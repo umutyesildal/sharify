@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sharify/constants.dart';
 import 'commentCard.dart';
-import 'constants.dart';
-import 'postDetails.dart';
+import '../constants.dart';
 
 class fullCommentPage extends StatefulWidget {
   @override
@@ -12,6 +12,7 @@ class _fullCommentPageState extends State<fullCommentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           "Replies (200)",

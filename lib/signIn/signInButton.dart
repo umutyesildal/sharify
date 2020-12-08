@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/HomePage/navigator.dart';
-import 'package:sharify/services/globalSnackBar.dart';
 import 'package:sharify/signIn/signIn.dart';
+
 class signInButton extends StatefulWidget {
   const signInButton(
       {@required this.givenButton, this.givenEmail, this.givenPassword});

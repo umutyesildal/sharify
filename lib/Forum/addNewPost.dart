@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'commentCard.dart';
-import 'getPosts.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 class addNewPost extends StatefulWidget {
   @override

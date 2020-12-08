@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'models/message_model.dart';
 import 'models/user_model.dart';
-import 'constants.dart';
+import '../constants.dart';
 
 String message;
 
@@ -23,8 +23,7 @@ class _ChatScreenState extends State<ChatScreen> {
       decoration: BoxDecoration(
         color: isMe
             ? Colors.grey.shade100
-            : Colors.green
-                .shade50, //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
+            : Colors.green.shade50, //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
         borderRadius: isMe
             ? BorderRadius.only(
                 topLeft: Radius.circular(15),
@@ -92,7 +91,6 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0,
         title: Row(
           children: [
             Text(
