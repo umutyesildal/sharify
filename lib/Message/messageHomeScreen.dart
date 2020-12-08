@@ -13,6 +13,7 @@ class _messageHomeScreenState extends State<messageHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 0,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,6 +63,17 @@ class _messageHomeScreenState extends State<messageHomeScreen> {
               ),
             ),
           ),
+          Material(
+            elevation: 20,
+            color: Colors.white,
+            child: SizedBox(
+              height: 5,
+              width: double.infinity,
+              child: Divider(
+                color: Colors.white,
+              ),
+            ),
+          ),
           RecentChats(),
         ],
       ),
@@ -80,5 +92,3 @@ class IconButtonWidget extends StatelessWidget {
     );
   }
 }
-
-
