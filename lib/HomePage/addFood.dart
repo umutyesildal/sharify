@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_page.dart';
+import 'package:sharify/constants.dart';
+import 'package:sharify/HomePage/addTextField.dart';
 
 class addFood extends StatefulWidget {
   @override
@@ -23,7 +25,8 @@ class _addFoodState extends State<addFood> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => addPage()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => addPage()));
           },
         ),
         actions: <Widget>[
@@ -49,102 +52,60 @@ class _addFoodState extends State<addFood> {
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                GestureDetector(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '  Title of Item',
-                      hintStyle: TextStyle(
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black26,
-                      ),
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '  Title of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
                     ),
                   ),
                 ),
-                GestureDetector(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '     Description of Item',
-                      hintStyle: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black26,
-                      ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '     Description of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
                     ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.format_list_numbered, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Quantity',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
+                addTextField(
+                  givenIcon: Icon(
+                    Icons.format_list_numbered,
+                    color: Colors.black,
                   ),
+                  givenText: "Quantity",
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.update, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Expiry Date',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
+                addTextField(
+                  givenIcon: Icon(
+                    Icons.update,
+                    color: Colors.black,
                   ),
+                  givenText: "Expiry Date",
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.calendar_today, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Pick-up Times',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
+                addTextField(
+                  givenIcon: Icon(
+                    Icons.calendar_today,
+                    color: Colors.black,
                   ),
+                  givenText: "Pick-Up Times",
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.location_on_outlined, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Location',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
+                addTextField(
+                  givenIcon: Icon(
+                    Icons.location_on_outlined,
+                    color: Colors.black,
                   ),
+                  givenText: "Location",
                 ),
-                SizedBox(height: 20.0,),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Container(
                   height: 170.0,
                   width: double.infinity,
@@ -159,8 +120,8 @@ class _addFoodState extends State<addFood> {
                         fontWeight: FontWeight.w400,
                         color: Colors.black26,
                         fontSize: 21.0,
-                      ),),
-
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -168,9 +129,6 @@ class _addFoodState extends State<addFood> {
           ),
         ),
       ),
-     );
-
-
-
+    );
   }
 }

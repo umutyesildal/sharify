@@ -10,7 +10,6 @@ const kSFProRegular = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-
 const kSFProTextMedium = TextStyle(
   fontFamily: 'SFProText-Medium',
   fontSize: 17,
@@ -51,7 +50,7 @@ const kForumRepliesGrey = Color(0xFF707070);
 var textFieldDecoration = InputDecoration(
   fillColor: Colors.white,
   focusedBorder: OutlineInputBorder(
-    borderRadius:BorderRadius.circular(10.0),
+    borderRadius: BorderRadius.circular(10.0),
     borderSide: BorderSide(
       color: Colors.teal[700],
     ),
@@ -63,5 +62,3 @@ var textFieldDecoration = InputDecoration(
     ),
   ),
 );
-
-
