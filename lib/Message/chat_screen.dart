@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'models/message_model.dart';
 import 'models/user_model.dart';
@@ -6,124 +7,142 @@ import '../constants.dart';
 String message;
 
 class ChatScreen extends StatefulWidget {
-  final User user;
-  ChatScreen({this.user});
+  final String userId;
+  final String conversationId;
+
+  const ChatScreen({this.userId, this.conversationId});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  _buildMessage(Message message, bool isMe) {
-    return Container(
-      margin: isMe //kullanıcıya göre mesaj'ın tarafı değişiyor
-          ? EdgeInsets.only(top: 8, bottom: 8, left: 80)
-          : EdgeInsets.only(top: 8, bottom: 8, right: 80),
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
-      decoration: BoxDecoration(
-        color: isMe
-            ? Colors.grey.shade100
-            : Colors.green.shade50, //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
-        borderRadius: isMe
-            ? BorderRadius.only(
-                topLeft: Radius.circular(15),
-                bottomLeft: Radius.circular(15),
-                topRight: Radius.circular(15),
-              )
-            : BorderRadius.only(
-                topRight: Radius.circular(15),
-                topLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15),
-              ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            message.time,
-            style: kSFProTextRegular.copyWith(
-                color: kLightGrayColor, fontSize: 13),
-          ),
-          SizedBox(height: 7),
-          Text(
-            message.text,
-            style: kSFProTextRegular,
-          ),
-        ],
-      ),
-    );
-  }
-
-  _buildMessageComposer() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
-      color: Colors.white,
-      child: Row(children: [
-        IconButtonWidget(
-          icon: Icon(Icons.camera_alt),
-          iconSize: 30,
-          onPressed: () {},
-        ),
-        Expanded(
-          child: TextField(
-            textCapitalization: TextCapitalization.sentences,
-            onChanged: (value) {
-              message = value;
-            },
-            decoration: InputDecoration.collapsed(
-              hintText: 'Mesaj Gönder...',
-            ),
-          ),
-        ),
-        IconButtonWidget(
-          icon: Icon(Icons.send),
-          iconSize: 30,
-          onPressed: () {
-            print(message);
-          },
-        ),
-      ]),
-    );
+  final TextEditingController _editingController = TextEditingController();
+  CollectionReference _ref;
+  void initState() {
+    _ref = Firestore.instance
+        .collection('conversations/${widget.conversationId}/messages');
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
+        titleSpacing: -5,
         title: Row(
           children: [
-            Text(
-              widget.user.name,
-              style: kSFProTextMedium,
+            CircleAvatar(
+              backgroundImage: NetworkImage(
+                  'https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: Text('Uğur Sarp'),
             ),
           ],
         ),
+        actions: [
+          IconButton(icon: Icon(Icons.search), onPressed: () {}),
+        ],
       ),
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          image: DecorationImage(
+            image: AssetImage('assets/splashLogo.png'),
+          ),
+        ),
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
+              child: StreamBuilder(
+                  stream: _ref.orderBy('timeStamp').snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    return !snapshot.hasData
+                        ? CircularProgressIndicator()
+                        : ListView(
+                            children: snapshot.data.documents
+                                .map(
+                                  (document) => ListTile(
+                                    title: Container(
+                                      alignment:
+                                          widget.userId == document['sender_id']
+                                              ? Alignment.centerRight
+                                              : Alignment.centerLeft,
+                                      margin:
+                                          widget.userId == document['sender_id']
+                                              ? EdgeInsets.only(
+                                                  top: 8, bottom: 3, left: 80)
+                                              : EdgeInsets.only(
+                                                  top: 8, bottom: 3, right: 80),
+                                      child: Container(
+                                        padding: EdgeInsets.all(15),
+                                        decoration: BoxDecoration(
+                                          color: widget.userId ==
+                                                  document['sender_id']
+                                              ? Colors.grey.shade200
+                                              : Colors.green
+                                                  .shade100, //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
+                                          borderRadius: widget.userId ==
+                                                  document['sender_id']
+                                              ? BorderRadius.only(
+                                                  topLeft: Radius.circular(15),
+                                                  bottomLeft:
+                                                      Radius.circular(15),
+                                                  topRight: Radius.circular(15),
+                                                )
+                                              : BorderRadius.only(
+                                                  topRight: Radius.circular(15),
+                                                  topLeft: Radius.circular(15),
+                                                  bottomRight:
+                                                      Radius.circular(15),
+                                                ),
+                                        ),
+                                        child: Text(
+                                          document['message'],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          );
+                  }),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              color: Colors.white,
+              child: Row(children: [
+                IconButtonWidget(
+                  icon: Icon(Icons.camera_alt),
+                  iconSize: 30,
+                  onPressed: () {},
                 ),
-                child: ListView.builder(
-                  reverse: true,
-                  padding: EdgeInsets.only(top: 15, right: 10, left: 10),
-                  itemCount: messages.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final Message message = messages[index];
-                    bool isMe = message.sender.id == currentUser.id;
-                    return _buildMessage(message, isMe);
+                Expanded(
+                  child: TextField(
+                    controller: _editingController,
+                    textCapitalization: TextCapitalization.sentences,
+                    onChanged: (value) {},
+                    decoration: InputDecoration.collapsed(
+                      hintText: 'Mesaj Gönder...',
+                    ),
+                  ),
+                ),
+                IconButtonWidget(
+                  icon: Icon(Icons.send),
+                  iconSize: 30,
+                  onPressed: () async {
+                    await _ref.add({
+                      'sender_id': widget.userId,
+                      'message': _editingController.text,
+                      'timeStamp': DateTime.now(),
+                    });
+                    _editingController.text = '';
                   },
                 ),
-              ),
+              ]),
             ),
-            _buildMessageComposer(),
           ],
         ),
       ),
