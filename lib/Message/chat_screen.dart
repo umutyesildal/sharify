@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'models/message_model.dart';
-import 'models/user_model.dart';
 import '../constants.dart';
 
 String message;
@@ -38,7 +36,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 8),
-              child: Text('Uğur Sarp'),
+              child: Text('Burayı çözemedik daha tam'),
             ),
           ],
         ),
@@ -62,52 +60,53 @@ class _ChatScreenState extends State<ChatScreen> {
                     return !snapshot.hasData
                         ? CircularProgressIndicator()
                         : ListView(
-                            children: snapshot.data.documents
-                                .map(
-                                  (document) => ListTile(
-                                    title: Container(
-                                      alignment:
-                                          widget.userId == document['sender_id']
-                                              ? Alignment.centerRight
-                                              : Alignment.centerLeft,
-                                      margin:
-                                          widget.userId == document['sender_id']
-                                              ? EdgeInsets.only(
-                                                  top: 8, bottom: 3, left: 80)
-                                              : EdgeInsets.only(
-                                                  top: 8, bottom: 3, right: 80),
-                                      child: Container(
-                                        padding: EdgeInsets.all(15),
-                                        decoration: BoxDecoration(
-                                          color: widget.userId ==
-                                                  document['sender_id']
-                                              ? Colors.grey.shade200
-                                              : Colors.green
-                                                  .shade100, //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
-                                          borderRadius: widget.userId ==
-                                                  document['sender_id']
-                                              ? BorderRadius.only(
-                                                  topLeft: Radius.circular(15),
-                                                  bottomLeft:
-                                                      Radius.circular(15),
-                                                  topRight: Radius.circular(15),
-                                                )
-                                              : BorderRadius.only(
-                                                  topRight: Radius.circular(15),
-                                                  topLeft: Radius.circular(15),
-                                                  bottomRight:
-                                                      Radius.circular(15),
-                                                ),
-                                        ),
-                                        child: Text(
-                                          document['message'],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                      reverse: true,
+                      children: snapshot.data.documents.reversed
+                          .map(
+                            (document) => ListTile(
+                          title: Container(
+                            alignment:
+                            widget.userId == document['sender_id']
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            margin:
+                            widget.userId == document['sender_id']
+                                ? EdgeInsets.only(
+                                top: 8, bottom: 3, left: 80)
+                                : EdgeInsets.only(
+                                top: 8, bottom: 3, right: 80),
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: widget.userId ==
+                                    document['sender_id']
+                                    ? Colors.grey.shade200
+                                    : Colors.green
+                                    .shade100, //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
+                                borderRadius: widget.userId ==
+                                    document['sender_id']
+                                    ? BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  bottomLeft:
+                                  Radius.circular(15),
+                                  topRight: Radius.circular(15),
                                 )
-                                .toList(),
-                          );
+                                    : BorderRadius.only(
+                                  topRight: Radius.circular(15),
+                                  topLeft: Radius.circular(15),
+                                  bottomRight:
+                                  Radius.circular(15),
+                                ),
+                              ),
+                              child: Text(
+                                document['message'],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                          .toList(),
+                    );
                   }),
             ),
             Container(
