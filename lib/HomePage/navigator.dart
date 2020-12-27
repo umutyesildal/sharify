@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sharify/HomePage/addFood.dart';
+import 'package:sharify/HomePage/add_page.dart';
 import 'package:sharify/HomePage/itemAdd.dart';
 import '../Forum/forumTabs.dart';
 import 'profile_page.dart';
@@ -14,7 +16,7 @@ class navigator extends StatefulWidget {
 class _navigatorState extends State<navigator> {
 
   int selectedPage = 0;
-  final _pageOption = [Home(), forumTabs(), itemAdd(), messageHomeScreen(),profilePage()];
+  final _pageOption = [Home(), forumTabs(), addPage(), messageHomeScreen(),profilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

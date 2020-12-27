@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sharify/HomePage/addItem.dart';
+import 'package:sharify/HomePage/addBook.dart';
+import 'package:sharify/HomePage/addFood.dart';
+import 'package:sharify/HomePage/addTechs.dart';
 import 'package:sharify/HomePage/navigator.dart';
+
+import 'addClothes.dart';
+
 
 class addPage extends StatefulWidget {
   @override
@@ -28,24 +33,7 @@ class _addPageState extends State<addPage> {
                 context, MaterialPageRoute(builder: (context) => navigator()));
           },
         ),
-        actions: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-            alignment: Alignment.bottomCenter,
-            child: FlatButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> addItem()));
-              },
-              child: Text(
-                'Next',
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Colors.green,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0)),
-            ),
-          ),
-        ],
+
       ),
       body: SafeArea(
         child: Column(
@@ -68,92 +56,114 @@ class _addPageState extends State<addPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(30.0),
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/add.png'),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    'food',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0,
-                        color: Colors.white),
+
+             InkWell(
+               onTap: (){
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=> addFood()));
+               },
+               child: Container(
+                  padding: EdgeInsets.all(30.0),
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/add.png'),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   ),
-                ],
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'food',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25.0,
+                            color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+             ),
+
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> addBook()));
+              },
+              child: Container(
+                padding: EdgeInsets.all(30.0),
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/add.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'books',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          color: Colors.white),
+                    )
+                  ],
+                ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(30.0),
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/add.png'),
-                  fit: BoxFit.cover,
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> addClothes()));
+              },
+              child: Container(
+                padding: EdgeInsets.all(30.0),
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/add.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    'books',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0,
-                        color: Colors.white),
-                  )
-                ],
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'clothes',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          color: Colors.white),
+                    )
+                  ],
+                ),
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(30.0),
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/add.png'),
-                  fit: BoxFit.cover,
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> addTechs()));
+              },
+              child: Container(
+                padding: EdgeInsets.all(30.0),
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/add.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    'clothes',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0,
-                        color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.all(30.0),
-              margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/add.png'),
-                  fit: BoxFit.cover,
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'techs',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          color: Colors.white),
+                    )
+                  ],
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(10.0)),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    'techs',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25.0,
-                        color: Colors.white),
-                  )
-                ],
               ),
             ),
           ],
