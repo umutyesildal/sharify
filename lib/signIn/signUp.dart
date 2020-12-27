@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/navigator.dart';
 import 'package:sharify/constants.dart';
+import 'package:sharify/signIn/signIn.dart';
 import 'package:sharify/signIn/signUpButton.dart';
 
 class SignUp extends StatefulWidget {
@@ -136,7 +137,7 @@ class _SignUpState extends State<SignUp> {
                     child: InkWell(
                       onTap: () {
                         Navigator.pushReplacement(
-                            context, new MaterialPageRoute(builder: (context) => new navigator()));
+                            context, new MaterialPageRoute(builder: (context) => new SignIn()));
                       },
                       child: new Padding(
                         padding: new EdgeInsets.all(10.0),

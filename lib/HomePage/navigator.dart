@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sharify/HomePage/addFood.dart';
 import 'package:sharify/HomePage/add_page.dart';
-import 'package:sharify/HomePage/itemAdd.dart';
 import '../Forum/forumTabs.dart';
 import 'profile_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'homePage.dart';
 import 'package:sharify/Message/messageHomeScreen.dart';
+import 'profile_page.dart';
 
 class navigator extends StatefulWidget {
   @override
@@ -14,14 +13,18 @@ class navigator extends StatefulWidget {
 }
 
 class _navigatorState extends State<navigator> {
-
   int selectedPage = 0;
-  final _pageOption = [Home(), forumTabs(), addPage(), messageHomeScreen(),profilePage()];
+  final _pageOption = [
+    Home(),
+    forumTabs(),
+    addPage(),
+    messageHomeScreen(),
+    profilePage()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pageOption[selectedPage],
-
       bottomNavigationBar: ConvexAppBar(
           initialActiveIndex: selectedPage,
           height: 50,
@@ -31,7 +34,10 @@ class _navigatorState extends State<navigator> {
           color: Colors.black45,
           activeColor: Colors.green,
           items: [
-            TabItem(icon: Icons.home, title: 'Home',),
+            TabItem(
+              icon: Icons.home,
+              title: 'Home',
+            ),
             TabItem(icon: Icons.forum, title: 'Forum'),
             TabItem(icon: Icons.add, title: 'Add'),
             TabItem(icon: Icons.message, title: 'Message'),
@@ -42,12 +48,7 @@ class _navigatorState extends State<navigator> {
             setState(() {
               selectedPage = index;
             });
-          }
-      ),
+          }),
     );
-
-
-
-
   }
 }

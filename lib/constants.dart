@@ -10,6 +10,7 @@ const kSFProRegular = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+
 const kSFProTextMedium = TextStyle(
   fontFamily: 'SFProText-Medium',
   fontSize: 17,
