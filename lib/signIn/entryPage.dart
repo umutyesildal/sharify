@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/navigator.dart';
+import 'package:sharify/constants.dart';
 import 'signIn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -102,6 +103,7 @@ class _entryPageState extends State<entryPage> {
             flex: 3,
             child: Column(
               children: [
+
                 Container(
                   padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                   height: 70.0,
@@ -140,6 +142,9 @@ class _entryPageState extends State<entryPage> {
                     ),
                   ),
                 ),
+
+
+
                 Builder(
                   builder: (context) => Container(
                     padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
@@ -179,6 +184,9 @@ class _entryPageState extends State<entryPage> {
                     ),
                   ),
                 ),
+
+
+
                 Container(
                   padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                   height: 70.0,
@@ -211,12 +219,25 @@ class _entryPageState extends State<entryPage> {
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-                  child: Center(
-                    child: Text(
-                      'Having trouble with login?',
-                      style: TextStyle(fontSize: 14.0, color: Colors.grey[600]),
+                  height: 70.0,
+                  child: Container(
+                    child: FlatButton(
+
+                      child: Text('Having trouble with login?',
+                        style: TextStyle(fontSize: 14.0, color: Colors.grey[600]),),
+                      onPressed: () {
+                        showAlertDialog(context);
+                      },
+                    ),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: kbackgroundGrey,
+                          ),
+                      color: kbackgroundGrey,
+                      borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
+
                 ),
               ],
             ),
@@ -225,4 +246,45 @@ class _entryPageState extends State<entryPage> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the buttons
+  Widget okButton = FlatButton(
+    child: Text("OK",
+        style: TextStyle(
+        color: kalphaGreen,
+    ),),
+    onPressed:  () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("Troubleshoot problems signing in",
+      style: TextStyle(
+        fontSize: 18.0,
+      ),
+    ),
+    content: Text("Check your internet connection "
+        "Make sure you’re connected to the internet by selecting Network  on the lock screen of your device. "
+        "If you’re having problems connecting to Wi-Fi or the signal is weak, try connecting your device directly to the router or modem with an Ethernet cable."
+        "If connectivity problems persist, check your internet connection using a different device to see if it’s a network problem.",
+    style: TextStyle(
+      fontSize: 17.0
+    ),),
+
+    actions: [
+      okButton,
+
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

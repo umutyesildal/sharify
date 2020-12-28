@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sharify/HomePage/itemAdd.dart';
 import 'constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'onBoarding/onBoarding.dart';
@@ -52,6 +53,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     spinkit = SpinKitSquareCircle(
       color: kalphaGreen,
       size: 50.0,
+
       controller: AnimationController(
           vsync: this, duration: const Duration(milliseconds: 1000)),
     );
@@ -70,12 +72,20 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            spinkit,
+            Image.asset('assets/sharifyLogo.png', width: 80, height: 80,),
             SizedBox(
-              height: 25,
+              height: 10,
             ),
             Text(
-              "Sharify"),
+              "Sharify",
+              style: TextStyle(
+                fontSize: 25,
+                fontFamily: 'SFProText-Semibold',
+                color: Colors.black,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+
           ],
         ),
       ),
