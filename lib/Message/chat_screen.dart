@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
-String message;
 
 class ChatScreen extends StatefulWidget {
   final String userId;
@@ -15,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _editingController = TextEditingController();
   CollectionReference _ref;
   void initState() {
@@ -27,22 +28,20 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: -5,
+        automaticallyImplyLeading: false,
+        titleSpacing: 10,
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage(
-                  'https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'),
+              backgroundImage: NetworkImage('https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'
+                  ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 8),
-              child: Text('Burayı çözemedik daha tam'),
+              child: Text(_auth.currentUser.email),
             ),
           ],
         ),
-        actions: [
-          IconButton(icon: Icon(Icons.search), onPressed: () {}),
-        ],
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -80,9 +79,9 @@ class _ChatScreenState extends State<ChatScreen> {
                               decoration: BoxDecoration(
                                 color: widget.userId ==
                                     document['sender_id']
-                                    ? Colors.grey.shade200
-                                    : Colors.green
-                                    .shade100, //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
+                                    ? Colors.green.shade100.withOpacity(0.96)
+                                    : Colors.grey
+                                    .shade200.withOpacity(0.96), //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
                                 borderRadius: widget.userId ==
                                     document['sender_id']
                                     ? BorderRadius.only(

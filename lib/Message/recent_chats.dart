@@ -1,17 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 import '../constants.dart';
 
 class RecentChats extends StatelessWidget {
-  final String userId = 'YHRJauj0omPep7Z9HKi8MG2HFKi2';
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _firestore = Firestore.instance;
+
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: Firestore.instance
           .collection('conversations')
-          .where('members', arrayContains: userId)
+          .where('members', arrayContains: _auth.currentUser.uid)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
@@ -39,7 +42,7 @@ class RecentChats extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (content) => ChatScreen(
-                          userId: userId,
+                          userId: _auth.currentUser.uid,
                           conversationId: doc.documentID,
                         ))),
                 trailing: Column(
