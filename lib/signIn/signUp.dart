@@ -124,6 +124,8 @@ class _SignUpState extends State<SignUp> {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
                   child: signUpButton(
+                    givenUserName: nameController.text,
+                    givenUserPhone: phoneController.text,
                     givenEmail: emailController.text,
                     givenPassword: passwordController.text,
                     givenButton: 'SIGN UP',
@@ -137,7 +139,9 @@ class _SignUpState extends State<SignUp> {
                     child: InkWell(
                       onTap: () {
                         Navigator.pushReplacement(
-                            context, new MaterialPageRoute(builder: (context) => new SignIn()));
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => new SignIn()));
                       },
                       child: new Padding(
                         padding: new EdgeInsets.all(10.0),
@@ -157,4 +161,3 @@ class _SignUpState extends State<SignUp> {
     );
   }
 }
-

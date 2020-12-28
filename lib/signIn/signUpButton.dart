@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/HomePage/navigator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class signUpButton extends StatelessWidget {
   const signUpButton(
-      {@required this.givenButton, this.givenEmail, this.givenPassword});
+      {@required this.givenButton,
+      this.givenEmail,
+      this.givenPassword,
+      this.givenUserName,
+      this.givenUserPhone});
 
+  final String givenUserPhone;
+  final String givenUserName;
   final String givenButton;
   final String givenEmail;
   final String givenPassword;
   static final _auth = FirebaseAuth.instance;
+
+  void inputData() {
+    final User user = _auth.currentUser;
+    final uid = user.uid;
+    FirebaseFirestore.instance.collection('users').add({
+      "userUID": uid,
+      "userName": givenUserName,
+      "userPhone": givenUserPhone,
+    });
+    // here you write the codes to input the data into firestore
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,14 +50,16 @@ class signUpButton extends StatelessWidget {
             try {
               print(givenPassword);
               print(givenEmail);
-              final user = await _auth.createUserWithEmailAndPassword(email: givenEmail, password: givenPassword);
-              if(user != null) {
+              final user = await _auth.createUserWithEmailAndPassword(
+                  email: givenEmail, password: givenPassword);
+              inputData();
+              if (user != null) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => navigator()),
                 );
               }
-            }catch(e){
+            } catch (e) {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
                   content: Text(e),
