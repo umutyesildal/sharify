@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class addNewPost extends StatefulWidget {
   @override
@@ -7,6 +8,9 @@ class addNewPost extends StatefulWidget {
 }
 
 class _addNewPostState extends State<addNewPost> {
+  TextEditingController titlePostController = TextEditingController();
+  TextEditingController contentPostController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size);
@@ -27,20 +31,11 @@ class _addNewPostState extends State<addNewPost> {
                           Navigator.pop(context);
                         },
                       ),
-                      GestureDetector(
-                        child: Text(
-                          "New Post",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      Text(
+                        "New Post",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => addNewPost()),
-                          );
-                        },
                       ),
                     ],
                   ),
@@ -53,7 +48,15 @@ class _addNewPostState extends State<addNewPost> {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       textColor: Colors.white,
-                      onPressed: () {},
+                      onPressed: () async {
+                        print(titlePostController.text);
+                        print(contentPostController.text);
+                        FirebaseFirestore.instance.collection('forum').add({
+                          "header": titlePostController.text,
+                          "contnent": contentPostController.text,
+                          "date": DateTime.now().toString().substring(0, 16),
+                        });
+                      },
                     ),
                   ),
                 ],
@@ -78,7 +81,8 @@ class _addNewPostState extends State<addNewPost> {
                 children: [
                   Container(
                     padding: EdgeInsets.only(left: 20),
-                    child: TextField(
+                    child: TextFormField(
+                      controller: titlePostController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Title of Post',
@@ -89,7 +93,8 @@ class _addNewPostState extends State<addNewPost> {
                   ),
                   Container(
                     padding: EdgeInsets.only(left: 20),
-                    child: TextField(
+                    child: TextFormField(
+                      controller: contentPostController,
                       maxLength: 300,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,

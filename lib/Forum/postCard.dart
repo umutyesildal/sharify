@@ -10,8 +10,8 @@ class postCard extends StatelessWidget {
       this.forumIcerikYazi,
       this.forumIcerikFoto,
       this.forumPaylasanKisi,
-      this.forumBegeni,
-      this.forumYorum,
+//      this.forumBegeni,
+//      this.forumYorum,
       this.forumPaylasanFoto});
 
   final String forumBaslik;
@@ -19,8 +19,8 @@ class postCard extends StatelessWidget {
   final String forumIcerikYazi;
   final String forumIcerikFoto;
   final String forumPaylasanKisi;
-  final String forumBegeni;
-  final String forumYorum;
+//  final String forumBegeni;
+//  final String forumYorum;
   final String forumPaylasanFoto;
 
   @override
@@ -59,7 +59,7 @@ class postCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                forumTarih.toString(),
+                forumTarih.toString().substring(0, 16),
                 style: TextStyle(fontSize: 10.0, color: Colors.grey),
               ),
             ),
@@ -81,7 +81,8 @@ class postCard extends StatelessWidget {
                   margin: EdgeInsets.only(top: 15, bottom: 15),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(forumIcerikFoto), fit: BoxFit.cover),
+                        image: NetworkImage(forumIcerikFoto),
+                        fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                 ),
@@ -97,6 +98,7 @@ class postCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
                     flex: 2,
@@ -107,7 +109,7 @@ class postCard extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(forumPaylasanFoto),
+                                  image: NetworkImage(forumPaylasanFoto),
                                   fit: BoxFit.cover),
                               shape: BoxShape.circle,
                             ),
@@ -122,7 +124,7 @@ class postCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Expanded(
+                  /*   Expanded(
                     child: Row(
                       children: <Widget>[
                         Expanded(
@@ -164,6 +166,7 @@ class postCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                  */
                 ],
               ),
             ),

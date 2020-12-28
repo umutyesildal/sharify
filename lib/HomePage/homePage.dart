@@ -63,15 +63,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   querySnapshot.docs.length,
                   (index) {
                     final map = querySnapshot.docs[index].data();
-                    return GestureDetector(
-                      onDoubleTap: () async {
-                        querySnapshot.docs[index].reference.delete();
-                      },
-                      child: homeCard1(
-                        givenPhoto: map['photo'],
-                        givenFullName: map['username'],
-                        givenHeader: map['header'],
-                      ),
+                    return homeCard1(
+                      givenPhoto: map['photo'],
+                      givenFullName: map['username'],
+                      givenHeader: map['header'],
                     );
                   },
                 ),
@@ -105,7 +100,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.all(20),
                 children: List.generate(
                   querySnapshot.docs.length,
-                      (index) {
+                  (index) {
                     final map = querySnapshot.docs[index].data();
                     return homeCard1(
                       givenPhoto: map['photo'],
@@ -144,7 +139,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.all(20),
                 children: List.generate(
                   querySnapshot.docs.length,
-                      (index) {
+                  (index) {
                     final map = querySnapshot.docs[index].data();
                     return homeCard1(
                       givenPhoto: map['photo'],
@@ -183,7 +178,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 padding: const EdgeInsets.all(20),
                 children: List.generate(
                   querySnapshot.docs.length,
-                      (index) {
+                  (index) {
                     final map = querySnapshot.docs[index].data();
                     return homeCard1(
                       givenPhoto: map['photo'],

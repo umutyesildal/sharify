@@ -1,9 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'addNewPost.dart';
-import 'commentCard.dart';
-import '../constants.dart';
-import 'fullCommentPage.dart';
 import 'imageDialog.dart';
 
 class postDetails extends StatefulWidget {
@@ -57,16 +53,10 @@ class _postDetailsState extends State<postDetails> {
                         Navigator.pop(context);
                       },
                     ),
-                    GestureDetector(
-                      child: Text(
-                        "Go Back",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => addNewPost()),
+                    Text(
+                      "Go Back",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
@@ -88,7 +78,7 @@ class _postDetailsState extends State<postDetails> {
                     ),
                   ),
                   Text(
-                    widget.forumTarih.toString(),
+                    widget.forumTarih.toString().substring(0, 16),
                     style: TextStyle(fontSize: 10.0, color: Colors.grey),
                   ),
                 ],
@@ -112,7 +102,7 @@ class _postDetailsState extends State<postDetails> {
                   margin: EdgeInsets.only(top: 15, bottom: 15),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(widget.forumIcerikFoto),
+                        image: NetworkImage(widget.forumIcerikFoto),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -139,7 +129,7 @@ class _postDetailsState extends State<postDetails> {
                           child: Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: AssetImage(widget.forumPaylasanFoto),
+                                  image: NetworkImage(widget.forumPaylasanFoto),
                                   fit: BoxFit.cover),
                               shape: BoxShape.circle,
                             ),
@@ -147,15 +137,16 @@ class _postDetailsState extends State<postDetails> {
                         ),
                         Expanded(flex: 1, child: SizedBox()),
                         Expanded(
-                            flex: 9,
-                            child: Text(
-                              widget.forumPaylasanKisi,
-                              style: TextStyle(fontSize: 12),
-                            )),
+                          flex: 9,
+                          child: Text(
+                            widget.forumPaylasanKisi,
+                            style: TextStyle(fontSize: 12),
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                  Expanded(
+                  /*    Expanded(
                     child: Row(
                       children: <Widget>[
                         Expanded(
@@ -188,19 +179,21 @@ class _postDetailsState extends State<postDetails> {
                           ),
                         ),
                         Expanded(
-                            flex: 1,
-                            child: Text(
-                              widget.forumYorum,
-                              style: TextStyle(
-                                  fontSize: 12, color: klikeAndCommentGrey),
-                            )),
+                          flex: 1,
+                          child: Text(
+                            widget.forumYorum,
+                            style: TextStyle(
+                                fontSize: 12, color: klikeAndCommentGrey),
+                          ),
+                        ),
                       ],
                     ),
                   ),
+                  */
                 ],
               ),
             ),
-            Expanded(
+            /*    Expanded(
               child: Padding(
                 padding: EdgeInsets.only(top: 6.0),
                 child: GestureDetector(
@@ -237,6 +230,7 @@ class _postDetailsState extends State<postDetails> {
                 ],
               ),
             ),
+            */
           ],
         ),
       ),
