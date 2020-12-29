@@ -148,7 +148,7 @@ class _addClothesState extends State<addClothes> {
                       ),
                     onChanged: (String newValue) {
                       setState(() {
-                        ddvalue = newValue;
+                        ddvalue2= newValue;
                       });
                     },
                     items: <String>[ 'Gender','None','Female','Male']
