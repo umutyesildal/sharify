@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
+import 'package:sharify/HomePage/navigator.dart';
 import 'package:sharify/constants.dart';
-import 'package:sharify/signIn/entryPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class onBoarding extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class onBoarding extends StatefulWidget {
     return _MyApp();
   }
 }
+
 class _MyApp extends State<onBoarding> {
   // 1 Step: Create List of Slides
   List<Slide> slides = new List();
@@ -29,7 +32,8 @@ class _MyApp extends State<onBoarding> {
         styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
-        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
+        styleDescription:
+            kSFProTextRegular.copyWith(fontSize: 20, color: Colors.grey[800]),
         pathImage: "assets/onBoarding1.png",
       ),
     );
@@ -39,7 +43,8 @@ class _MyApp extends State<onBoarding> {
         styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Ye indulgence unreserved connection alteration appearance",
-        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
+        styleDescription:
+            kSFProTextRegular.copyWith(fontSize: 20, color: Colors.grey[800]),
         pathImage: "assets/onBoarding2.png",
       ),
     );
@@ -49,7 +54,8 @@ class _MyApp extends State<onBoarding> {
         styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Much evil soon high in hope do view. Out may few northward believing attempted. Yet timed being songs marry one defer men our. Although finished blessing do of",
-        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
+        styleDescription:
+            kSFProTextRegular.copyWith(fontSize: 20, color: Colors.grey[800]),
         pathImage: "assets/onBoarding3.png",
       ),
     );
@@ -59,17 +65,25 @@ class _MyApp extends State<onBoarding> {
         styleTitle: kSFProTextMedium.copyWith(fontSize: 28),
         description:
             "Ye indulgence unreserved connection alteration appearance",
-        styleDescription: kSFProTextRegular.copyWith(fontSize: 20,color: Colors.grey[800]),
+        styleDescription:
+            kSFProTextRegular.copyWith(fontSize: 20, color: Colors.grey[800]),
         pathImage: "assets/onBoarding4.png",
       ),
     );
   }
 
   // 4 Step: Create Other functions
-  void onDonePress() {
-    // Back to the first tab
-    Navigator.push(context,
-    MaterialPageRoute(builder: (context) => entryPage()));
+  void onDonePress() async {
+    final _auth = FirebaseAuth.instance;
+    final User user = _auth.currentUser;
+    final uid = user.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .update({"onboardingPass": true}).whenComplete(() async {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => navigator()));
+    }).catchError((e) => print(e));
   }
 
   void onTabChangeCompleted(index) {

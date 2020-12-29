@@ -2,26 +2,47 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'imageDialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class postCard extends StatelessWidget {
-  const postCard(
-      {@required this.forumBaslik,
-      this.forumTarih,
-      this.forumIcerikYazi,
-      this.forumIcerikFoto,
-      this.forumPaylasanKisi,
-//      this.forumBegeni,
-//      this.forumYorum,
-      this.forumPaylasanFoto});
-
+class postCard extends StatefulWidget {
+  const postCard({
+    @required this.forumBaslik,
+    this.forumUserUID,
+    this.forumTarih,
+    this.forumIcerikYazi,
+    this.forumIcerikFoto,
+  });
+  final String forumUserUID;
   final String forumBaslik;
   final DateTime forumTarih;
   final String forumIcerikYazi;
   final String forumIcerikFoto;
-  final String forumPaylasanKisi;
-//  final String forumBegeni;
-//  final String forumYorum;
-  final String forumPaylasanFoto;
+
+  @override
+  _postCardState createState() => _postCardState();
+}
+
+class _postCardState extends State<postCard> {
+  Future giver() async {
+    DocumentSnapshot result = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.forumUserUID)
+        .get();
+
+    userName = result.data()['userName'];
+    userPhoto = result.data()['userPhoto'];
+    print(userName);
+    print(userPhoto);
+  }
+
+  String userName;
+  String userPhoto;
+
+  void initState() {
+    super.initState();
+    giver();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +69,7 @@ class postCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                forumBaslik,
+                widget.forumBaslik,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
@@ -59,14 +80,14 @@ class postCard extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                forumTarih.toString().substring(0, 16),
+                widget.forumTarih.toString(),
                 style: TextStyle(fontSize: 10.0, color: Colors.grey),
               ),
             ),
             Expanded(
               flex: 2,
               child: Text(
-                forumIcerikYazi.substring(0, 160) + "...",
+                widget.forumIcerikYazi.substring(0, 160) + "...",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 10.0,
@@ -81,7 +102,7 @@ class postCard extends StatelessWidget {
                   margin: EdgeInsets.only(top: 15, bottom: 15),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(forumIcerikFoto),
+                        image: NetworkImage(widget.forumIcerikFoto),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -90,7 +111,7 @@ class postCard extends StatelessWidget {
                   await showDialog(
                       context: context,
                       builder: (_) => ImageDialog(
-                            sentPhoto: forumIcerikFoto,
+                            sentPhoto: widget.forumIcerikFoto,
                           ));
                 },
               ),
@@ -109,7 +130,7 @@ class postCard extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(forumPaylasanFoto),
+                                  image: NetworkImage("userPhoto"),
                                   fit: BoxFit.cover),
                               shape: BoxShape.circle,
                             ),
@@ -118,7 +139,7 @@ class postCard extends StatelessWidget {
                         Expanded(
                             flex: 3,
                             child: Text(
-                              forumPaylasanKisi,
+                              "userName",
                               style: TextStyle(fontSize: 12),
                             )),
                       ],

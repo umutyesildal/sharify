@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'postCard.dart';
 import 'postDetails.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sharify/Forum/addNewPost.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class getPosts extends StatefulWidget {
   @override
@@ -71,12 +72,11 @@ class _getPostsState extends State<getPosts> {
                                     VoidCallback openContainer) {
                                   final map = querySnapshot.docs[index].data();
                                   return postCard(
+                                    forumUserUID: map['userUID'],
                                     forumBaslik: map['header'],
                                     forumTarih: DateTime.now(),
                                     forumIcerikYazi: map['content'],
                                     forumIcerikFoto: map['contentPhoto'],
-                                    forumPaylasanKisi: map['personName'],
-                                    forumPaylasanFoto: map['personPhoto'],
                                   );
                                 },
                                 openBuilder:

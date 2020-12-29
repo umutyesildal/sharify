@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/HomePage/navigator.dart';
+import 'package:sharify/onBoarding/onBoarding.dart';
 import 'package:sharify/signIn/signIn.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class signInButton extends StatefulWidget {
   const signInButton(
@@ -39,14 +41,27 @@ class _signInButtonState extends State<signInButton> {
             try {
               print(widget.givenPassword);
               print(widget.givenEmail);
-              final user = await signInButton._auth.signInWithEmailAndPassword(email: widget.givenEmail.trim(), password: widget.givenPassword.trim());
-              if(user != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => navigator()),
-                );
-              }
-            }catch(e){
+              final user = await signInButton._auth.signInWithEmailAndPassword(
+                  email: widget.givenEmail.trim(),
+                  password: widget.givenPassword.trim());
+              final uid = await user.user.uid;
+              var result = await FirebaseFirestore.instance
+                  .collection('users')
+                  .where('userUID', isEqualTo: uid)
+                  .get();
+              result.docs.forEach((element) {
+                print(element.data());
+                if (element.data()["onboardingPass"] == false) {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => onBoarding()));
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => navigator()),
+                  );
+                }
+              });
+            } catch (e) {
               print(e);
             }
           },

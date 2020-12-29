@@ -51,11 +51,13 @@ class _addNewPostState extends State<addNewPost> {
                       onPressed: () async {
                         print(titlePostController.text);
                         print(contentPostController.text);
-                        FirebaseFirestore.instance.collection('forum').add({
-                          "header": titlePostController.text,
-                          "contnent": contentPostController.text,
-                          "date": DateTime.now().toString().substring(0, 16),
-                        });
+                        FirebaseFirestore.instance.collection('forum').add(
+                          {
+                            "header": titlePostController.text,
+                            "content": contentPostController.text,
+                            "date": DateTime.now().toString().substring(0, 16),
+                          },
+                        );
                       },
                     ),
                   ),

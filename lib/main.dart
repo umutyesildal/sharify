@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/itemAdd.dart';
+import 'package:sharify/signIn/entryPage.dart';
 import 'constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'onBoarding/onBoarding.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
           create: (_) => AuthenticationService(FirebaseAuth.instance),
         ),
         StreamProvider(
-          create: (context) => context.read<AuthenticationService>().authStateChanges,
+          create: (context) =>
+              context.read<AuthenticationService>().authStateChanges,
         )
       ],
       child: MaterialApp(
@@ -53,14 +55,13 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     spinkit = SpinKitSquareCircle(
       color: kalphaGreen,
       size: 50.0,
-
       controller: AnimationController(
           vsync: this, duration: const Duration(milliseconds: 1000)),
     );
 
     Future.delayed(const Duration(seconds: 3), () async {
-      Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => new onBoarding()));
+      Navigator.pushReplacement(context,
+          new MaterialPageRoute(builder: (context) => new entryPage()));
     });
   }
 
@@ -72,20 +73,22 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('assets/sharifyLogo.png', width: 80, height: 80,),
+            Image.asset(
+              'assets/sharifyLogo.png',
+              width: 80,
+              height: 80,
+            ),
             SizedBox(
               height: 10,
             ),
             Text(
               "Sharify",
               style: TextStyle(
-                fontSize: 25,
-                fontFamily: 'SFProText-Semibold',
-                color: Colors.black,
-                fontWeight: FontWeight.bold
-              ),
+                  fontSize: 25,
+                  fontFamily: 'SFProText-Semibold',
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
             ),
-
           ],
         ),
       ),

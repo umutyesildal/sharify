@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/HomePage/navigator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sharify/onBoarding/onBoarding.dart';
 
 class signUpButton extends StatelessWidget {
   const signUpButton(
@@ -18,14 +19,19 @@ class signUpButton extends StatelessWidget {
   final String givenPassword;
   static final _auth = FirebaseAuth.instance;
 
-  void inputData() {
+  void inputData() async {
     final User user = _auth.currentUser;
     final uid = user.uid;
-    FirebaseFirestore.instance.collection('users').add({
+    var data = {
+      "userMail": givenEmail,
       "userUID": uid,
       "userName": givenUserName,
       "userPhone": givenUserPhone,
-    });
+      "onboardingPass": false
+    };
+    await FirebaseFirestore.instance.collection('users').doc(uid).set(data);
+    final map = await FirebaseFirestore.instance.collection('users').doc(uid);
+    print(map);
     // here you write the codes to input the data into firestore
   }
 
@@ -56,7 +62,7 @@ class signUpButton extends StatelessWidget {
               if (user != null) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => navigator()),
+                  MaterialPageRoute(builder: (context) => onBoarding()),
                 );
               }
             } catch (e) {
