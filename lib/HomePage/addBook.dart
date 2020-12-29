@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'add_page.dart';
+import 'package:sharify/constants.dart';
 
 class addBook extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class addBook extends StatefulWidget {
 }
 
 class _addBookState extends State<addBook> {
+  String dropdownValue = 'Type';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,24 +53,54 @@ class _addBookState extends State<addBook> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                GestureDetector(
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '  Title of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
+                    ),
+                  ),
+                ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '     Description of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
+                    ),
+                  ),
+                ),
+
+
+
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
                   child: TextField(
                     decoration: InputDecoration(
+                      icon: Icon(Icons.calendar_today, color: Colors.black,),
                       border: InputBorder.none,
-                      hintText: '  Title of Item',
+                      hintText: ' Pick-up Times',
                       hintStyle: TextStyle(
-                        fontSize: 40.0,
+                        fontSize: 20.0,
                         fontWeight: FontWeight.w400,
                         color: Colors.black26,
                       ),
                     ),
                   ),
                 ),
-                GestureDetector(
+
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
                   child: TextField(
                     decoration: InputDecoration(
+                      icon: Icon(Icons.location_on_outlined, color: Colors.black,),
                       border: InputBorder.none,
-                      hintText: '     Description of Item',
+                      hintText: ' Location',
                       hintStyle: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
@@ -79,54 +111,27 @@ class _addBookState extends State<addBook> {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.book, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Type',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
+                  child: DropdownButton<String>(
+                    value: dropdownValue,
+                    dropdownColor: Colors.green,
+                    icon: Icon(Icons.arrow_drop_down_outlined, color: Colors.black,),
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
                     ),
-                  ),
-                ),
-
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.calendar_today, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Pick-up Times',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.location_on_outlined, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Location',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        dropdownValue = newValue;
+                      });
+                    },
+                    items: <String>['Type', 'None','Historical', 'Science-Fiction', 'Biography','Poetry',"Children's"]
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
                 ),
                 SizedBox(height: 20.0,),

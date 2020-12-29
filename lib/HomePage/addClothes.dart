@@ -7,6 +7,8 @@ class addClothes extends StatefulWidget {
 }
 
 class _addClothesState extends State<addClothes> {
+  String ddvalue = 'Category';
+  String ddvalue2 = 'Gender';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,79 +53,41 @@ class _addClothesState extends State<addClothes> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                GestureDetector(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '  Title of Item',
-                      hintStyle: TextStyle(
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black26,
-                      ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '  Title of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
                     ),
                   ),
                 ),
-                GestureDetector(
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '     Description of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
+                    ),
+                  ),
+                ),
+
+
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
                   child: TextField(
                     decoration: InputDecoration(
+                      icon: Icon(Icons.calendar_today, color: Colors.black,),
                       border: InputBorder.none,
-                      hintText: '     Description of Item',
+                      hintText: ' Pick-up Times',
                       hintStyle: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
                         color: Colors.black26,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.person_outline, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Gender',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.category_outlined, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Category',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.calendar_today, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Pick-up Times',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
                       ),
                     ),
                   ),
@@ -145,6 +109,58 @@ class _addClothesState extends State<addClothes> {
                     ),
                   ),
                 ),
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
+                  child: DropdownButton<String>(
+                    value: ddvalue,
+                      dropdownColor: Colors.green,
+                      icon: Icon(Icons.arrow_drop_down_outlined, color: Colors.black,),
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black26,
+                      ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        ddvalue = newValue;
+                      });
+                    },
+                    items: <String>['Category','None','Jacket', 'Jeans and short', 'Dress','Shoes', 'T-shirt and sweatshirt']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    ),
+                  ),
+
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
+                  child: DropdownButton<String>(
+                    value: ddvalue2,
+                      dropdownColor: Colors.green,
+                      icon: Icon(Icons.arrow_drop_down_outlined, color: Colors.black,),
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black26,
+                      ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        ddvalue = newValue;
+                      });
+                    },
+                    items: <String>[ 'Gender','None','Female','Male']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    ),
+                  ),
+
                 SizedBox(height: 20.0,),
                 Container(
                   height: 170.0,
