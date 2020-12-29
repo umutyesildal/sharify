@@ -96,6 +96,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               print(snapshot.data);
               final QuerySnapshot querySnapshot = snapshot.data;
               return GridView.count(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 padding: const EdgeInsets.all(20),
                 children: List.generate(
