@@ -7,6 +7,7 @@ class addTechs extends StatefulWidget {
 }
 
 class _addTechsState extends State<addTechs> {
+  String ddvalue3 = 'Category';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,24 +52,37 @@ class _addTechsState extends State<addTechs> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                GestureDetector(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '  Title of Item',
-                      hintStyle: TextStyle(
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black26,
-                      ),
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '  Title of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 40.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
                     ),
                   ),
                 ),
-                GestureDetector(
+                TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: '     Description of Item',
+                    hintStyle: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
+                    ),
+                  ),
+                ),
+
+
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
                   child: TextField(
                     decoration: InputDecoration(
+                      icon: Icon(Icons.calendar_today, color: Colors.black,),
                       border: InputBorder.none,
-                      hintText: '     Description of Item',
+                      hintText: ' Pick-up Times',
                       hintStyle: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
@@ -77,56 +91,44 @@ class _addTechsState extends State<addTechs> {
                     ),
                   ),
                 ),
-
                 Container(
                   margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.category_outlined, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Category',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.location_on_outlined, color: Colors.black,),
+                      border: InputBorder.none,
+                      hintText: ' Location',
+                      hintStyle: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black26,
                       ),
                     ),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.calendar_today, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Pick-up Times',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
+                  child: DropdownButton<String>(
+                    value: ddvalue3,
+                    dropdownColor: Colors.green,
+                    icon: Icon(Icons.arrow_drop_down_outlined, color: Colors.black,),
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
                     ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
-                  child: GestureDetector(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.location_on_outlined, color: Colors.black,),
-                        border: InputBorder.none,
-                        hintText: ' Location',
-                        hintStyle: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black26,
-                        ),
-                      ),
-                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        ddvalue3 = newValue;
+                      });
+                    },
+                    items: <String>[ 'Category','None','Phone','Laptop','Headphone']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
                 ),
                 SizedBox(height: 20.0,),
