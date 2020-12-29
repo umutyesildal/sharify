@@ -3,12 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 
-
 class ChatScreen extends StatefulWidget {
   final String userId;
   final String conversationId;
+  final String senderName;
+  final String senderId;
 
-  const ChatScreen({this.userId, this.conversationId});
+  const ChatScreen({this.userId, this.conversationId, this.senderName, this.senderId});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -18,6 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _editingController = TextEditingController();
   CollectionReference _ref;
+
   void initState() {
     _ref = Firestore.instance
         .collection('conversations/${widget.conversationId}/messages');
@@ -38,8 +40,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 8),
-              child: Text(_auth.currentUser.email),
-            ),
+              child: Text(widget.senderName),),
           ],
         ),
       ),
@@ -132,6 +133,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   iconSize: 30,
                   onPressed: () async {
                     await _ref.add({
+                      'sender_name': _auth.currentUser.email,
                       'sender_id': widget.userId,
                       'message': _editingController.text,
                       'timeStamp': DateTime.now(),
