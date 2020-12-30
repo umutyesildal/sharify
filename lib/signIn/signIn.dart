@@ -36,7 +36,7 @@ class _SignInState extends State<SignIn> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: Column(
                   children: [
                     Text('Sign in',

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sharify/HomePage/navigator.dart';
 import 'package:sharify/constants.dart';
 import 'package:sharify/signIn/signIn.dart';
 import 'package:sharify/signIn/signUpButton.dart';
@@ -48,12 +47,12 @@ class _SignUpState extends State<SignUp> {
                   children: [
                     Text('Sign in',
                         style: TextStyle(
-                          fontSize: 28.0,
+                          fontSize: 28,
                         )),
                     Text(
                       '     to share.',
                       style: TextStyle(
-                        fontSize: 28.0,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -69,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
+                      padding: EdgeInsets.fromLTRB(25.0, 3.0, 25.0, 5.0),
                       child: TextFormField(
                         controller: nameController,
                         decoration: textFieldDecoration.copyWith(
@@ -105,7 +104,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
+                      padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 3.0),
                       child: TextFormField(
                         controller: passwordController,
                         decoration: textFieldDecoration.copyWith(
@@ -144,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                                 builder: (context) => new SignIn()));
                       },
                       child: new Padding(
-                        padding: new EdgeInsets.all(10.0),
+                        padding: new EdgeInsets.all(8.0),
                         child: new Text(
                           "You’ve already registered?",
                           style: TextStyle(color: Colors.teal[700]),

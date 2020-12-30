@@ -22,7 +22,7 @@ class _ChatScreenState extends State<ChatScreen> {
   FocusNode _focusNode;
 
   void initState() {
-    _ref = Firestore.instance
+    _ref = FirebaseFirestore.instance
         .collection('conversations/${widget.conversationId}/messages');
     super.initState();
     _focusNode = FocusNode();
@@ -65,7 +65,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           ? CircularProgressIndicator()
                           : ListView(
                         reverse: true,
-                        children: snapshot.data.documents.reversed
+                        children: snapshot.data.docs.reversed
                             .map(
                               (document) => ListTile(
                             title: Container(
