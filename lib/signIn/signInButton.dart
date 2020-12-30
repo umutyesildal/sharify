@@ -49,18 +49,20 @@ class _signInButtonState extends State<signInButton> {
                   .collection('users')
                   .where('userUID', isEqualTo: uid)
                   .get();
-              result.docs.forEach((element) {
-                print(element.data());
-                if (element.data()["onboardingPass"] == false) {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => onBoarding()));
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => navigator()),
-                  );
-                }
-              });
+              result.docs.forEach(
+                (element) {
+                  print(element.data());
+                  if (element.data()["onboardingPass"] == false) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => onBoarding()));
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => navigator()),
+                    );
+                  }
+                },
+              );
             } catch (e) {
               print(e);
             }

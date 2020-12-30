@@ -129,7 +129,8 @@ class _postDetailsState extends State<postDetails> {
                           child: Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(widget.forumPaylasanFoto),
+                                  image:
+                                      NetworkImage("widget.forumPaylasanFoto"),
                                   fit: BoxFit.cover),
                               shape: BoxShape.circle,
                             ),
