@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class addTextField extends StatelessWidget {
-  const addTextField({
-    @required this.givenIcon,
-    this.givenText,
-  });
+  const addTextField(
+      {@required this.givenIcon, this.givenText, this.controller});
   final Icon givenIcon;
   final String givenText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(left: 20.0),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           icon: givenIcon,
           border: InputBorder.none,

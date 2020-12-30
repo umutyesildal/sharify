@@ -4,6 +4,7 @@ import 'package:sharify/HomePage/navigator.dart';
 import 'package:sharify/onBoarding/onBoarding.dart';
 import 'package:sharify/signIn/signIn.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
 class signInButton extends StatefulWidget {
   const signInButton(
@@ -19,9 +20,24 @@ class signInButton extends StatefulWidget {
 }
 
 class _signInButtonState extends State<signInButton> {
+  ProgressDialog pr;
   SignIn signIn = new SignIn();
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context);
+    pr.style(
+        message: 'Please Wait',
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInOut,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+        messageTextStyle: TextStyle(
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
     return Container(
       padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
       height: 60.0,
@@ -38,6 +54,8 @@ class _signInButtonState extends State<signInButton> {
             ),
           ),
           onPressed: () async {
+            pr.show();
+            print("gösterildi");
             try {
               print(widget.givenPassword);
               print(widget.givenEmail);

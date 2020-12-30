@@ -5,7 +5,6 @@ import 'profile_page.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'homePage.dart';
 import 'package:sharify/Message/messageHomeScreen.dart';
-import 'profile_page.dart';
 
 class navigator extends StatefulWidget {
   @override

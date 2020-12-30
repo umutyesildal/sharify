@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sharify/HomePage/itemAdd.dart';
 import 'package:sharify/signIn/entryPage.dart';
 import 'constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'onBoarding/onBoarding.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:sharify/services/authService.dart';

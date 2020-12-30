@@ -34,166 +34,181 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: TabBarView(controller: _tabController, children: <Widget>[
-        Scaffold(
-          backgroundColor: Colors.white,
-          body: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('items').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                print(snapshot.error);
-                return Center(
-                  child: Icon(
-                    Icons.error,
-                    size: 80,
-                    color: Colors.red,
+      body: TabBarView(
+        controller: _tabController,
+        children: <Widget>[
+          Scaffold(
+            backgroundColor: Colors.white,
+            body: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('items')
+                  .where("tag", isEqualTo: "food")
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return Center(
+                    child: Icon(
+                      Icons.error,
+                      size: 80,
+                      color: Colors.red,
+                    ),
+                  );
+                }
+                print(snapshot.data);
+                final QuerySnapshot querySnapshot = snapshot.data;
+                return GridView.count(
+                  crossAxisCount: 2,
+                  padding: const EdgeInsets.all(20),
+                  children: List.generate(
+                    querySnapshot.docs.length,
+                    (index) {
+                      final map = querySnapshot.docs[index].data();
+                      return homeCard1(
+                        givenPhoto: map['photo'],
+                        givenFullName: map['username'],
+                        givenHeader: map['header'],
+                      );
+                    },
                   ),
                 );
-              }
-              print(snapshot.data);
-              final QuerySnapshot querySnapshot = snapshot.data;
-              return GridView.count(
-                crossAxisCount: 2,
-                padding: const EdgeInsets.all(20),
-                children: List.generate(
-                  querySnapshot.docs.length,
-                  (index) {
-                    final map = querySnapshot.docs[index].data();
-                    return homeCard1(
-                      givenPhoto: map['photo'],
-                      givenFullName: map['username'],
-                      givenHeader: map['header'],
-                    );
-                  },
-                ),
-              );
-            },
+              },
+            ),
           ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.white,
-          body: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('items').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                print(snapshot.error);
-                return Center(
-                  child: Icon(
-                    Icons.error,
-                    size: 80,
-                    color: Colors.red,
+          Scaffold(
+            backgroundColor: Colors.white,
+            body: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('items')
+                  .where("tag", isEqualTo: "book")
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return Center(
+                    child: Icon(
+                      Icons.error,
+                      size: 80,
+                      color: Colors.red,
+                    ),
+                  );
+                }
+                print(snapshot.data);
+                final QuerySnapshot querySnapshot = snapshot.data;
+                return GridView.count(
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  padding: const EdgeInsets.all(20),
+                  children: List.generate(
+                    querySnapshot.docs.length,
+                    (index) {
+                      final map = querySnapshot.docs[index].data();
+                      return homeCard1(
+                        givenPhoto: map['photo'],
+                        givenFullName: map['username'],
+                        givenHeader: map['header'],
+                      );
+                    },
                   ),
                 );
-              }
-              print(snapshot.data);
-              final QuerySnapshot querySnapshot = snapshot.data;
-              return GridView.count(
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 2,
-                padding: const EdgeInsets.all(20),
-                children: List.generate(
-                  querySnapshot.docs.length,
-                  (index) {
-                    final map = querySnapshot.docs[index].data();
-                    return homeCard1(
-                      givenPhoto: map['photo'],
-                      givenFullName: map['username'],
-                      givenHeader: map['header'],
-                    );
-                  },
-                ),
-              );
-            },
+              },
+            ),
           ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.white,
-          body: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('items').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                print(snapshot.error);
-                return Center(
-                  child: Icon(
-                    Icons.error,
-                    size: 80,
-                    color: Colors.red,
+          Scaffold(
+            backgroundColor: Colors.white,
+            body: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('items')
+                  .where("tag", isEqualTo: "cloth")
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return Center(
+                    child: Icon(
+                      Icons.error,
+                      size: 80,
+                      color: Colors.red,
+                    ),
+                  );
+                }
+                print(snapshot.data);
+                final QuerySnapshot querySnapshot = snapshot.data;
+                return GridView.count(
+                  crossAxisCount: 2,
+                  padding: const EdgeInsets.all(20),
+                  children: List.generate(
+                    querySnapshot.docs.length,
+                    (index) {
+                      final map = querySnapshot.docs[index].data();
+                      return homeCard1(
+                        givenPhoto: map['photo'],
+                        givenFullName: map['username'],
+                        givenHeader: map['header'],
+                      );
+                    },
                   ),
                 );
-              }
-              print(snapshot.data);
-              final QuerySnapshot querySnapshot = snapshot.data;
-              return GridView.count(
-                crossAxisCount: 2,
-                padding: const EdgeInsets.all(20),
-                children: List.generate(
-                  querySnapshot.docs.length,
-                  (index) {
-                    final map = querySnapshot.docs[index].data();
-                    return homeCard1(
-                      givenPhoto: map['photo'],
-                      givenFullName: map['username'],
-                      givenHeader: map['header'],
-                    );
-                  },
-                ),
-              );
-            },
+              },
+            ),
           ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.white,
-          body: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('items').snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (snapshot.hasError) {
-                print(snapshot.error);
-                return Center(
-                  child: Icon(
-                    Icons.error,
-                    size: 80,
-                    color: Colors.red,
+          Scaffold(
+            backgroundColor: Colors.white,
+            body: StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection('items')
+                  .where("tag", isEqualTo: "tech")
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return Center(
+                    child: Icon(
+                      Icons.error,
+                      size: 80,
+                      color: Colors.red,
+                    ),
+                  );
+                }
+                print(snapshot.data);
+                final QuerySnapshot querySnapshot = snapshot.data;
+                return GridView.count(
+                  crossAxisCount: 2,
+                  padding: const EdgeInsets.all(20),
+                  children: List.generate(
+                    querySnapshot.docs.length,
+                    (index) {
+                      final map = querySnapshot.docs[index].data();
+                      return homeCard1(
+                        givenPhoto: map['photo'],
+                        givenFullName: map['username'],
+                        givenHeader: map['header'],
+                      );
+                    },
                   ),
                 );
-              }
-              print(snapshot.data);
-              final QuerySnapshot querySnapshot = snapshot.data;
-              return GridView.count(
-                crossAxisCount: 2,
-                padding: const EdgeInsets.all(20),
-                children: List.generate(
-                  querySnapshot.docs.length,
-                  (index) {
-                    final map = querySnapshot.docs[index].data();
-                    return homeCard1(
-                      givenPhoto: map['photo'],
-                      givenFullName: map['username'],
-                      givenHeader: map['header'],
-                    );
-                  },
-                ),
-              );
-            },
+              },
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
       appBar: AppBar(
         title: !isSearching
             ? Text('')

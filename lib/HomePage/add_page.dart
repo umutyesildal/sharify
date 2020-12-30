@@ -4,8 +4,7 @@ import 'package:sharify/HomePage/addBook.dart';
 import 'package:sharify/HomePage/addFood.dart';
 import 'package:sharify/HomePage/addTechs.dart';
 import 'package:sharify/HomePage/navigator.dart';
-import 'addClothes.dart';
-
+import 'package:sharify/HomePage/addClothes.dart';
 
 class addPage extends StatefulWidget {
   @override
@@ -32,7 +31,6 @@ class _addPageState extends State<addPage> {
                 context, MaterialPageRoute(builder: (context) => navigator()));
           },
         ),
-
       ),
       body: SafeArea(
         child: Column(
@@ -55,38 +53,38 @@ class _addPageState extends State<addPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
-             InkWell(
-               onTap: (){
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> addFood()));
-               },
-               child: Container(
-                  padding: EdgeInsets.all(30.0),
-                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/add.png'),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  ),
-                  child: Row(
-                    children: <Widget>[
-                      Text(
-                        'food',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25.0,
-                            color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-             ),
-
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> addBook()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => addFood()));
+              },
+              child: Container(
+                padding: EdgeInsets.all(30.0),
+                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/add.png'),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'food',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => addBook()));
               },
               child: Container(
                 padding: EdgeInsets.all(30.0),
@@ -112,8 +110,9 @@ class _addPageState extends State<addPage> {
               ),
             ),
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> addClothes()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => addClothes()));
               },
               child: Container(
                 padding: EdgeInsets.all(30.0),
@@ -139,8 +138,9 @@ class _addPageState extends State<addPage> {
               ),
             ),
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> addTechs()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => addTechs()));
               },
               child: Container(
                 padding: EdgeInsets.all(30.0),

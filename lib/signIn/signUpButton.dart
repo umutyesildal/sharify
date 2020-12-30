@@ -3,8 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/HomePage/navigator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sharify/onBoarding/onBoarding.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 
-class signUpButton extends StatelessWidget {
+class signUpButton extends StatefulWidget {
   const signUpButton(
       {@required this.givenButton,
       this.givenEmail,
@@ -19,14 +20,19 @@ class signUpButton extends StatelessWidget {
   final String givenPassword;
   static final _auth = FirebaseAuth.instance;
 
+  @override
+  _signUpButtonState createState() => _signUpButtonState();
+}
+
+class _signUpButtonState extends State<signUpButton> {
   void inputData() async {
-    final User user = _auth.currentUser;
+    final User user = signUpButton._auth.currentUser;
     final uid = user.uid;
     var data = {
-      "userMail": givenEmail,
+      "userMail": widget.givenEmail,
       "userUID": uid,
-      "userName": givenUserName,
-      "userPhone": givenUserPhone,
+      "userName": widget.givenUserName,
+      "userPhone": widget.givenUserPhone,
       "onboardingPass": false
     };
     await FirebaseFirestore.instance.collection('users').doc(uid).set(data);
@@ -35,8 +41,24 @@ class signUpButton extends StatelessWidget {
     // here you write the codes to input the data into firestore
   }
 
+  ProgressDialog pr;
+
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context);
+    pr.style(
+        message: 'Please Wait',
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInOut,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+        messageTextStyle: TextStyle(
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
     return Container(
       padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
       height: 60.0,
@@ -45,7 +67,7 @@ class signUpButton extends StatelessWidget {
           color: Colors.teal[700],
           child: Center(
             child: Text(
-              givenButton,
+              widget.givenButton,
               style: TextStyle(
                 fontSize: 20,
                 color: Colors.white,
@@ -53,11 +75,14 @@ class signUpButton extends StatelessWidget {
             ),
           ),
           onPressed: () async {
+            pr.show();
+            print("gösterildi");
             try {
-              print(givenPassword);
-              print(givenEmail);
-              final user = await _auth.createUserWithEmailAndPassword(
-                  email: givenEmail, password: givenPassword);
+              print(widget.givenPassword);
+              print(widget.givenEmail);
+              final user = await signUpButton._auth
+                  .createUserWithEmailAndPassword(
+                      email: widget.givenEmail, password: widget.givenPassword);
               inputData();
               if (user != null) {
                 Navigator.push(
