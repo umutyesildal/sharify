@@ -27,7 +27,7 @@ class RecentChats extends StatelessWidget {
               color: Colors.white,
             ),
             child: ListView(
-              children: snapshot.data.documents
+              children: snapshot.data.docs
                   .map((doc) => ListTile(
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(
@@ -40,7 +40,7 @@ class RecentChats extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (content) => ChatScreen(
                           userId: _auth.currentUser.uid,
-                          conversationId: doc.documentID,
+                          conversationId: doc.id,
                           senderName: doc['senderName'],
                           senderId: _auth.currentUser.uid != doc['members'][0].toString() ? doc['members'][0].toString(): doc['members'][1].toString()
                         ))),
