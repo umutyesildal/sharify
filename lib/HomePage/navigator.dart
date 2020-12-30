@@ -17,7 +17,7 @@ class _navigatorState extends State<navigator> {
     Home(),
     forumTabs(),
     addPage(),
-    messageHomeScreen(),
+    MessageHomeScreen(),
     profilePage()
   ];
   @override

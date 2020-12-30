@@ -1,16 +1,57 @@
 import 'package:flutter/material.dart';
 import 'add_page.dart';
-import 'package:sharify/constants.dart';
+import 'navigator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:progress_dialog/progress_dialog.dart';
+
 
 class addBook extends StatefulWidget {
   @override
   _addBookState createState() => _addBookState();
+  static final _auth = FirebaseAuth.instance;
+  static final User user = _auth.currentUser;
+  static final uid = user.uid;
 }
 
 class _addBookState extends State<addBook> {
   String dropdownValue = 'Type';
+  TextEditingController titleOfItem = TextEditingController();
+  TextEditingController descriptionOfItem = TextEditingController();
+  TextEditingController pickUpTimes = TextEditingController();
+  TextEditingController location = TextEditingController();
+  String userName;
+  Future giver() async {
+    DocumentSnapshot result = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(addBook.uid)
+        .get();
+
+    userName = result.data()['userName'];
+    print(result.data()['userName']);
+  }
+
+  void initState() {
+    super.initState();
+    giver();
+  }
+  ProgressDialog pr;
   @override
   Widget build(BuildContext context) {
+    pr = new ProgressDialog(context);
+    pr.style(
+        message: 'Please Wait',
+        borderRadius: 10.0,
+        backgroundColor: Colors.white,
+        progressWidget: CircularProgressIndicator(),
+        elevation: 10.0,
+        insetAnimCurve: Curves.easeInOut,
+        progress: 0.0,
+        maxProgress: 100.0,
+        progressTextStyle: TextStyle(
+            color: Colors.black, fontSize: 13.0, fontWeight: FontWeight.w400),
+        messageTextStyle: TextStyle(
+            color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600));
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -34,7 +75,25 @@ class _addBookState extends State<addBook> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
-              onPressed: () {},
+              onPressed: () {
+                pr.show();
+                FirebaseFirestore.instance.collection('items').add(
+                  {
+                    "photo": "",
+                    "header": titleOfItem.text,
+                    "pickUpTimes": pickUpTimes.text,
+                    "location": location.text,
+                    "tag": "book",
+                    "username": userName,
+                    "userUID": addBook.uid,
+                    "type":dropdownValue,
+
+                  },
+                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => navigator()));
+
+              },
               child: Text(
                 'Add',
                 style: TextStyle(color: Colors.white),
