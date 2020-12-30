@@ -19,11 +19,13 @@ class _ChatScreenState extends State<ChatScreen> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _editingController = TextEditingController();
   CollectionReference _ref;
+  FocusNode _focusNode;
 
   void initState() {
     _ref = Firestore.instance
         .collection('conversations/${widget.conversationId}/messages');
     super.initState();
+    _focusNode = FocusNode();
   }
 
   @override
@@ -54,60 +56,63 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           children: [
             Expanded(
-              child: StreamBuilder(
-                  stream: _ref.orderBy('timeStamp').snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    return !snapshot.hasData
-                        ? CircularProgressIndicator()
-                        : ListView(
-                      reverse: true,
-                      children: snapshot.data.documents.reversed
-                          .map(
-                            (document) => ListTile(
-                          title: Container(
-                            alignment:
-                            widget.userId == document['sender_id']
-                                ? Alignment.centerRight
-                                : Alignment.centerLeft,
-                            margin:
-                            widget.userId == document['sender_id']
-                                ? EdgeInsets.only(
-                                top: 8, bottom: 3, left: 80)
-                                : EdgeInsets.only(
-                                top: 8, bottom: 3, right: 80),
-                            child: Container(
-                              padding: EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                color: widget.userId ==
-                                    document['sender_id']
-                                    ? Colors.green.shade100.withOpacity(0.96)
-                                    : Colors.grey
-                                    .shade200.withOpacity(0.96), //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
-                                borderRadius: widget.userId ==
-                                    document['sender_id']
-                                    ? BorderRadius.only(
-                                  topLeft: Radius.circular(15),
-                                  bottomLeft:
-                                  Radius.circular(15),
-                                  topRight: Radius.circular(15),
-                                )
-                                    : BorderRadius.only(
-                                  topRight: Radius.circular(15),
-                                  topLeft: Radius.circular(15),
-                                  bottomRight:
-                                  Radius.circular(15),
+              child: GestureDetector(
+                onTap: () => _focusNode.unfocus(),
+                child: StreamBuilder(
+                    stream: _ref.orderBy('timeStamp').snapshots(),
+                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                      return !snapshot.hasData
+                          ? CircularProgressIndicator()
+                          : ListView(
+                        reverse: true,
+                        children: snapshot.data.documents.reversed
+                            .map(
+                              (document) => ListTile(
+                            title: Container(
+                              alignment:
+                              widget.userId == document['sender_id']
+                                  ? Alignment.centerRight
+                                  : Alignment.centerLeft,
+                              margin:
+                              widget.userId == document['sender_id']
+                                  ? EdgeInsets.only(
+                                  top: 8, bottom: 3, left: 80)
+                                  : EdgeInsets.only(
+                                  top: 8, bottom: 3, right: 80),
+                              child: Container(
+                                padding: EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                  color: widget.userId ==
+                                      document['sender_id']
+                                      ? Colors.green.shade100.withOpacity(0.96)
+                                      : Colors.grey
+                                      .shade200.withOpacity(0.96), //kullanıcıya göre mesaj kutusunun köşesi sağ veya sol oluyor
+                                  borderRadius: widget.userId ==
+                                      document['sender_id']
+                                      ? BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    bottomLeft:
+                                    Radius.circular(15),
+                                    topRight: Radius.circular(15),
+                                  )
+                                      : BorderRadius.only(
+                                    topRight: Radius.circular(15),
+                                    topLeft: Radius.circular(15),
+                                    bottomRight:
+                                    Radius.circular(15),
+                                  ),
                                 ),
-                              ),
-                              child: Text(
-                                document['message'],
+                                child: Text(
+                                  document['message'],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                          .toList(),
-                    );
-                  }),
+                        )
+                            .toList(),
+                      );
+                    }),
+              ),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 8),
@@ -120,6 +125,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 ),
                 Expanded(
                   child: TextField(
+                    focusNode: _focusNode,
                     controller: _editingController,
                     textCapitalization: TextCapitalization.sentences,
                     onChanged: (value) {},

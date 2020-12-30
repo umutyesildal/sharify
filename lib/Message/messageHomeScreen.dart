@@ -3,12 +3,12 @@ import 'recent_chats.dart';
 import 'package:flutter/cupertino.dart';
 import '../constants.dart';
 
-class messageHomeScreen extends StatefulWidget {
+class MessageHomeScreen extends StatefulWidget {
   @override
-  _messageHomeScreenState createState() => _messageHomeScreenState();
+  _MessageHomeScreenState createState() => _MessageHomeScreenState();
 }
 
-class _messageHomeScreenState extends State<messageHomeScreen> {
+class _MessageHomeScreenState extends State<MessageHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +41,6 @@ class _messageHomeScreenState extends State<messageHomeScreen> {
             ),
           ],
         ),
-        actions: [
-          IconButtonWidget(),
-        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,18 +63,6 @@ class _messageHomeScreenState extends State<messageHomeScreen> {
           RecentChats(),
         ],
       ),
-    );
-  }
-}
-
-class IconButtonWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.search),
-      iconSize: 35,
-      color: Colors.black,
-      onPressed: () {},
     );
   }
 }
