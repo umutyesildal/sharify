@@ -8,12 +8,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 class postCard extends StatefulWidget {
   const postCard({
     @required this.forumBaslik,
-    this.forumUserUID,
+    this.forumUserName,
     this.forumTarih,
     this.forumIcerikYazi,
     this.forumIcerikFoto,
   });
-  final String forumUserUID;
+  final String forumUserName;
   final String forumBaslik;
   final DateTime forumTarih;
   final String forumIcerikYazi;
@@ -24,24 +24,8 @@ class postCard extends StatefulWidget {
 }
 
 class _postCardState extends State<postCard> {
-  Future giver() async {
-    DocumentSnapshot result = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(widget.forumUserUID)
-        .get();
-
-    userName = result.data()['userName'];
-    userPhoto = result.data()['userPhoto'];
-    print(userName);
-    print(userPhoto);
-  }
-
-  String userName;
-  String userPhoto;
-
   void initState() {
     super.initState();
-    giver();
   }
 
   @override
@@ -125,7 +109,7 @@ class _postCardState extends State<postCard> {
                     flex: 2,
                     child: Row(
                       children: <Widget>[
-                        Expanded(
+                        /*     Expanded(
                           flex: 1,
                           child: Container(
                             decoration: BoxDecoration(
@@ -135,13 +119,15 @@ class _postCardState extends State<postCard> {
                               shape: BoxShape.circle,
                             ),
                           ),
-                        ),
+                        ), */
                         Expanded(
-                            flex: 3,
-                            child: Text(
-                              "userName",
-                              style: TextStyle(fontSize: 12),
-                            )),
+                          flex: 3,
+                          child: Text(
+                            widget.forumUserName,
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.bold),
+                          ),
+                        ),
                       ],
                     ),
                   ),

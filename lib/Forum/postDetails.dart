@@ -8,19 +8,13 @@ class postDetails extends StatefulWidget {
       this.forumTarih,
       this.forumIcerikYazi,
       this.forumIcerikFoto,
-      this.forumPaylasanKisi,
-      this.forumBegeni,
-      this.forumYorum,
-      this.forumPaylasanFoto});
+      this.forumPaylasanKisi});
 
   final String forumBaslik;
   final DateTime forumTarih;
   final String forumIcerikYazi;
   final String forumIcerikFoto;
   final String forumPaylasanKisi;
-  final String forumBegeni;
-  final String forumYorum;
-  final String forumPaylasanFoto;
 
   @override
   _postDetailsState createState() => _postDetailsState();
@@ -124,7 +118,7 @@ class _postDetailsState extends State<postDetails> {
                     flex: 2,
                     child: Row(
                       children: <Widget>[
-                        Expanded(
+                        /*   Expanded(
                           flex: 3,
                           child: Container(
                             decoration: BoxDecoration(
@@ -135,13 +129,14 @@ class _postDetailsState extends State<postDetails> {
                               shape: BoxShape.circle,
                             ),
                           ),
-                        ),
+                        ), */
                         Expanded(flex: 1, child: SizedBox()),
                         Expanded(
                           flex: 9,
                           child: Text(
                             widget.forumPaylasanKisi,
-                            style: TextStyle(fontSize: 12),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],

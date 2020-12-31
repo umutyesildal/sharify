@@ -34,6 +34,7 @@ class _addTechsState extends State<addTechs> {
     super.initState();
     giver();
   }
+
   ProgressDialog pr;
   @override
   Widget build(BuildContext context) {
@@ -85,13 +86,11 @@ class _addTechsState extends State<addTechs> {
                     "tag": "tech",
                     "username": userName,
                     "userUID": addTechs.uid,
-                    "category":ddvalue3,
-
+                    "category": ddvalue3,
                   },
                 );
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => navigator()));
-
               },
               child: Text(
                 'Add',
@@ -110,8 +109,9 @@ class _addTechsState extends State<addTechs> {
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                TextField(
+              children: [
+                TextFormField(
+                  controller: titleOfItem,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: '  Title of Item',
@@ -122,7 +122,8 @@ class _addTechsState extends State<addTechs> {
                     ),
                   ),
                 ),
-                TextField(
+                TextFormField(
+                  controller: descriptionOfItem,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: '     Description of Item',
@@ -133,13 +134,15 @@ class _addTechsState extends State<addTechs> {
                     ),
                   ),
                 ),
-
-
                 Container(
                   margin: EdgeInsets.only(left: 20.0),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: pickUpTimes,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.calendar_today, color: Colors.black,),
+                      icon: Icon(
+                        Icons.calendar_today,
+                        color: Colors.black,
+                      ),
                       border: InputBorder.none,
                       hintText: ' Pick-up Times',
                       hintStyle: TextStyle(
@@ -152,9 +155,13 @@ class _addTechsState extends State<addTechs> {
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 20.0),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: location,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.location_on_outlined, color: Colors.black,),
+                      icon: Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.black,
+                      ),
                       border: InputBorder.none,
                       hintText: ' Location',
                       hintStyle: TextStyle(
@@ -170,7 +177,10 @@ class _addTechsState extends State<addTechs> {
                   child: DropdownButton<String>(
                     value: ddvalue3,
                     dropdownColor: Colors.green,
-                    icon: Icon(Icons.arrow_drop_down_outlined, color: Colors.black,),
+                    icon: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      color: Colors.black,
+                    ),
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w400,
@@ -181,8 +191,13 @@ class _addTechsState extends State<addTechs> {
                         ddvalue3 = newValue;
                       });
                     },
-                    items: <String>[ 'Category','None','Phone','Laptop','Headphone']
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items: <String>[
+                      'Category',
+                      'None',
+                      'Phone',
+                      'Laptop',
+                      'Headphone'
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -190,7 +205,9 @@ class _addTechsState extends State<addTechs> {
                     }).toList(),
                   ),
                 ),
-                SizedBox(height: 20.0,),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Container(
                   height: 170.0,
                   width: double.infinity,
@@ -205,8 +222,8 @@ class _addTechsState extends State<addTechs> {
                         fontWeight: FontWeight.w400,
                         color: Colors.black26,
                         fontSize: 21.0,
-                      ),),
-
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -215,8 +232,5 @@ class _addTechsState extends State<addTechs> {
         ),
       ),
     );
-
-
-
   }
 }

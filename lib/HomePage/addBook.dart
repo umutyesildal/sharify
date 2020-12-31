@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
-
 class addBook extends StatefulWidget {
   @override
   _addBookState createState() => _addBookState();
@@ -35,6 +34,7 @@ class _addBookState extends State<addBook> {
     super.initState();
     giver();
   }
+
   ProgressDialog pr;
   @override
   Widget build(BuildContext context) {
@@ -86,13 +86,11 @@ class _addBookState extends State<addBook> {
                     "tag": "book",
                     "username": userName,
                     "userUID": addBook.uid,
-                    "type":dropdownValue,
-
+                    "type": dropdownValue,
                   },
                 );
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => navigator()));
-
               },
               child: Text(
                 'Add',
@@ -111,8 +109,9 @@ class _addBookState extends State<addBook> {
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:[
-                TextField(
+              children: [
+                TextFormField(
+                  controller: titleOfItem,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: '  Title of Item',
@@ -123,7 +122,8 @@ class _addBookState extends State<addBook> {
                     ),
                   ),
                 ),
-                TextField(
+                TextFormField(
+                  controller: descriptionOfItem,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: '     Description of Item',
@@ -134,14 +134,15 @@ class _addBookState extends State<addBook> {
                     ),
                   ),
                 ),
-
-
-
                 Container(
                   margin: EdgeInsets.only(left: 20.0),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: pickUpTimes,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.calendar_today, color: Colors.black,),
+                      icon: Icon(
+                        Icons.calendar_today,
+                        color: Colors.black,
+                      ),
                       border: InputBorder.none,
                       hintText: ' Pick-up Times',
                       hintStyle: TextStyle(
@@ -152,12 +153,15 @@ class _addBookState extends State<addBook> {
                     ),
                   ),
                 ),
-
                 Container(
                   margin: EdgeInsets.only(left: 20.0),
-                  child: TextField(
+                  child: TextFormField(
+                    controller: location,
                     decoration: InputDecoration(
-                      icon: Icon(Icons.location_on_outlined, color: Colors.black,),
+                      icon: Icon(
+                        Icons.location_on_outlined,
+                        color: Colors.black,
+                      ),
                       border: InputBorder.none,
                       hintText: ' Location',
                       hintStyle: TextStyle(
@@ -173,7 +177,10 @@ class _addBookState extends State<addBook> {
                   child: DropdownButton<String>(
                     value: dropdownValue,
                     dropdownColor: Colors.green,
-                    icon: Icon(Icons.arrow_drop_down_outlined, color: Colors.black,),
+                    icon: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      color: Colors.black,
+                    ),
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.w400,
@@ -184,8 +191,15 @@ class _addBookState extends State<addBook> {
                         dropdownValue = newValue;
                       });
                     },
-                    items: <String>['Type', 'None','Historical', 'Science-Fiction', 'Biography','Poetry',"Children's"]
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items: <String>[
+                      'Type',
+                      'None',
+                      'Historical',
+                      'Science-Fiction',
+                      'Biography',
+                      'Poetry',
+                      "Children's"
+                    ].map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -193,7 +207,9 @@ class _addBookState extends State<addBook> {
                     }).toList(),
                   ),
                 ),
-                SizedBox(height: 20.0,),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Container(
                   height: 170.0,
                   width: double.infinity,
@@ -208,8 +224,8 @@ class _addBookState extends State<addBook> {
                         fontWeight: FontWeight.w400,
                         color: Colors.black26,
                         fontSize: 21.0,
-                      ),),
-
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -218,8 +234,5 @@ class _addBookState extends State<addBook> {
         ),
       ),
     );
-
-
-
   }
 }

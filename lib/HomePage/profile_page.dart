@@ -111,7 +111,7 @@ class _profilePageState extends State<profilePage> {
                           Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(userPhoto),
+                                  image: NetworkImage("userPhoto"),
                                   fit: BoxFit.cover),
                               shape: BoxShape.circle,
                             ),
@@ -183,6 +183,8 @@ class _profilePageState extends State<profilePage> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 "Phone Number",
@@ -223,14 +225,14 @@ class _profilePageState extends State<profilePage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Adress",
+                                                "Location",
                                                 style:
                                                     kSFProTextMedium.copyWith(
                                                   color: Color(0xFF8E8080),
                                                 ),
                                               ),
                                               Text(
-                                                "+905545731484",
+                                                "locationgelcek",
                                                 style:
                                                     kSFProTextRegular.copyWith(
                                                         color: Colors.black),
@@ -247,7 +249,6 @@ class _profilePageState extends State<profilePage> {
                                       ),
                                     ),
                                   ),
-                                  Expanded(flex: 2, child: SizedBox()),
                                   Expanded(
                                     flex: 2,
                                     child: Center(
@@ -258,7 +259,8 @@ class _profilePageState extends State<profilePage> {
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  Expanded(flex: 1, child: SizedBox()),
                                 ],
                               ),
                             ),
@@ -280,7 +282,7 @@ class _profilePageState extends State<profilePage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Mail",
+                                                "E-Mail",
                                                 style:
                                                     kSFProTextMedium.copyWith(
                                                   color: Color(0xFF8E8080),
@@ -325,24 +327,23 @@ class _profilePageState extends State<profilePage> {
                                                 ),
                                               ),
                                               Text(
-                                                "burayanoktaligelcek.",
+                                                "**************",
                                                 style:
                                                     kSFProTextRegular.copyWith(
                                                         color: Colors.black),
                                               )
                                             ],
                                           ),
-                                          Text(
+                                          /*     Text(
                                             "Edit",
                                             style: TextStyle(
                                                 color: kalphaGreen,
                                                 fontSize: 20),
-                                          )
+                                          ), */
                                         ],
                                       ),
                                     ),
                                   ),
-                                  Expanded(flex: 2, child: SizedBox()),
                                   Expanded(
                                     flex: 2,
                                     child: Center(
@@ -353,7 +354,8 @@ class _profilePageState extends State<profilePage> {
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  Expanded(flex: 1, child: SizedBox()),
                                 ],
                               ),
                             ),

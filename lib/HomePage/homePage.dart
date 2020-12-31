@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:sharify/HomePage/homeCard1.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sharify/HomePage/homeCardDetails.dart';
+import 'package:animations/animations.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -67,11 +69,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   children: List.generate(
                     querySnapshot.docs.length,
                     (index) {
-                      final map = querySnapshot.docs[index].data();
-                      return homeCard1(
-                        givenPhoto: map['photo'],
-                        givenFullName: map['username'],
-                        givenHeader: map['header'],
+                      return OpenContainer(
+                        openElevation: 0.0,
+                        closedElevation: 0.0,
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: const Duration(milliseconds: 1000),
+                        useRootNavigator: true,
+                        closedBuilder:
+                            (BuildContext context, VoidCallback openContainer) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCard1(
+                            givenPhoto: map['photo'],
+                            givenFullName: map['username'],
+                            givenHeader: map['header'],
+                          );
+                        },
+                        openBuilder: (BuildContext context, VoidCallback _) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCardDetails(
+                              header: map['header'],
+                              expiryDate: map['expiryDate'],
+                              location: "location",
+                              photo: "PHoto",
+                              pickUpTimes: "pickuptimes",
+                              quantity: "quantity",
+                              userName: "Username",
+                              userUID: "userUID");
+                        },
                       );
                     },
                   ),

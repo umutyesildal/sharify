@@ -57,6 +57,7 @@ class _getPostsState extends State<getPosts> {
                       }
                       print(snapshot.data);
                       final QuerySnapshot querySnapshot = snapshot.data;
+                      print(querySnapshot.docs.length);
                       return Container(
                         color: kbackgroundGrey,
                         child: ListView.separated(
@@ -72,7 +73,7 @@ class _getPostsState extends State<getPosts> {
                                     VoidCallback openContainer) {
                                   final map = querySnapshot.docs[index].data();
                                   return postCard(
-                                    forumUserUID: map['userUID'],
+                                    forumUserName: map['userName'],
                                     forumBaslik: map['header'],
                                     forumTarih: DateTime.now(),
                                     forumIcerikYazi: map['content'],
@@ -83,14 +84,12 @@ class _getPostsState extends State<getPosts> {
                                     (BuildContext context, VoidCallback _) {
                                   final map = querySnapshot.docs[index].data();
                                   return postDetails(
-                                      forumBaslik: map['header'],
-                                      forumTarih: DateTime.now(),
-                                      forumIcerikYazi: map['content'],
-                                      forumIcerikFoto: map['contentPhoto'],
-                                      forumPaylasanKisi: map['personName'],
-                                      forumPaylasanFoto: map['personPhoto'],
-                                      forumBegeni: "100",
-                                      forumYorum: "250");
+                                    forumBaslik: map['header'],
+                                    forumTarih: DateTime.now(),
+                                    forumIcerikYazi: map['content'],
+                                    forumIcerikFoto: map['contentPhoto'],
+                                    forumPaylasanKisi: map['userName'],
+                                  );
                                 },
                               );
                             },
