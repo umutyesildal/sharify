@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import "package:sharify/HomePage/homeCard1.dart";
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sharify/HomePage/homeCardDetails.dart';
+import 'package:sharify/HomePage/homeCardBook.dart';
+import 'package:sharify/HomePage/homeCardFood.dart';
+import 'package:sharify/HomePage/homeCardCloth.dart';
+import 'package:sharify/HomePage/homeCardTech.dart';
 import 'package:animations/animations.dart';
 
 class Home extends StatefulWidget {
@@ -86,7 +89,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         },
                         openBuilder: (BuildContext context, VoidCallback _) {
                           final map = querySnapshot.docs[index].data();
-                          return homeCardDetails(
+                          return homeCardFood(
                               header: map['header'],
                               expiryDate: map['expiryDate'],
                               location: "location",
@@ -128,18 +131,38 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 print(snapshot.data);
                 final QuerySnapshot querySnapshot = snapshot.data;
                 return GridView.count(
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
                   crossAxisCount: 2,
                   padding: const EdgeInsets.all(20),
                   children: List.generate(
                     querySnapshot.docs.length,
                     (index) {
-                      final map = querySnapshot.docs[index].data();
-                      return homeCard1(
-                        givenPhoto: map['photo'],
-                        givenFullName: map['username'],
-                        givenHeader: map['header'],
+                      return OpenContainer(
+                        openElevation: 0.0,
+                        closedElevation: 0.0,
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: const Duration(milliseconds: 1000),
+                        useRootNavigator: true,
+                        closedBuilder:
+                            (BuildContext context, VoidCallback openContainer) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCard1(
+                            givenPhoto: map['photo'],
+                            givenFullName: map['username'],
+                            givenHeader: map['header'],
+                          );
+                        },
+                        openBuilder: (BuildContext context, VoidCallback _) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCardBook(
+                              header: map['header'],
+                              expiryDate: map['expiryDate'],
+                              location: "location",
+                              photo: "PHoto",
+                              pickUpTimes: "pickuptimes",
+                              quantity: "quantity",
+                              userName: "Username",
+                              userUID: "userUID");
+                        },
                       );
                     },
                   ),
@@ -177,11 +200,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   children: List.generate(
                     querySnapshot.docs.length,
                     (index) {
-                      final map = querySnapshot.docs[index].data();
-                      return homeCard1(
-                        givenPhoto: map['photo'],
-                        givenFullName: map['username'],
-                        givenHeader: map['header'],
+                      return OpenContainer(
+                        openElevation: 0.0,
+                        closedElevation: 0.0,
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: const Duration(milliseconds: 1000),
+                        useRootNavigator: true,
+                        closedBuilder:
+                            (BuildContext context, VoidCallback openContainer) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCard1(
+                            givenPhoto: map['photo'],
+                            givenFullName: map['username'],
+                            givenHeader: map['header'],
+                          );
+                        },
+                        openBuilder: (BuildContext context, VoidCallback _) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCardCloth(
+                              header: map['header'],
+                              expiryDate: map['expiryDate'],
+                              location: "location",
+                              photo: "PHoto",
+                              pickUpTimes: "pickuptimes",
+                              quantity: "quantity",
+                              userName: "Username",
+                              userUID: "userUID");
+                        },
                       );
                     },
                   ),
@@ -219,11 +264,33 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   children: List.generate(
                     querySnapshot.docs.length,
                     (index) {
-                      final map = querySnapshot.docs[index].data();
-                      return homeCard1(
-                        givenPhoto: map['photo'],
-                        givenFullName: map['username'],
-                        givenHeader: map['header'],
+                      return OpenContainer(
+                        openElevation: 0.0,
+                        closedElevation: 0.0,
+                        transitionType: ContainerTransitionType.fade,
+                        transitionDuration: const Duration(milliseconds: 1000),
+                        useRootNavigator: true,
+                        closedBuilder:
+                            (BuildContext context, VoidCallback openContainer) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCard1(
+                            givenPhoto: map['photo'],
+                            givenFullName: map['username'],
+                            givenHeader: map['header'],
+                          );
+                        },
+                        openBuilder: (BuildContext context, VoidCallback _) {
+                          final map = querySnapshot.docs[index].data();
+                          return homeCardTech(
+                              header: map['header'],
+                              expiryDate: map['expiryDate'],
+                              location: "location",
+                              photo: "PHoto",
+                              pickUpTimes: "pickuptimes",
+                              quantity: "quantity",
+                              userName: "Username",
+                              userUID: "userUID");
+                        },
                       );
                     },
                   ),

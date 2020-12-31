@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class homeCardDetails extends StatefulWidget {
-  const homeCardDetails(
+class homeCardFood extends StatefulWidget {
+  const homeCardFood(
       {@required this.header,
       this.userName,
       this.userUID,
@@ -22,10 +22,10 @@ class homeCardDetails extends StatefulWidget {
   final String userName;
 
   @override
-  _homeCardDetailsState createState() => _homeCardDetailsState();
+  _homeCardFoodState createState() => _homeCardFoodState();
 }
 
-class _homeCardDetailsState extends State<homeCardDetails> {
+class _homeCardFoodState extends State<homeCardFood> {
   @override
   Widget build(BuildContext context) {
     print(MediaQuery.of(context).size);
