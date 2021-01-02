@@ -173,7 +173,7 @@ class _homeCardTechState extends State<homeCardTech> {
                         shape: BoxShape.rectangle,
                         image: new DecorationImage(
                           fit: BoxFit.scaleDown,
-                          image: AssetImage("assets/forumFoto.png"),
+                          image: NetworkImage(widget.photo),
                         ),
                       ),
                     ),

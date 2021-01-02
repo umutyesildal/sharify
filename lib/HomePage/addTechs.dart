@@ -4,6 +4,10 @@ import 'navigator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 
 class addTechs extends StatefulWidget {
   @override
@@ -20,6 +24,8 @@ class _addTechsState extends State<addTechs> {
   TextEditingController location = TextEditingController();
   String ddvalue3 = 'Category';
   String userName;
+  String imageURL;
+
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -28,6 +34,40 @@ class _addTechsState extends State<addTechs> {
 
     userName = result.data()['userName'];
     print(result.data()['userName']);
+  }
+
+  void uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile image;
+    await Permission.photos.request();
+
+    // check permission
+    var permissionStatus = await Permission.photos.status;
+    //select image
+    if (permissionStatus.isGranted) {
+      image = await _picker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
+
+      if (image != null) {
+        var snapshot = await _storage
+            .ref()
+            .child('techItem/${DateTime.now().toString()}')
+            .putFile(file);
+
+        var downloadURL = await snapshot.ref.getDownloadURL();
+        print("ŞİMDİ DOWNLOAD URL GELCEK");
+        print(downloadURL);
+
+        setState(() {
+          imageURL = downloadURL;
+        });
+      } else {
+        print("No Image is selected");
+      }
+    } else {
+      print("Grant Permission");
+    }
   }
 
   void initState() {
@@ -75,19 +115,19 @@ class _addTechsState extends State<addTechs> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
-              onPressed: () {
+              onPressed: () async {
                 pr.show();
-                FirebaseFirestore.instance.collection('items').add(
+                await FirebaseFirestore.instance.collection('items').add(
                   {
-                    "photo": "",
+                    "photo": imageURL,
                     "header": titleOfItem.text,
                     "pickUpTimes": pickUpTimes.text,
                     "location": location.text,
                     "tag": "tech",
                     "username": userName,
                     "userUID": addTechs.uid,
-                    "category": ddvalue3,
-                    "description": descriptionOfItem,
+                    "type": ddvalue3,
+                    "description": descriptionOfItem.text,
                   },
                 );
                 Navigator.push(context,
@@ -215,15 +255,14 @@ class _addTechsState extends State<addTechs> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      'You can add total 10 photos.',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black26,
-                        fontSize: 21.0,
-                      ),
+                  child: GestureDetector(
+                    onTap: () {
+                      uploadImage();
+                    },
+                    child: CircleAvatar(
+                      backgroundImage: (imageURL != null)
+                          ? NetworkImage(imageURL)
+                          : AssetImage("assets/tapHere.png"),
                     ),
                   ),
                 ),

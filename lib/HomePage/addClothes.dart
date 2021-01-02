@@ -4,6 +4,10 @@ import 'navigator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 
 class addClothes extends StatefulWidget {
   @override
@@ -20,7 +24,10 @@ class _addClothesState extends State<addClothes> {
   TextEditingController location = TextEditingController();
   String ddvalue = 'Category';
   String ddvalue2 = 'Gender';
+  String ddvalue3 = 'Size';
   String userName;
+  String imageURL;
+
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -29,6 +36,40 @@ class _addClothesState extends State<addClothes> {
 
     userName = result.data()['userName'];
     print(result.data()['userName']);
+  }
+
+  void uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile image;
+    await Permission.photos.request();
+
+    // check permission
+    var permissionStatus = await Permission.photos.status;
+    //select image
+    if (permissionStatus.isGranted) {
+      image = await _picker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
+
+      if (image != null) {
+        var snapshot = await _storage
+            .ref()
+            .child('clothItem/${DateTime.now().toString()}')
+            .putFile(file);
+
+        var downloadURL = await snapshot.ref.getDownloadURL();
+        print("ŞİMDİ DOWNLOAD URL GELCEK");
+        print(downloadURL);
+
+        setState(() {
+          imageURL = downloadURL;
+        });
+      } else {
+        print("No Image is selected");
+      }
+    } else {
+      print("Grant Permission");
+    }
   }
 
   void initState() {
@@ -76,24 +117,29 @@ class _addClothesState extends State<addClothes> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
-              onPressed: () {
+              onPressed: () async {
                 pr.show();
-                FirebaseFirestore.instance.collection('items').add(
-                  {
-                    "photo": "",
-                    "header": titleOfItem.text,
-                    "pickUpTimes": pickUpTimes.text,
-                    "location": location.text,
-                    "tag": "cloth",
-                    "username": userName,
-                    "userUID": addClothes.uid,
-                    "category": ddvalue,
-                    "gender": ddvalue2,
-                    "description": descriptionOfItem,
-                  },
-                );
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => navigator()));
+                try {
+                  await FirebaseFirestore.instance.collection('items').add(
+                    {
+                      "photo": imageURL,
+                      "header": titleOfItem.text,
+                      "pickUpTimes": pickUpTimes.text,
+                      "location": location.text,
+                      "tag": "cloth",
+                      "username": userName,
+                      "userUID": addClothes.uid,
+                      "category": ddvalue,
+                      "gender": ddvalue2,
+                      "size": ddvalue3,
+                      "description": descriptionOfItem.text,
+                    },
+                  );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => navigator()));
+                } catch (e) {
+                  print(e);
+                }
               },
               child: Text(
                 'Add',
@@ -240,6 +286,34 @@ class _addClothesState extends State<addClothes> {
                     }).toList(),
                   ),
                 ),
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
+                  child: DropdownButton<String>(
+                    value: ddvalue3,
+                    dropdownColor: Colors.green,
+                    icon: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      color: Colors.black,
+                    ),
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        ddvalue3 = newValue;
+                      });
+                    },
+                    items: <String>['Size', 'S', 'M', 'L']
+                        .map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
                 SizedBox(
                   height: 20.0,
                 ),
@@ -249,15 +323,14 @@ class _addClothesState extends State<addClothes> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
-                  child: Align(
-                    alignment: Alignment.bottomLeft,
-                    child: Text(
-                      'You can add total 10 photos.',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black26,
-                        fontSize: 21.0,
-                      ),
+                  child: GestureDetector(
+                    onTap: () {
+                      uploadImage();
+                    },
+                    child: CircleAvatar(
+                      backgroundImage: (imageURL != null)
+                          ? NetworkImage(imageURL)
+                          : AssetImage("assets/tapHere.png"),
                     ),
                   ),
                 ),

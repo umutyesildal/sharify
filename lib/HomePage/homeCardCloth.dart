@@ -13,7 +13,7 @@ class homeCardCloth extends StatefulWidget {
     this.photo,
     this.location,
     this.pickUpTimes,
-    this.quantity,
+    this.category,
     this.gender,
     this.size,
     this.userUID,
@@ -24,7 +24,7 @@ class homeCardCloth extends StatefulWidget {
   final String photo;
   final String location;
   final String pickUpTimes;
-  final String quantity;
+  final String category;
   final String gender;
   final String size;
   final String userUID;
@@ -177,7 +177,7 @@ class _homeCardClothState extends State<homeCardCloth> {
                         shape: BoxShape.rectangle,
                         image: new DecorationImage(
                           fit: BoxFit.scaleDown,
-                          image: AssetImage("assets/forumFoto.png"),
+                          image: NetworkImage(widget.photo),
                         ),
                       ),
                     ),
@@ -267,7 +267,7 @@ class _homeCardClothState extends State<homeCardCloth> {
                             width: 15.0,
                           ),
                           Text(
-                            widget.quantity,
+                            widget.category,
                             style: TextStyle(
                               color: Colors.black87,
                               fontSize: 20.0,

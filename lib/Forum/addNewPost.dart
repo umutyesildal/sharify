@@ -3,6 +3,10 @@ import 'package:sharify/Forum/forumTabs.dart';
 import '../constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
 
 class addNewPost extends StatefulWidget {
   static final _auth = FirebaseAuth.instance;
@@ -16,6 +20,7 @@ class addNewPost extends StatefulWidget {
 class _addNewPostState extends State<addNewPost> {
   TextEditingController titlePostController = TextEditingController();
   TextEditingController contentPostController = TextEditingController();
+  String imageURL;
 
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
@@ -26,9 +31,46 @@ class _addNewPostState extends State<addNewPost> {
     userName = result.data()['userName'];
     userPhoto = result.data()['userPhoto'];
     print(result.data()['userName']);
+    print(result.data()['userName']);
+
+    print(userPhoto);
     setState(() {
       isLoading = true;
     });
+  }
+
+  void uploadImage() async {
+    final _storage = FirebaseStorage.instance;
+    final _picker = ImagePicker();
+    PickedFile image;
+    await Permission.photos.request();
+
+    // check permission
+    var permissionStatus = await Permission.photos.status;
+    //select image
+    if (permissionStatus.isGranted) {
+      image = await _picker.getImage(source: ImageSource.gallery);
+      var file = File(image.path);
+
+      if (image != null) {
+        var snapshot = await _storage
+            .ref()
+            .child('foodItem/${DateTime.now().toString()}')
+            .putFile(file);
+
+        var downloadURL = await snapshot.ref.getDownloadURL();
+        print("ŞİMDİ DOWNLOAD URL GELCEK");
+        print(downloadURL);
+
+        setState(() {
+          imageURL = downloadURL;
+        });
+      } else {
+        print("No Image is selected");
+      }
+    } else {
+      print("Grant Permission");
+    }
   }
 
   String userPhoto;
@@ -87,13 +129,15 @@ class _addNewPostState extends State<addNewPost> {
                         onPressed: () async {
                           print(titlePostController.text);
                           print(contentPostController.text);
-                          FirebaseFirestore.instance.collection('forum').add(
+                          await FirebaseFirestore.instance
+                              .collection('forum')
+                              .add(
                             {
                               "header": titlePostController.text,
                               "content": contentPostController.text,
                               "date":
                                   DateTime.now().toString().substring(0, 16),
-                              "contentPhoto": "NOTYET",
+                              "contentPhoto": imageURL,
                               "userName": userName,
                               "userUID": addNewPost.uid,
                             },
@@ -155,14 +199,21 @@ class _addNewPostState extends State<addNewPost> {
                       ),
                     ),
                     SizedBox(height: 60.0),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 4 / 5,
-                      height: MediaQuery.of(context).size.height * 75 / 203,
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        image: new DecorationImage(
-                          fit: BoxFit.scaleDown,
-                          image: AssetImage("assets/forumFoto.png"),
+                    GestureDetector(
+                      onTap: () {
+                        uploadImage();
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 4 / 5,
+                        height: MediaQuery.of(context).size.height * 75 / 203,
+                        decoration: new BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          image: new DecorationImage(
+                            fit: BoxFit.scaleDown,
+                            image: (imageURL != null)
+                                ? NetworkImage(imageURL)
+                                : AssetImage("assets/tapHere.png"),
+                          ),
                         ),
                       ),
                     ),

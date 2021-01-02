@@ -223,7 +223,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             photo: map["photo"],
                             location: map["location"],
                             pickUpTimes: map["pickUpTimes"],
-                            quantity: map["quantity"],
                             gender: map["gender"],
                             size: map["size"],
                             userUID: map["userUID"],
