@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:sharify/HomePage/navigator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sharify/onBoarding/onBoarding.dart';
 import 'package:progress_dialog/progress_dialog.dart';
+import 'signUpAddLocationAndPhoto.dart';
 
 class signUpButton extends StatefulWidget {
   const signUpButton(
@@ -87,7 +86,8 @@ class _signUpButtonState extends State<signUpButton> {
               if (user != null) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => onBoarding()),
+                  MaterialPageRoute(
+                      builder: (context) => signUpAddLocationAndPhoto()),
                 );
               }
             } catch (e) {

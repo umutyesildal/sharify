@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sharify/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sharify/signIn/entryPage.dart';
+import 'package:sharify/signIn/signUpAddLocationAndPhoto.dart';
 
 class profilePage extends StatefulWidget {
   static final _auth = FirebaseAuth.instance;
@@ -24,6 +25,7 @@ class _profilePageState extends State<profilePage> {
     userMail = result.data()['userMail'];
     userPhoto = result.data()['userPhoto'];
     userPhone = result.data()['userPhone'];
+    userLocation = result.data()['location'];
     print(result.data()['userName']);
     print(result.data()['userPhoto']);
     print(result.data()['userMail']);
@@ -37,6 +39,7 @@ class _profilePageState extends State<profilePage> {
   String userPhone;
   String userMail;
   String userPhoto;
+  String userLocation;
   bool isLoading = false;
 
   void initState() {
@@ -65,10 +68,20 @@ class _profilePageState extends State<profilePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "profile",
-                            style: kSFProRegular.copyWith(
-                                fontSize: 30, color: kGrayColor),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        signUpAddLocationAndPhoto()),
+                              );
+                            },
+                            child: Text(
+                              "profile",
+                              style: kSFProRegular.copyWith(
+                                  fontSize: 30, color: kGrayColor),
+                            ),
                           ),
                           GestureDetector(
                             onTap: () async {
@@ -111,7 +124,7 @@ class _profilePageState extends State<profilePage> {
                           Container(
                             decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage("userPhoto"),
+                                  image: NetworkImage(userPhoto),
                                   fit: BoxFit.cover),
                               shape: BoxShape.circle,
                             ),
@@ -232,7 +245,7 @@ class _profilePageState extends State<profilePage> {
                                                 ),
                                               ),
                                               Text(
-                                                "locationgelcek",
+                                                userLocation,
                                                 style:
                                                     kSFProTextRegular.copyWith(
                                                         color: Colors.black),

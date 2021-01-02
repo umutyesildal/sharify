@@ -1,134 +1,190 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sharify/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:sharify/Forum/imageDialog.dart';
 
 class homeCardCloth extends StatefulWidget {
-  final String text='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pulvinar imperdiet feugiat. Integer non mauris tellus. Ut ultrices magna ut risus iaculis dignissim. Quisque venenatis justo quis nisl blandit semper. Morbi risus urna, euismod non justo vitae, imperdiet luctus justo. Curabitu...';
   bool isExpanded = false;
-     homeCardCloth(
-      {@required this.header,
-      this.userName,
-      this.userUID,
-      this.photo,
-      this.location,
-      this.pickUpTimes,
-      this.expiryDate,
-      this.quantity});
+  homeCardCloth({
+    @required this.header,
+    this.description,
+    this.photo,
+    this.location,
+    this.pickUpTimes,
+    this.quantity,
+    this.gender,
+    this.size,
+    this.userUID,
+  });
 
   final String header;
-  final String expiryDate;
-  final String location;
+  final String description;
   final String photo;
+  final String location;
   final String pickUpTimes;
   final String quantity;
+  final String gender;
+  final String size;
   final String userUID;
-  final String userName;
+
+  static final _auth = FirebaseAuth.instance;
+  static final User user = _auth.currentUser;
+  static final uid = user.uid;
 
   @override
   _homeCardClothState createState() => _homeCardClothState();
 }
 
 class _homeCardClothState extends State<homeCardCloth> {
+  Future giver() async {
+    DocumentSnapshot result = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(homeCardCloth.uid)
+        .get();
+
+    userName = result.data()['userName'];
+    userPhoto = result.data()['userPhoto'];
+
+    setState(() {
+      isLoading = true;
+    });
+  }
+
+  String userName;
+  String userPhoto;
+  bool isLoading = false;
+
+  void initState() {
+    super.initState();
+    giver();
+  }
+
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size);
-    return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(15.0)),
-      child: Card(
-        elevation: 0.0, //Because this is a card there is a basic elevation.
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: EdgeInsets.only(top: 5.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+    if (isLoading == false) {
+      return Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
+      return Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(15.0)),
+        child: Card(
+          elevation: 0.0, //Because this is a card there is a basic elevation.
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 5.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                      Text(
+                        "Go Back",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
                     Text(
-                      "Go Back",
+                      widget.header,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Text(
+                      'November 12, 12 PM'
+                      /*widget.pickUpTimes*/,
+                      style: TextStyle(
+                        fontSize: 11.0,
+                        color: Colors.grey,
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            SizedBox(height: 20.0,),
-            Expanded(
-              flex: 1,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text('Nahta Oyunları'
-                    /*widget.header*/,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Text('November 12, 12 PM'
-                    /*widget.pickUpTimes*/,
-                    style: TextStyle(
-                      fontSize: 11.0,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+              Expanded(
+                flex: 3,
+                child: Column(
+                  children: <Widget>[
+                    new ConstrainedBox(
+                        constraints: widget.isExpanded
+                            ? new BoxConstraints()
+                            : new BoxConstraints(maxHeight: 50.0),
+                        child: new Text(
+                          widget.description,
+                          softWrap: true,
+                          overflow: TextOverflow.fade,
+                        )),
+                    widget.isExpanded
+                        ? new Container()
+                        : new FlatButton(
+                            child: const Text(
+                              'See more...',
+                              style: TextStyle(
+                                color: kalphaGreen,
+                                fontSize: 15.0,
+                              ),
+                            ),
+                            onPressed: () =>
+                                setState(() => widget.isExpanded = true))
+                  ],
+                ),
               ),
-            ),
-
-            Expanded(
-              flex: 3,
-              child: Column(children: <Widget>[
-                new ConstrainedBox(
-                    constraints: widget.isExpanded
-                        ? new BoxConstraints()
-                        : new BoxConstraints(maxHeight: 50.0),
-                    child: new Text(
-                      widget.text,
-                      softWrap: true,
-                      overflow: TextOverflow.fade,
-                    )),
-                widget.isExpanded
-                    ? new Container()
-                    : new FlatButton(
-                    child: const Text('See more...',
-                      style: TextStyle(
-                        color: kalphaGreen,
-                        fontSize: 15.0,
+              Expanded(
+                flex: 3,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await showDialog(
+                        context: context,
+                        builder: (_) => ImageDialog(
+                          sentPhoto: widget.photo,
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 4 / 5,
+                      height: MediaQuery.of(context).size.height * 75 / 203,
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        image: new DecorationImage(
+                          fit: BoxFit.scaleDown,
+                          image: AssetImage("assets/forumFoto.png"),
+                        ),
                       ),
                     ),
-                    onPressed: () => setState(() => widget.isExpanded = true)
-                )
-              ],
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Container(
-                child: Center(
-                  child: Image(
-                    image: AssetImage('assets/yemek1.png'),
-                    width: 299.0,
-                    height: 172.0,
                   ),
                 ),
               ),
-            ),
-            /*
+              /*
             Expanded(
               flex: 5,
               child: Container(
@@ -141,132 +197,189 @@ class _homeCardClothState extends State<homeCardCloth> {
               ),
             ),
             */
-            SizedBox(height: 25,),
-            Expanded(
-              flex: 3,
-              child: Column(
-                children:<Widget> [
-                  Container(
-                    child: Row(
-                      children:<Widget>[
-                        Image(
-                          image: new AssetImage("assets/placeholder.png"),
-                          color: null,
-                          width: 20.49,
-                          height: 25.71,
-                        ),
-                        SizedBox(
-                          width: 15.0,
-                        ),
-                        Text(
-                          'İstanbul (Anadolu)',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10.0,),
-                  Container(
-                    child: Row(
-                      children:<Widget>[
-                        Image(
-                          image: new AssetImage("assets/clock.png"),
-                          color: null,
-                          width: 20.49,
-                          height: 25.71,
-                        ),
-                        SizedBox(
-                          width: 15.0,
-                        ),
-                        Text(
-                          '14.00 - 17.00',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10.0,),
-                  Container(
-                    child: Row(
-                      children:<Widget>[
-                        Image(
-                          image: new AssetImage("assets/hashtag.png"),
-                          color: null,
-                          width: 20.49,
-                          height: 25.71,
-                        ),
-                        SizedBox(
-                          width: 15.0,
-                        ),
-                        Text(
-                          'Historical',
-                          style: TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              SizedBox(
+                height: 25,
               ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(flex: 1, child: SizedBox()),
-                        Expanded(
-                          flex: 5,
-                          child: Text(
-                            widget.userName,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+              Expanded(
+                flex: 4,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Image(
+                            image: new AssetImage("assets/placeholder.png"),
+                            color: null,
+                            width: 20.49,
+                            height: 25.71,
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(5.0, 30.0, 5.0, 30.0),
-                          child: Expanded(
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            widget.location,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Image(
+                            image: new AssetImage("assets/clock.png"),
+                            color: null,
+                            width: 20.49,
+                            height: 25.71,
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            widget.pickUpTimes,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Image(
+                            image: new AssetImage("assets/hashtag.png"),
+                            color: null,
+                            width: 20.49,
+                            height: 25.71,
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            widget.quantity,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Image(
+                            image: new AssetImage("assets/clothGender.png"),
+                            color: null,
+                            width: 20.49,
+                            height: 25.71,
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            widget.gender,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Container(
+                      child: Row(
+                        children: <Widget>[
+                          Image(
+                            image: new AssetImage("assets/clothSize.png"),
+                            color: null,
+                            width: 20.49,
+                            height: 25.71,
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          Text(
+                            widget.size,
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 20.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2,
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(flex: 1, child: SizedBox()),
+                          Expanded(
                             flex: 5,
-                            child: Container(
-                              child: FlatButton(
-                                height: 10.0,
-                                child: Center(
-                                  child: Text(
-                                    "Send Message",
-                                    style: TextStyle(
-                                      fontSize: 10.0,
-                                      color: Colors.white,
+                            child: Text(
+                              userName,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(5.0, 30.0, 5.0, 30.0),
+                            child: Expanded(
+                              flex: 5,
+                              child: Container(
+                                child: FlatButton(
+                                  height: 10.0,
+                                  child: Center(
+                                    child: Text(
+                                      "Send Message",
+                                      style: TextStyle(
+                                        fontSize: 10.0,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              decoration: BoxDecoration(
-                                color:kalphaGreen,
-                                borderRadius: BorderRadius.circular(5.0),
+                                decoration: BoxDecoration(
+                                  color: kalphaGreen,
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }
   }
 }

@@ -89,6 +89,7 @@ class _addClothesState extends State<addClothes> {
                     "userUID": addClothes.uid,
                     "category": ddvalue,
                     "gender": ddvalue2,
+                    "description": descriptionOfItem,
                   },
                 );
                 Navigator.push(context,

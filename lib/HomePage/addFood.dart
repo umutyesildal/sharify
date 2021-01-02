@@ -90,6 +90,7 @@ class _addFoodState extends State<addFood> {
                     "tag": "food",
                     "username": userName,
                     "userUID": addFood.uid,
+                    "description": descriptionOfItem,
                   },
                 );
                 Navigator.push(context,

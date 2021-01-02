@@ -87,6 +87,7 @@ class _addBookState extends State<addBook> {
                     "username": userName,
                     "userUID": addBook.uid,
                     "type": dropdownValue,
+                    "description": descriptionOfItem,
                   },
                 );
                 Navigator.push(context,

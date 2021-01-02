@@ -87,6 +87,7 @@ class _addTechsState extends State<addTechs> {
                     "username": userName,
                     "userUID": addTechs.uid,
                     "category": ddvalue3,
+                    "description": descriptionOfItem,
                   },
                 );
                 Navigator.push(context,
