@@ -8,7 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
+/// This page is for adding a forum post.
 class addNewPost extends StatefulWidget {
+  // a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
   static final User user = _auth.currentUser;
   static final uid = user.uid;
@@ -18,10 +20,13 @@ class addNewPost extends StatefulWidget {
 }
 
 class _addNewPostState extends State<addNewPost> {
+  // text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController titlePostController = TextEditingController();
   TextEditingController contentPostController = TextEditingController();
+  // this is an imageURL so that we can save url to database.
   String imageURL;
 
+  /// The function to get current users data from database and saving it to a string.
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -39,8 +44,11 @@ class _addNewPostState extends State<addNewPost> {
     });
   }
 
+  /// function to upload image.
   void uploadImage() async {
+    // firebase storage connection
     final _storage = FirebaseStorage.instance;
+    // an instance from imagepicker to use imagepicker
     final _picker = ImagePicker();
     PickedFile image;
     await Permission.photos.request();
@@ -53,11 +61,12 @@ class _addNewPostState extends State<addNewPost> {
       var file = File(image.path);
 
       if (image != null) {
+        // upload image
         var snapshot = await _storage
             .ref()
-            .child('foodItem/${DateTime.now().toString()}')
+            .child('forumPost/${DateTime.now().toString()}')
             .putFile(file);
-
+        // get image url
         var downloadURL = await snapshot.ref.getDownloadURL();
         print("ŞİMDİ DOWNLOAD URL GELCEK");
         print(downloadURL);
@@ -75,6 +84,7 @@ class _addNewPostState extends State<addNewPost> {
 
   String userPhoto;
   String userName;
+  // when isLoading is false only circularindicator shows up, when it becomes true at giver Function, the scaffold is returned.
   bool isLoading = false;
 
   void initState() {
@@ -84,7 +94,6 @@ class _addNewPostState extends State<addNewPost> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size);
     if (isLoading == false) {
       return Scaffold(
         body: Center(
@@ -126,6 +135,7 @@ class _addNewPostState extends State<addNewPost> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         textColor: Colors.white,
+                        // adding post to database.
                         onPressed: () async {
                           print(titlePostController.text);
                           print(contentPostController.text);
@@ -210,6 +220,7 @@ class _addNewPostState extends State<addNewPost> {
                           shape: BoxShape.rectangle,
                           image: new DecorationImage(
                             fit: BoxFit.scaleDown,
+                            // when image is added to database image will load up here
                             image: (imageURL != null)
                                 ? NetworkImage(imageURL)
                                 : AssetImage("assets/tapHere.png"),

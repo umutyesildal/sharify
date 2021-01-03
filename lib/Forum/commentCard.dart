@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// This was supposed to be comment page at forum posts but it is postponed.
 class commentCard extends StatelessWidget {
   const commentCard(
       {@required this.commentatorName,

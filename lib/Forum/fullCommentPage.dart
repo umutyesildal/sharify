@@ -3,6 +3,7 @@ import 'package:sharify/constants.dart';
 import 'commentCard.dart';
 import '../constants.dart';
 
+/// This was supposed to be comment page at forum posts but it is postponed.
 class fullCommentPage extends StatefulWidget {
   @override
   _fullCommentPageState createState() => _fullCommentPageState();

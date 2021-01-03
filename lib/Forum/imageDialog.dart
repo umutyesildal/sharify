@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// to create a function that shows the sent photo bigger.
 class ImageDialog extends StatelessWidget {
   const ImageDialog({@required this.sentPhoto});
   final String sentPhoto;

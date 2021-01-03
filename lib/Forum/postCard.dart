@@ -1,23 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../constants.dart';
 import 'imageDialog.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
+/// the Card Function where a forum post is shown at tab page.
 class postCard extends StatefulWidget {
   const postCard({
-    @required this.forumBaslik,
+    @required this.forumHeader,
     this.forumUserName,
-    this.forumTarih,
-    this.forumIcerikYazi,
-    this.forumIcerikFoto,
+    this.forumDate,
+    this.forumContent,
+    this.forumContentPhoto,
   });
   final String forumUserName;
-  final String forumBaslik;
-  final DateTime forumTarih;
-  final String forumIcerikYazi;
-  final String forumIcerikFoto;
+  final String forumHeader;
+  final DateTime forumDate;
+  final String forumContent;
+  final String forumContentPhoto;
 
   @override
   _postCardState createState() => _postCardState();
@@ -53,7 +51,7 @@ class _postCardState extends State<postCard> {
             Expanded(
               flex: 1,
               child: Text(
-                widget.forumBaslik,
+                widget.forumHeader,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
@@ -64,14 +62,14 @@ class _postCardState extends State<postCard> {
             Expanded(
               flex: 1,
               child: Text(
-                widget.forumTarih.toString(),
+                widget.forumDate.toString(),
                 style: TextStyle(fontSize: 10.0, color: Colors.grey),
               ),
             ),
             Expanded(
               flex: 2,
               child: Text(
-                widget.forumIcerikYazi + "...",
+                widget.forumContent + "...",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 10.0,
@@ -86,7 +84,7 @@ class _postCardState extends State<postCard> {
                   margin: EdgeInsets.only(top: 15, bottom: 15),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(widget.forumIcerikFoto),
+                        image: NetworkImage(widget.forumContentPhoto),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -95,7 +93,7 @@ class _postCardState extends State<postCard> {
                   await showDialog(
                       context: context,
                       builder: (_) => ImageDialog(
-                            sentPhoto: widget.forumIcerikFoto,
+                            sentPhoto: widget.forumContentPhoto,
                           ));
                 },
               ),

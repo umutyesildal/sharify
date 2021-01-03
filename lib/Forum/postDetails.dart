@@ -2,19 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'imageDialog.dart';
 
+/// a detailed version of postCard, It is enabled when postCard is tapped.
 class postDetails extends StatefulWidget {
   const postDetails(
-      {@required this.forumBaslik,
-      this.forumTarih,
-      this.forumIcerikYazi,
-      this.forumIcerikFoto,
-      this.forumPaylasanKisi});
+      {@required this.forumHeader,
+      this.forumDate,
+      this.forumContentText,
+      this.forumContentPhoto,
+      this.forumPersonSharing});
 
-  final String forumBaslik;
-  final DateTime forumTarih;
-  final String forumIcerikYazi;
-  final String forumIcerikFoto;
-  final String forumPaylasanKisi;
+  final String forumHeader;
+  final DateTime forumDate;
+  final String forumContentText;
+  final String forumContentPhoto;
+  final String forumPersonSharing;
 
   @override
   _postDetailsState createState() => _postDetailsState();
@@ -64,7 +65,7 @@ class _postDetailsState extends State<postDetails> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    widget.forumBaslik,
+                    widget.forumHeader,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
@@ -72,7 +73,7 @@ class _postDetailsState extends State<postDetails> {
                     ),
                   ),
                   Text(
-                    widget.forumTarih.toString().substring(0, 16),
+                    widget.forumDate.toString().substring(0, 16),
                     style: TextStyle(fontSize: 10.0, color: Colors.grey),
                   ),
                 ],
@@ -81,7 +82,7 @@ class _postDetailsState extends State<postDetails> {
             Expanded(
               flex: 2,
               child: Text(
-                widget.forumIcerikYazi +
+                widget.forumContentText +
                     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
                 style: TextStyle(
                   fontSize: 10.0,
@@ -96,7 +97,7 @@ class _postDetailsState extends State<postDetails> {
                   margin: EdgeInsets.only(top: 15, bottom: 15),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: NetworkImage(widget.forumIcerikFoto),
+                        image: NetworkImage(widget.forumContentPhoto),
                         fit: BoxFit.cover),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -105,7 +106,7 @@ class _postDetailsState extends State<postDetails> {
                   await showDialog(
                       context: context,
                       builder: (_) => ImageDialog(
-                            sentPhoto: widget.forumIcerikFoto,
+                            sentPhoto: widget.forumContentPhoto,
                           ));
                 },
               ),
@@ -134,7 +135,7 @@ class _postDetailsState extends State<postDetails> {
                         Expanded(
                           flex: 9,
                           child: Text(
-                            widget.forumPaylasanKisi,
+                            widget.forumPersonSharing,
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),

@@ -6,6 +6,7 @@ import 'package:sharify/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+/// to explain the user how the app works
 class onBoarding extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -72,7 +73,7 @@ class _MyApp extends State<onBoarding> {
     );
   }
 
-  // 4 Step: Create Other functions
+  // 4 Step: updating the onBoardingPass at database so that user will not see onboarding again in the future.
   void onDonePress() async {
     final _auth = FirebaseAuth.instance;
     final User user = _auth.currentUser;

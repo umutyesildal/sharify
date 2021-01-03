@@ -5,8 +5,8 @@ import 'postCard.dart';
 import 'postDetails.dart';
 import 'package:sharify/Forum/addNewPost.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
+/// the page to get forum posts, this method is called at forumTabs.
 class getPosts extends StatefulWidget {
   @override
   _getPostsState createState() => _getPostsState();
@@ -17,6 +17,7 @@ class _getPostsState extends State<getPosts> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+        // go to addNewPost Page.
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => addNewPost()),
@@ -37,6 +38,7 @@ class _getPostsState extends State<getPosts> {
                 padding: EdgeInsets.all(15),
                 child: Scaffold(
                   body: StreamBuilder(
+                    // database initializing
                     stream: FirebaseFirestore.instance
                         .collection('forum')
                         .snapshots(),
@@ -56,12 +58,14 @@ class _getPostsState extends State<getPosts> {
                         );
                       }
                       print(snapshot.data);
+                      // saving all the datas from forumDatabase and saving it.
                       final QuerySnapshot querySnapshot = snapshot.data;
                       print(querySnapshot.docs.length);
                       return Container(
                         color: kbackgroundGrey,
                         child: ListView.separated(
                             itemBuilder: (BuildContext context, int index) {
+                              // Animation.
                               return OpenContainer(
                                 openElevation: 0.0,
                                 closedElevation: 0.0,
@@ -71,24 +75,25 @@ class _getPostsState extends State<getPosts> {
                                 useRootNavigator: true,
                                 closedBuilder: (BuildContext context,
                                     VoidCallback openContainer) {
+                                  // getting datas at index.
                                   final map = querySnapshot.docs[index].data();
                                   return postCard(
                                     forumUserName: map['userName'],
-                                    forumBaslik: map['header'],
-                                    forumTarih: DateTime.now(),
-                                    forumIcerikYazi: map['content'],
-                                    forumIcerikFoto: map['contentPhoto'],
+                                    forumHeader: map['header'],
+                                    forumDate: DateTime.now(),
+                                    forumContent: map['content'],
+                                    forumContentPhoto: map['contentPhoto'],
                                   );
                                 },
                                 openBuilder:
                                     (BuildContext context, VoidCallback _) {
                                   final map = querySnapshot.docs[index].data();
                                   return postDetails(
-                                    forumBaslik: map['header'],
-                                    forumTarih: DateTime.now(),
-                                    forumIcerikYazi: map['content'],
-                                    forumIcerikFoto: map['contentPhoto'],
-                                    forumPaylasanKisi: map['userName'],
+                                    forumHeader: map['header'],
+                                    forumDate: DateTime.now(),
+                                    forumContentText: map['content'],
+                                    forumContentPhoto: map['contentPhoto'],
+                                    forumPersonSharing: map['userName'],
                                   );
                                 },
                               );

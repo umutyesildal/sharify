@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'getPosts.dart';
 
+/// The page where tabs are initialized.
 class forumTabs extends StatefulWidget {
   @override
   _forumTabsState createState() => _forumTabsState();
