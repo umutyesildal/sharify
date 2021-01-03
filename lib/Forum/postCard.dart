@@ -71,7 +71,7 @@ class _postCardState extends State<postCard> {
             Expanded(
               flex: 2,
               child: Text(
-                widget.forumIcerikYazi.substring(0, 160) + "...",
+                widget.forumIcerikYazi + "...",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 10.0,
