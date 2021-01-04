@@ -20,6 +20,7 @@ class signInButton extends StatefulWidget {
 }
 
 class _signInButtonState extends State<signInButton> {
+  /// used for custom circular indicator.
   ProgressDialog pr;
   SignIn signIn = new SignIn();
   @override
@@ -53,6 +54,8 @@ class _signInButtonState extends State<signInButton> {
               ),
             ),
           ),
+
+          /// this code block signs the user in, with given password and email. If onBoardingPass is false user has to go onboarding, if not goes straight to app.
           onPressed: () async {
             pr.show();
             print("gösterildi");

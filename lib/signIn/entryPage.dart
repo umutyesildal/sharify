@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/navigator.dart';
 import 'package:sharify/constants.dart';
 import 'signIn.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class entryPage extends StatefulWidget {
   @override
@@ -11,9 +9,8 @@ class entryPage extends StatefulWidget {
 }
 
 class _entryPageState extends State<entryPage> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-
-  void _signInWithGoogle() async {
+  /// it was made for google sign in but not used yet.
+  /* void _signInWithGoogle() async {
     try {
       final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication googleAuth =
@@ -57,8 +54,7 @@ class _entryPageState extends State<entryPage> {
       );
     }
   }
-
-
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +99,6 @@ class _entryPageState extends State<entryPage> {
             flex: 3,
             child: Column(
               children: [
-
                 Container(
                   padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                   height: 70.0,
@@ -121,11 +116,11 @@ class _entryPageState extends State<entryPage> {
                       children: <Widget>[
                         Center(
                             child: new Image(
-                              image: new AssetImage("assets/apple.png"),
-                              color: null,
-                              width: 22.49,
-                              height: 27.71,
-                            )),
+                          image: new AssetImage("assets/apple.png"),
+                          color: null,
+                          width: 22.49,
+                          height: 27.71,
+                        )),
                         SizedBox(
                           width: 10.0,
                         ),
@@ -142,9 +137,6 @@ class _entryPageState extends State<entryPage> {
                     ),
                   ),
                 ),
-
-
-
                 Builder(
                   builder: (context) => Container(
                     padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
@@ -184,9 +176,6 @@ class _entryPageState extends State<entryPage> {
                     ),
                   ),
                 ),
-
-
-
                 Container(
                   padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
                   height: 70.0,
@@ -201,11 +190,10 @@ class _entryPageState extends State<entryPage> {
                           ),
                         ),
                       ),
-                      onPressed: () =>
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignIn()),
-                          ),
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignIn()),
+                      ),
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
@@ -222,22 +210,23 @@ class _entryPageState extends State<entryPage> {
                   height: 70.0,
                   child: Container(
                     child: FlatButton(
-
-                      child: Text('Having trouble with login?',
-                        style: TextStyle(fontSize: 14.0, color: Colors.grey[600]),),
+                      child: Text(
+                        'Having trouble with login?',
+                        style:
+                            TextStyle(fontSize: 14.0, color: Colors.grey[600]),
+                      ),
                       onPressed: () {
                         showAlertDialog(context);
                       },
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
-                          color: kbackgroundGrey,
-                          ),
+                        color: kbackgroundGrey,
+                      ),
                       color: kbackgroundGrey,
                       borderRadius: BorderRadius.circular(25.0),
                     ),
                   ),
-
                 ),
               ],
             ),
@@ -251,33 +240,34 @@ class _entryPageState extends State<entryPage> {
 showAlertDialog(BuildContext context) {
   // set up the buttons
   Widget okButton = FlatButton(
-    child: Text("OK",
-        style: TextStyle(
+    child: Text(
+      "OK",
+      style: TextStyle(
         color: kalphaGreen,
-    ),),
-    onPressed:  () {
+      ),
+    ),
+    onPressed: () {
       Navigator.of(context).pop();
     },
   );
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text("Troubleshoot problems signing in",
+    title: Text(
+      "Troubleshoot problems signing in",
       style: TextStyle(
         fontSize: 18.0,
       ),
     ),
-    content: Text("Check your internet connection "
-        "Make sure you’re connected to the internet by selecting Network  on the lock screen of your device. "
-        "If you’re having problems connecting to Wi-Fi or the signal is weak, try connecting your device directly to the router or modem with an Ethernet cable."
-        "If connectivity problems persist, check your internet connection using a different device to see if it’s a network problem.",
-    style: TextStyle(
-      fontSize: 17.0
-    ),),
-
+    content: Text(
+      "Check your internet connection "
+      "Make sure you’re connected to the internet by selecting Network  on the lock screen of your device. "
+      "If you’re having problems connecting to Wi-Fi or the signal is weak, try connecting your device directly to the router or modem with an Ethernet cable."
+      "If connectivity problems persist, check your internet connection using a different device to see if it’s a network problem.",
+      style: TextStyle(fontSize: 17.0),
+    ),
     actions: [
       okButton,
-
     ],
   );
   // show the dialog

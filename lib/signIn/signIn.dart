@@ -9,6 +9,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  // text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   Widget build(BuildContext context) {
@@ -93,6 +94,8 @@ class _SignInState extends State<SignIn> {
                 flex: 1,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+
+                  /// The button in order to sign the user in
                   child: signInButton(
                     givenEmail: emailController.text,
                     givenPassword: passwordController.text,

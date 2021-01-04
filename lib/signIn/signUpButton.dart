@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'signUpAddLocationAndPhoto.dart';
 
+/// Signing the user up.
 class signUpButton extends StatefulWidget {
   const signUpButton(
       {@required this.givenButton,
@@ -24,6 +25,7 @@ class signUpButton extends StatefulWidget {
 }
 
 class _signUpButtonState extends State<signUpButton> {
+  /// adding user datas to database with a document id same with user id.
   void inputData() async {
     final User user = signUpButton._auth.currentUser;
     final uid = user.uid;
@@ -73,6 +75,8 @@ class _signUpButtonState extends State<signUpButton> {
               ),
             ),
           ),
+
+          /// creating a user with authentication and creating an another user at database with the user id from auth.
           onPressed: () async {
             pr.show();
             print("gösterildi");

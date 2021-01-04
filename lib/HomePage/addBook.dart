@@ -9,9 +9,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
+/// Adding book to database
 class addBook extends StatefulWidget {
   @override
   _addBookState createState() => _addBookState();
+// a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
   static final User user = _auth.currentUser;
   static final uid = user.uid;
@@ -19,6 +21,7 @@ class addBook extends StatefulWidget {
 
 class _addBookState extends State<addBook> {
   String dropdownValue = 'Type';
+// text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController titleOfItem = TextEditingController();
   TextEditingController descriptionOfItem = TextEditingController();
   TextEditingController location = TextEditingController();
@@ -26,8 +29,12 @@ class _addBookState extends State<addBook> {
 
   String imageURL;
   String userName;
+
+  /// function to upload image.
   void uploadImage() async {
+    // firebase storage connection
     final _storage = FirebaseStorage.instance;
+    // an instance from imagepicker to use imagepicker
     final _picker = ImagePicker();
     PickedFile image;
     await Permission.photos.request();
@@ -38,7 +45,7 @@ class _addBookState extends State<addBook> {
     if (permissionStatus.isGranted) {
       image = await _picker.getImage(source: ImageSource.gallery);
       var file = File(image.path);
-
+      // upload image
       if (image != null) {
         var snapshot = await _storage
             .ref()
@@ -60,6 +67,7 @@ class _addBookState extends State<addBook> {
     }
   }
 
+  /// Getting username from userID
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -75,6 +83,7 @@ class _addBookState extends State<addBook> {
     giver();
   }
 
+  /// used for custom circular indicator.
   ProgressDialog pr;
   @override
   Widget build(BuildContext context) {
@@ -115,6 +124,7 @@ class _addBookState extends State<addBook> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
+              /// Adding the book to database.
               onPressed: () async {
                 pr.show();
                 try {
@@ -270,9 +280,11 @@ class _addBookState extends State<addBook> {
                     color: Colors.white,
                   ),
                   child: GestureDetector(
+                    /// uploading Image
                     onTap: () {
                       uploadImage();
                     },
+                    // when image is added to database image will load up here
                     child: CircleAvatar(
                       backgroundImage: (imageURL != null)
                           ? NetworkImage(imageURL)

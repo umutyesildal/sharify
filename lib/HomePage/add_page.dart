@@ -6,6 +6,7 @@ import 'package:sharify/HomePage/addTechs.dart';
 import 'package:sharify/HomePage/navigator.dart';
 import 'package:sharify/HomePage/addClothes.dart';
 
+/// The page where comes after user tapped Add at the buttonNavigationBar
 class addPage extends StatefulWidget {
   @override
   _addPageState createState() => _addPageState();
@@ -54,6 +55,7 @@ class _addPageState extends State<addPage> {
               ),
             ),
             InkWell(
+              /// adding food page
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => addFood()));
@@ -82,6 +84,7 @@ class _addPageState extends State<addPage> {
               ),
             ),
             InkWell(
+              /// adding book page
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => addBook()));
@@ -110,6 +113,7 @@ class _addPageState extends State<addPage> {
               ),
             ),
             InkWell(
+              /// adding cloth page
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => addClothes()));
@@ -138,6 +142,7 @@ class _addPageState extends State<addPage> {
               ),
             ),
             InkWell(
+              /// adding tech page
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => addTechs()));

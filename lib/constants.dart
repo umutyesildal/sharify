@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
+/// Constants we use in the app. It can be color, widget, textStyle etc.
 const kGreencolor = Color(0xFF18914C);
 const kGrayColor = Color(0xFF5A5A5A);
 const kLightGrayColor = Color(0xFF707070);

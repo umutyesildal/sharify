@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sharify/HomePage/navigator.dart';
 
+/// this was intended for SMS validation but not made.
 class SmsCode extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,7 +153,7 @@ class newTextField extends StatelessWidget {
       child: TextFormField(
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
-            borderRadius:BorderRadius.circular(10.0) ,
+            borderRadius: BorderRadius.circular(10.0),
             borderSide: BorderSide(
               color: Colors.teal[700],
             ),

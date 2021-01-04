@@ -9,12 +9,10 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  // text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   TextEditingController phoneController = TextEditingController();
-
   TextEditingController nameController = TextEditingController();
 
   Widget build(BuildContext context) {
@@ -122,6 +120,8 @@ class _SignUpState extends State<SignUp> {
                 flex: 1,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+
+                  /// to create a user with given datas.
                   child: signUpButton(
                     givenUserName: nameController.text,
                     givenUserPhone: phoneController.text,

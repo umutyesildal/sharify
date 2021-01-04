@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// This textfield is widely used in addPages so we refactored it to use it more than once.
 class addTextField extends StatelessWidget {
   const addTextField(
       {@required this.givenIcon, this.givenText, this.controller});

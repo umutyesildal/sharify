@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sharify/Forum/imageDialog.dart';
 
+/// the detailed card for homecard1, and the tag is food
 class homeCardFood extends StatefulWidget {
   bool isExpanded = false;
 
@@ -27,6 +28,7 @@ class homeCardFood extends StatefulWidget {
   final String quantity;
   final String description;
 
+  // a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
   static final User user = _auth.currentUser;
   static final uid = user.uid;
@@ -36,6 +38,7 @@ class homeCardFood extends StatefulWidget {
 }
 
 class _homeCardFoodState extends State<homeCardFood> {
+  /// The function to get current users data from database and saving it to a string.
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -46,12 +49,14 @@ class _homeCardFoodState extends State<homeCardFood> {
     userPhoto = result.data()['userPhoto'];
 
     setState(() {
+      // when it is no longer waiting for a response, it returns not the circular indicator but it returns scaffold.
       isLoading = true;
     });
   }
 
   String userName;
   String userPhoto;
+  // to check if awaiting response has came or not.
   bool isLoading = false;
 
   void initState() {

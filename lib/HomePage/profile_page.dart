@@ -5,7 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sharify/signIn/entryPage.dart';
 import 'package:sharify/signIn/signUpAddLocationAndPhoto.dart';
 
+/// Profile page.
 class profilePage extends StatefulWidget {
+  // a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
   static final User user = _auth.currentUser;
   static final uid = user.uid;
@@ -15,6 +17,7 @@ class profilePage extends StatefulWidget {
 }
 
 class _profilePageState extends State<profilePage> {
+  /// Getting user datas with userUID from database
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -31,6 +34,7 @@ class _profilePageState extends State<profilePage> {
     print(result.data()['userMail']);
     print(result.data()['userPhone']);
     setState(() {
+      // when it is no longer waiting for a response, it returns not the circular indicator but it returns scaffold.
       isLoading = true;
     });
   }
@@ -40,6 +44,7 @@ class _profilePageState extends State<profilePage> {
   String userMail;
   String userPhoto;
   String userLocation;
+  // to check if awaiting response has came or not.
   bool isLoading = false;
 
   void initState() {
@@ -68,22 +73,13 @@ class _profilePageState extends State<profilePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        signUpAddLocationAndPhoto()),
-                              );
-                            },
-                            child: Text(
-                              "profile",
-                              style: kSFProRegular.copyWith(
-                                  fontSize: 30, color: kGrayColor),
-                            ),
+                          Text(
+                            "profile",
+                            style: kSFProRegular.copyWith(
+                                fontSize: 30, color: kGrayColor),
                           ),
                           GestureDetector(
+                            // Signing out
                             onTap: () async {
                               FirebaseAuth.instance.signOut();
                               Navigator.push(
@@ -149,6 +145,8 @@ class _profilePageState extends State<profilePage> {
                     ),
                   ),
                 ),
+
+                /// Creating tab in order to create both about and settings tab.
                 Expanded(
                   flex: 4,
                   child: Container(

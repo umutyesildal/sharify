@@ -10,11 +10,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Adding photo and location to user.
 class signUpAddLocationAndPhoto extends StatefulWidget {
   @override
   _signUpAddLocationAndPhotoState createState() =>
       _signUpAddLocationAndPhotoState();
-
+// a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
   static final User user = _auth.currentUser;
   static final uid = user.uid;
@@ -22,8 +23,11 @@ class signUpAddLocationAndPhoto extends StatefulWidget {
 
 class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
   String _selectedItem;
+  // this is an imageURL so that we can save url to database.
   String imageURL;
   ProgressDialog pr;
+
+  /// function to upload image.
   void uploadImage() async {
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
@@ -75,6 +79,7 @@ class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
   }
 
   Widget build(BuildContext context) {
+    /// used for custom circular indicator.
     pr = new ProgressDialog(context);
     pr.style(
         message: 'Please Wait',
@@ -149,6 +154,8 @@ class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
                       backgroundColor: Colors.black,
                       child: CircleAvatar(
                         radius: 75,
+
+                        /// if imageURL is null stock image, if not added image.
                         backgroundImage: (imageURL != null)
                             ? NetworkImage(imageURL)
                             : AssetImage("assets/tapHere.png"),
@@ -170,18 +177,17 @@ class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
                           value: _selectedItem,
                           items: [
                             DropdownMenuItem(
-                              child: Text("First Item"),
-                              value: "First Item",
+                              child: Text("İstanbul/Avrupa"),
+                              value: "İstanbul/Avrupa",
                             ),
                             DropdownMenuItem(
-                              child: Text("Second Item"),
-                              value: "Second Item",
+                              child: Text("İstanbul/Anadolu"),
+                              value: "İstanbul/Anadolu",
                             ),
                             DropdownMenuItem(
-                                child: Text("Third Item"), value: "Third Item"),
+                                child: Text("Kocaeli"), value: "Kocaeli"),
                             DropdownMenuItem(
-                                child: Text("Fourth Item"),
-                                value: "Fourth Item")
+                                child: Text("Edirne"), value: "Edirne")
                           ],
                           onChanged: (value) {
                             setState(
@@ -213,13 +219,14 @@ class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
                             ),
                           ),
                         ),
+
+                        /// adding image and location to userDatabase
                         onPressed: () async {
                           pr.show();
                           try {
                             print(_selectedItem);
                             print(imageURL);
                             await inputData(_selectedItem, imageURL);
-                            print("AHANDA BİTTİ");
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -254,8 +261,9 @@ class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
   }
 }
 
-class newTextField extends StatelessWidget {
-  const newTextField({@required this.givenText});
+/// custom textfield
+class customTextField extends StatelessWidget {
+  const customTextField({@required this.givenText});
   final String givenText;
   @override
   Widget build(BuildContext context) {

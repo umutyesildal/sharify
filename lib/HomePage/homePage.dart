@@ -8,6 +8,7 @@ import 'package:sharify/HomePage/homeCardCloth.dart';
 import 'package:sharify/HomePage/homeCardTech.dart';
 import 'package:animations/animations.dart';
 
+/// Homepage where there are 4 tabs.
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -15,7 +16,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   bool isSearching = false;
-
+// initializing tabs
   final List<Tab> myTabs = <Tab>[
     Tab(text: "food"),
     Tab(text: "books"),
@@ -45,15 +46,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Scaffold(
             backgroundColor: Colors.white,
             body: StreamBuilder(
+              // getting items with food tag
               stream: FirebaseFirestore.instance
                   .collection('items')
                   .where("tag", isEqualTo: "food")
                   .snapshots(),
               builder: (context, snapshot) {
+                // if waiting circular progress
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                  // if it has error
                 } else if (snapshot.hasError) {
                   print(snapshot.error);
                   return Center(
@@ -65,13 +69,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 }
                 print(snapshot.data);
+                // saving all the datas with a tag food from Database and saving it.
                 final QuerySnapshot querySnapshot = snapshot.data;
                 return GridView.count(
                   crossAxisCount: 2,
                   padding: const EdgeInsets.all(20),
                   children: List.generate(
+                    //creating a list with database items.
                     querySnapshot.docs.length,
                     (index) {
+                      /// animation
                       return OpenContainer(
                         openElevation: 0.0,
                         closedElevation: 0.0,
@@ -110,15 +117,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Scaffold(
             backgroundColor: Colors.white,
             body: StreamBuilder(
+              // getting items with food tag
               stream: FirebaseFirestore.instance
                   .collection('items')
                   .where("tag", isEqualTo: "book")
                   .snapshots(),
               builder: (context, snapshot) {
+                // if waiting circular progress
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                  // if it has error
                 } else if (snapshot.hasError) {
                   print(snapshot.error);
                   return Center(
@@ -130,13 +140,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 }
                 print(snapshot.data);
+                // saving all the datas with a tag book from Database and saving it.
                 final QuerySnapshot querySnapshot = snapshot.data;
                 return GridView.count(
                   crossAxisCount: 2,
                   padding: const EdgeInsets.all(20),
                   children: List.generate(
+                    //creating a list with database items.
                     querySnapshot.docs.length,
                     (index) {
+                      /// animation
                       return OpenContainer(
                         openElevation: 0.0,
                         closedElevation: 0.0,
@@ -173,15 +186,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Scaffold(
             backgroundColor: Colors.white,
             body: StreamBuilder(
+              // getting items with food tag
               stream: FirebaseFirestore.instance
                   .collection('items')
                   .where("tag", isEqualTo: "cloth")
                   .snapshots(),
               builder: (context, snapshot) {
+                // if waiting circular progress
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                  // if it has error
                 } else if (snapshot.hasError) {
                   print(snapshot.error);
                   return Center(
@@ -193,13 +209,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 }
                 print(snapshot.data);
+                // saving all the datas with a tag cloth from Database and saving it.
                 final QuerySnapshot querySnapshot = snapshot.data;
                 return GridView.count(
                   crossAxisCount: 2,
                   padding: const EdgeInsets.all(20),
                   children: List.generate(
+                    //creating a list with database items.
                     querySnapshot.docs.length,
                     (index) {
+                      /// animation
                       return OpenContainer(
                         openElevation: 0.0,
                         closedElevation: 0.0,
@@ -238,15 +257,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           Scaffold(
             backgroundColor: Colors.white,
             body: StreamBuilder(
+              // getting items with food tag
               stream: FirebaseFirestore.instance
                   .collection('items')
                   .where("tag", isEqualTo: "tech")
                   .snapshots(),
               builder: (context, snapshot) {
+                // if waiting circular progress
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
+                  // if it has error
                 } else if (snapshot.hasError) {
                   print(snapshot.error);
                   return Center(
@@ -258,13 +280,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   );
                 }
                 print(snapshot.data);
+                // saving all the datas with a tag tech from Database and saving it.
                 final QuerySnapshot querySnapshot = snapshot.data;
                 return GridView.count(
                   crossAxisCount: 2,
                   padding: const EdgeInsets.all(20),
                   children: List.generate(
+                    //creating a list with database items.
                     querySnapshot.docs.length,
                     (index) {
+                      /// animation
                       return OpenContainer(
                         openElevation: 0.0,
                         closedElevation: 0.0,

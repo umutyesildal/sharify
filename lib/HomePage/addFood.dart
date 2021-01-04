@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
+/// adding food to database
 class addFood extends StatefulWidget {
   @override
   _addFoodState createState() => _addFoodState();
@@ -19,6 +20,7 @@ class addFood extends StatefulWidget {
 }
 
 class _addFoodState extends State<addFood> {
+  // text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController titleOfItem = TextEditingController();
   TextEditingController descriptionOfItem = TextEditingController();
   TextEditingController quantity = TextEditingController();
@@ -28,6 +30,7 @@ class _addFoodState extends State<addFood> {
   String userName;
   String imageURL;
 
+  /// Getting username from userID
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -38,6 +41,7 @@ class _addFoodState extends State<addFood> {
     print(result.data()['userName']);
   }
 
+  /// function to upload image.
   void uploadImage() async {
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
@@ -50,7 +54,7 @@ class _addFoodState extends State<addFood> {
     if (permissionStatus.isGranted) {
       image = await _picker.getImage(source: ImageSource.gallery);
       var file = File(image.path);
-
+// upload image
       if (image != null) {
         var snapshot = await _storage
             .ref()
@@ -77,6 +81,7 @@ class _addFoodState extends State<addFood> {
     giver();
   }
 
+  /// used for custom circular indicator.
   ProgressDialog pr;
   @override
   Widget build(BuildContext context) {
@@ -117,6 +122,7 @@ class _addFoodState extends State<addFood> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
+              /// Adding the food to database.
               onPressed: () async {
                 pr.show();
                 await FirebaseFirestore.instance.collection('items').add(
@@ -224,6 +230,7 @@ class _addFoodState extends State<addFood> {
                       uploadImage();
                     },
                     child: CircleAvatar(
+                      // when image is added to database image will load up here
                       backgroundImage: (imageURL != null)
                           ? NetworkImage(imageURL)
                           : AssetImage("assets/tapHere.png"),

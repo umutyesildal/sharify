@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
+/// adding tech to database
 class addTechs extends StatefulWidget {
   @override
   _addTechsState createState() => _addTechsState();
@@ -18,6 +19,7 @@ class addTechs extends StatefulWidget {
 }
 
 class _addTechsState extends State<addTechs> {
+  // text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController titleOfItem = TextEditingController();
   TextEditingController descriptionOfItem = TextEditingController();
   TextEditingController pickUpTimes = TextEditingController();
@@ -26,6 +28,7 @@ class _addTechsState extends State<addTechs> {
   String userName;
   String imageURL;
 
+  /// Getting username from userID
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -36,6 +39,7 @@ class _addTechsState extends State<addTechs> {
     print(result.data()['userName']);
   }
 
+  /// function to upload image.
   void uploadImage() async {
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
@@ -48,6 +52,7 @@ class _addTechsState extends State<addTechs> {
     if (permissionStatus.isGranted) {
       image = await _picker.getImage(source: ImageSource.gallery);
       var file = File(image.path);
+// upload image
 
       if (image != null) {
         var snapshot = await _storage
@@ -75,6 +80,7 @@ class _addTechsState extends State<addTechs> {
     giver();
   }
 
+  /// used for custom circular indicator.
   ProgressDialog pr;
   @override
   Widget build(BuildContext context) {
@@ -115,6 +121,7 @@ class _addTechsState extends State<addTechs> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
+              /// Adding the tech to database.
               onPressed: () async {
                 pr.show();
                 await FirebaseFirestore.instance.collection('items').add(
@@ -260,6 +267,7 @@ class _addTechsState extends State<addTechs> {
                       uploadImage();
                     },
                     child: CircleAvatar(
+                      // when image is added to database image will load up here
                       backgroundImage: (imageURL != null)
                           ? NetworkImage(imageURL)
                           : AssetImage("assets/tapHere.png"),

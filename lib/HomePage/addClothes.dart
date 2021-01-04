@@ -9,15 +9,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
+/// adding clothes to database
 class addClothes extends StatefulWidget {
   @override
   _addClothesState createState() => _addClothesState();
+  // a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
   static final User user = _auth.currentUser;
   static final uid = user.uid;
 }
 
 class _addClothesState extends State<addClothes> {
+  // text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController titleOfItem = TextEditingController();
   TextEditingController descriptionOfItem = TextEditingController();
   TextEditingController pickUpTimes = TextEditingController();
@@ -26,8 +29,10 @@ class _addClothesState extends State<addClothes> {
   String ddvalue2 = 'Gender';
   String ddvalue3 = 'Size';
   String userName;
+  // this is an imageURL so that we can save url to database.
   String imageURL;
 
+  /// Getting username from userID
   Future giver() async {
     DocumentSnapshot result = await FirebaseFirestore.instance
         .collection('users')
@@ -38,6 +43,7 @@ class _addClothesState extends State<addClothes> {
     print(result.data()['userName']);
   }
 
+  /// function to upload image.
   void uploadImage() async {
     final _storage = FirebaseStorage.instance;
     final _picker = ImagePicker();
@@ -50,7 +56,7 @@ class _addClothesState extends State<addClothes> {
     if (permissionStatus.isGranted) {
       image = await _picker.getImage(source: ImageSource.gallery);
       var file = File(image.path);
-
+// upload image
       if (image != null) {
         var snapshot = await _storage
             .ref()
@@ -117,6 +123,7 @@ class _addClothesState extends State<addClothes> {
             padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
             alignment: Alignment.bottomCenter,
             child: FlatButton(
+              // att items to database.
               onPressed: () async {
                 pr.show();
                 try {
@@ -328,6 +335,7 @@ class _addClothesState extends State<addClothes> {
                       uploadImage();
                     },
                     child: CircleAvatar(
+                      // when image is added to database image will load up here
                       backgroundImage: (imageURL != null)
                           ? NetworkImage(imageURL)
                           : AssetImage("assets/tapHere.png"),

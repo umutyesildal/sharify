@@ -6,12 +6,14 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'homePage.dart';
 import 'package:sharify/Message/messageHomeScreen.dart';
 
+/// Navigator for bottom navigation bar.
 class navigator extends StatefulWidget {
   @override
   _navigatorState createState() => _navigatorState();
 }
 
 class _navigatorState extends State<navigator> {
+  // initializing tabs.
   int selectedPage = 0;
   final _pageOption = [
     Home(),
@@ -33,6 +35,7 @@ class _navigatorState extends State<navigator> {
           color: Colors.black45,
           activeColor: Colors.green,
           items: [
+            // adding tabs.
             TabItem(
               icon: Icons.home,
               title: 'Home',
