@@ -20,6 +20,44 @@ class signInButton extends StatefulWidget {
 }
 
 class _signInButtonState extends State<signInButton> {
+  /// auth errors
+  String getMessageFromErrorCode(String errorCode) {
+    switch (errorCode) {
+      case "ERROR_EMAIL_ALREADY_IN_USE":
+      case "account-exists-with-different-credential":
+      case "email-already-in-use":
+        return "Email already used. Go to login page.";
+        break;
+      case "ERROR_WRONG_PASSWORD":
+      case "wrong-password":
+        return "Wrong email/password combination.";
+        break;
+      case "ERROR_USER_NOT_FOUND":
+      case "user-not-found":
+        return "No user found with this email.";
+        break;
+      case "ERROR_USER_DISABLED":
+      case "user-disabled":
+        return "User disabled.";
+        break;
+      case "ERROR_TOO_MANY_REQUESTS":
+      case "operation-not-allowed":
+        return "Too many requests to log into this account.";
+        break;
+      case "ERROR_OPERATION_NOT_ALLOWED":
+      case "operation-not-allowed":
+        return "Server error, please try again later.";
+        break;
+      case "ERROR_INVALID_EMAIL":
+      case "invalid-email":
+        return "Email address is invalid.";
+        break;
+      default:
+        return "Login failed. Please try again.";
+        break;
+    }
+  }
+
   /// used for custom circular indicator.
   ProgressDialog pr;
   SignIn signIn = new SignIn();
@@ -57,9 +95,9 @@ class _signInButtonState extends State<signInButton> {
 
           /// this code block signs the user in, with given password and email. If onBoardingPass is false user has to go onboarding, if not goes straight to app.
           onPressed: () async {
-            pr.show();
             print("gösterildi");
             try {
+              pr.show();
               print(widget.givenPassword);
               print(widget.givenEmail);
               final user = await signInButton._auth.signInWithEmailAndPassword(
@@ -86,6 +124,22 @@ class _signInButtonState extends State<signInButton> {
               );
             } catch (e) {
               print(e);
+              await showDialog(
+                context: context,
+                builder: (context) => new AlertDialog(
+                  title: new Text('Error'),
+                  content: Text(e.toString()),
+                  actions: <Widget>[
+                    new FlatButton(
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .pop(); // dismisses only the dialog and returns nothing
+                      },
+                      child: new Text('OK'),
+                    ),
+                  ],
+                ),
+              );
             }
           },
         ),

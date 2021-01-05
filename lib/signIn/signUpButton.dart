@@ -11,13 +11,15 @@ class signUpButton extends StatefulWidget {
       this.givenEmail,
       this.givenPassword,
       this.givenUserName,
-      this.givenUserPhone});
+      this.givenUserPhone,
+      this.givenColor});
 
   final String givenUserPhone;
   final String givenUserName;
   final String givenButton;
   final String givenEmail;
   final String givenPassword;
+  final Color givenColor;
   static final _auth = FirebaseAuth.instance;
 
   @override
@@ -65,7 +67,7 @@ class _signUpButtonState extends State<signUpButton> {
       height: 60.0,
       child: Container(
         child: FlatButton(
-          color: Colors.teal[700],
+          color: widget.givenColor,
           child: Center(
             child: Text(
               widget.givenButton,
@@ -96,9 +98,21 @@ class _signUpButtonState extends State<signUpButton> {
                 );
               }
             } catch (e) {
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(e),
+              print(e);
+              await showDialog(
+                context: context,
+                builder: (context) => new AlertDialog(
+                  title: new Text('Error'),
+                  content: Text(e.toString()),
+                  actions: <Widget>[
+                    new FlatButton(
+                      onPressed: () {
+                        Navigator.of(context, rootNavigator: true)
+                            .pop(); // dismisses only the dialog and returns nothing
+                      },
+                      child: new Text('OK'),
+                    ),
+                  ],
                 ),
               );
             }

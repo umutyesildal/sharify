@@ -117,12 +117,6 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.black45,
                           ),
                         ),
-                        validator: (text) {
-                          if (text == null || text.isEmpty) {
-                            return 'Text is empty';
-                          }
-                          return null;
-                        },
                       ),
                     ),
                   ],
@@ -134,12 +128,16 @@ class _SignUpState extends State<SignUp> {
                   padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
 
                   /// to create a user with given datas.
-                  child: signUpButton(
-                    givenUserName: nameController.text,
-                    givenUserPhone: phoneController.text,
-                    givenEmail: emailController.text,
-                    givenPassword: passwordController.text,
-                    givenButton: 'SIGN UP',
+                  child: IgnorePointer(
+                    ignoring: false,
+                    child: signUpButton(
+                      givenColor: Colors.teal[700],
+                      givenUserName: nameController.text,
+                      givenUserPhone: phoneController.text,
+                      givenEmail: emailController.text,
+                      givenPassword: passwordController.text,
+                      givenButton: 'SIGN UP',
+                    ),
                   ),
                 ),
               ),
