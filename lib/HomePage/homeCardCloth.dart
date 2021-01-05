@@ -18,8 +18,9 @@ class homeCardCloth extends StatefulWidget {
     this.gender,
     this.size,
     this.userUID,
+    this.date,
   });
-
+  final String date;
   final String header;
   final String description;
   final String photo;
@@ -125,8 +126,7 @@ class _homeCardClothState extends State<homeCardCloth> {
                       ),
                     ),
                     Text(
-                      'November 12, 12 PM'
-                      /*widget.pickUpTimes*/,
+                      widget.date.substring(0, 16),
                       style: TextStyle(
                         fontSize: 11.0,
                         color: Colors.grey,

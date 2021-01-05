@@ -13,7 +13,7 @@ class postCard extends StatefulWidget {
   });
   final String forumUserName;
   final String forumHeader;
-  final DateTime forumDate;
+  final String forumDate;
   final String forumContent;
   final String forumContentPhoto;
 
@@ -62,7 +62,7 @@ class _postCardState extends State<postCard> {
             Expanded(
               flex: 1,
               child: Text(
-                widget.forumDate.toString(),
+                widget.forumDate.substring(0, 16),
                 style: TextStyle(fontSize: 10.0, color: Colors.grey),
               ),
             ),

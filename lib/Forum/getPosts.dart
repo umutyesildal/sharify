@@ -80,7 +80,7 @@ class _getPostsState extends State<getPosts> {
                                   return postCard(
                                     forumUserName: map['userName'],
                                     forumHeader: map['header'],
-                                    forumDate: DateTime.now(),
+                                    forumDate: map['date'],
                                     forumContent: map['content'],
                                     forumContentPhoto: map['contentPhoto'],
                                   );
@@ -90,7 +90,7 @@ class _getPostsState extends State<getPosts> {
                                   final map = querySnapshot.docs[index].data();
                                   return postDetails(
                                     forumHeader: map['header'],
-                                    forumDate: DateTime.now(),
+                                    forumDate: map['date'],
                                     forumContentText: map['content'],
                                     forumContentPhoto: map['contentPhoto'],
                                     forumPersonSharing: map['userName'],

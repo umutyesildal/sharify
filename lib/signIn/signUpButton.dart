@@ -11,15 +11,13 @@ class signUpButton extends StatefulWidget {
       this.givenEmail,
       this.givenPassword,
       this.givenUserName,
-      this.givenUserPhone,
-      this.givenColor});
+      this.givenUserPhone});
 
   final String givenUserPhone;
   final String givenUserName;
   final String givenButton;
   final String givenEmail;
   final String givenPassword;
-  final Color givenColor;
   static final _auth = FirebaseAuth.instance;
 
   @override
@@ -67,7 +65,7 @@ class _signUpButtonState extends State<signUpButton> {
       height: 60.0,
       child: Container(
         child: FlatButton(
-          color: widget.givenColor,
+          color: Colors.teal[700],
           child: Center(
             child: Text(
               widget.givenButton,

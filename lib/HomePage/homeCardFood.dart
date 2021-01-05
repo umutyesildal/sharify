@@ -9,16 +9,18 @@ import 'package:sharify/Forum/imageDialog.dart';
 class homeCardFood extends StatefulWidget {
   bool isExpanded = false;
 
-  homeCardFood(
-      {@required this.header,
-      this.userUID,
-      this.photo,
-      this.location,
-      this.pickUpTimes,
-      this.expiryDate,
-      this.quantity,
-      this.description});
-
+  homeCardFood({
+    @required this.header,
+    this.userUID,
+    this.photo,
+    this.location,
+    this.pickUpTimes,
+    this.expiryDate,
+    this.quantity,
+    this.description,
+    this.date,
+  });
+  final String date;
   final String header;
   final String userUID;
   final String photo;
@@ -123,8 +125,7 @@ class _homeCardFoodState extends State<homeCardFood> {
                       ),
                     ),
                     Text(
-                      'November 12, 12 PM'
-                      /*widget.pickUpTimes*/,
+                      widget.date.substring(0, 16),
                       style: TextStyle(
                         fontSize: 11.0,
                         color: Colors.grey,

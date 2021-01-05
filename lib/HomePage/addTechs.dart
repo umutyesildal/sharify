@@ -126,6 +126,7 @@ class _addTechsState extends State<addTechs> {
                 pr.show();
                 await FirebaseFirestore.instance.collection('items').add(
                   {
+                    "date": DateTime.now().toString().substring(0, 16),
                     "photo": imageURL,
                     "header": titleOfItem.text,
                     "pickUpTimes": pickUpTimes.text,
@@ -137,8 +138,25 @@ class _addTechsState extends State<addTechs> {
                     "description": descriptionOfItem.text,
                   },
                 );
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => navigator()));
+                await showDialog(
+                  context: context,
+                  builder: (context) => new AlertDialog(
+                    title: new Text('Success'),
+                    content: Text("Successfully Added!"),
+                    actions: <Widget>[
+                      new FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      navigator())); // dismisses only the dialog and returns nothing
+                        },
+                        child: new Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
               },
               child: Text(
                 'Add',

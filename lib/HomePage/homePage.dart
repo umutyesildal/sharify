@@ -97,6 +97,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         openBuilder: (BuildContext context, VoidCallback _) {
                           final map = querySnapshot.docs[index].data();
                           return homeCardFood(
+                            date: map['date'],
                             header: map['header'],
                             userUID: "userUID",
                             expiryDate: map['expiryDate'],

@@ -16,8 +16,9 @@ class homeCardBook extends StatefulWidget {
       this.userUID,
       this.location,
       this.pickUpTimes,
-      this.type});
-
+      this.type,
+      this.date});
+  final String date;
   final String header;
   final String description;
   final String photo;
@@ -120,8 +121,7 @@ class _homeCardBookState extends State<homeCardBook> {
                       ),
                     ),
                     Text(
-                      'November 12, 12 PM'
-                      /*widget.pickUpTimes*/,
+                      widget.date.substring(0, 16),
                       style: TextStyle(
                         fontSize: 11.0,
                         color: Colors.grey,

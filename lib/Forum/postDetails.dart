@@ -12,7 +12,7 @@ class postDetails extends StatefulWidget {
       this.forumPersonSharing});
 
   final String forumHeader;
-  final DateTime forumDate;
+  final String forumDate;
   final String forumContentText;
   final String forumContentPhoto;
   final String forumPersonSharing;
@@ -73,7 +73,7 @@ class _postDetailsState extends State<postDetails> {
                     ),
                   ),
                   Text(
-                    widget.forumDate.toString().substring(0, 16),
+                    widget.forumDate.substring(0, 16),
                     style: TextStyle(fontSize: 10.0, color: Colors.grey),
                   ),
                 ],
