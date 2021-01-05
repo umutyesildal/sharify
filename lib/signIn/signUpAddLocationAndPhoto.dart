@@ -230,7 +230,7 @@ class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => navigator()),
+                                  builder: (context) => onBoarding()),
                             );
                           } catch (e) {
                             print(e);

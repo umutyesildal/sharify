@@ -212,12 +212,7 @@ class _profilePageState extends State<profilePage> {
                                               )
                                             ],
                                           ),
-                                          Text(
-                                            "Edit",
-                                            style: TextStyle(
-                                                color: kalphaGreen,
-                                                fontSize: 20),
-                                          )
+                                          SizedBox()
                                         ],
                                       ),
                                     ),
@@ -250,12 +245,7 @@ class _profilePageState extends State<profilePage> {
                                               )
                                             ],
                                           ),
-                                          Text(
-                                            "Edit",
-                                            style: TextStyle(
-                                                color: kalphaGreen,
-                                                fontSize: 20),
-                                          )
+                                          SizedBox()
                                         ],
                                       ),
                                     ),
@@ -307,12 +297,7 @@ class _profilePageState extends State<profilePage> {
                                               )
                                             ],
                                           ),
-                                          Text(
-                                            "Edit",
-                                            style: TextStyle(
-                                                color: kalphaGreen,
-                                                fontSize: 20),
-                                          )
+                                          SizedBox()
                                         ],
                                       ),
                                     ),

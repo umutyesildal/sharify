@@ -34,7 +34,7 @@ class _signUpButtonState extends State<signUpButton> {
       "userUID": uid,
       "userName": widget.givenUserName,
       "userPhone": widget.givenUserPhone,
-      "onboardingPass": false
+      "onboardingPass": false,
     };
     await FirebaseFirestore.instance.collection('users').doc(uid).set(data);
     final map = await FirebaseFirestore.instance.collection('users').doc(uid);
@@ -86,6 +86,7 @@ class _signUpButtonState extends State<signUpButton> {
               final user = await signUpButton._auth
                   .createUserWithEmailAndPassword(
                       email: widget.givenEmail, password: widget.givenPassword);
+              print("okay");
               inputData();
               if (user != null) {
                 Navigator.push(

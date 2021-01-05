@@ -66,17 +66,25 @@ class _SignInState extends State<SignIn> {
                       padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
                       child: TextFormField(
                         controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
                         decoration: textFieldDecoration.copyWith(
                           labelText: "E-mail Adress",
                           labelStyle: TextStyle(
                             color: Colors.black45,
                           ),
                         ),
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'Text is empty';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
                       child: TextFormField(
+                        keyboardType: TextInputType.text,
                         obscureText: true,
                         controller: passwordController,
                         decoration: textFieldDecoration.copyWith(
@@ -85,6 +93,12 @@ class _SignInState extends State<SignIn> {
                             color: Colors.black45,
                           ),
                         ),
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'Text is empty';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ],

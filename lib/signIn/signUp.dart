@@ -80,9 +80,12 @@ class _SignUpState extends State<SignUp> {
                     Container(
                       padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
                       child: TextFormField(
+                        maxLength: 11,
                         controller: phoneController,
                         decoration: textFieldDecoration.copyWith(
                           labelText: "Phone Number",
+                          counterText: '',
+                          counterStyle: TextStyle(fontSize: 0),
                           labelStyle: TextStyle(
                             color: Colors.black45,
                           ),
@@ -92,6 +95,7 @@ class _SignUpState extends State<SignUp> {
                     Container(
                       padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 5.0),
                       child: TextFormField(
+                        keyboardType: TextInputType.emailAddress,
                         controller: emailController,
                         decoration: textFieldDecoration.copyWith(
                           labelText: "E-mail Adress",
@@ -104,6 +108,8 @@ class _SignUpState extends State<SignUp> {
                     Container(
                       padding: EdgeInsets.fromLTRB(25.0, 5.0, 25.0, 3.0),
                       child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        obscureText: true,
                         controller: passwordController,
                         decoration: textFieldDecoration.copyWith(
                           labelText: "Password",
@@ -111,6 +117,12 @@ class _SignUpState extends State<SignUp> {
                             color: Colors.black45,
                           ),
                         ),
+                        validator: (text) {
+                          if (text == null || text.isEmpty) {
+                            return 'Text is empty';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ],
