@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
 
+
 /// This page is for adding a forum post.
 class addNewPost extends StatefulWidget {
   // a code block to get current users user id.
