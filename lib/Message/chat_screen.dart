@@ -8,7 +8,7 @@ class ChatScreen extends StatefulWidget {
   final String conversationId;
   final String senderName;
   final String senderId;
-
+  // our needed instances when we want to talk with a person it has to have this properties
   const ChatScreen({this.userId, this.conversationId, this.senderName, this.senderId});
 
   @override
@@ -22,6 +22,7 @@ class _ChatScreenState extends State<ChatScreen> {
   FocusNode _focusNode;
 
   void initState() {
+    // we have assigned messages between persons into what we call _ref
     _ref = FirebaseFirestore.instance
         .collection('conversations/${widget.conversationId}/messages');
     super.initState();
@@ -32,17 +33,16 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         titleSpacing: 10,
         title: Row(
           children: [
             CircleAvatar(
               backgroundImage: NetworkImage('https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'
-                  ),
+                  ), // example user photo
             ),
             Padding(
               padding: EdgeInsets.only(left: 8),
-              child: Text(widget.senderName),),
+              child: Text(widget.senderName),),// we get from here which person sent the message
           ],
         ),
       ),
@@ -50,7 +50,7 @@ class _ChatScreenState extends State<ChatScreen> {
         decoration: BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
-            image: AssetImage('assets/splashLogo.png'),
+            image: AssetImage('assets/splashLogo.png'), // chatscreen background image
           ),
         ),
         child: Column(
@@ -59,12 +59,12 @@ class _ChatScreenState extends State<ChatScreen> {
               child: GestureDetector(
                 onTap: () => _focusNode.unfocus(),
                 child: StreamBuilder(
-                    stream: _ref.orderBy('timeStamp').snapshots(),
+                    stream: _ref.orderBy('timeStamp').snapshots(), //we build our stream with timestamp in order to sort which user sent most recent message
                     builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                       return !snapshot.hasData
                           ? CircularProgressIndicator()
                           : ListView(
-                        reverse: true,
+                        reverse: true, // in this part what we do is actually look for who sent the message and allign the messages based on users
                         children: snapshot.data.docs.reversed
                             .map(
                               (document) => ListTile(
@@ -103,7 +103,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ),
                                 ),
                                 child: Text(
-                                  document['message'],
+                                  document['message'], // we get our instance message and pop it on screen
                                 ),
                               ),
                             ),
@@ -119,12 +119,12 @@ class _ChatScreenState extends State<ChatScreen> {
               color: Colors.white,
               child: Row(children: [
                 IconButtonWidget(
-                  icon: Icon(Icons.camera_alt),
+                  icon: Icon(Icons.camera_alt), //in later it will be added photos to take and send it via our app
                   iconSize: 30,
                   onPressed: () {},
                 ),
                 Expanded(
-                  child: TextField(
+                  child: TextField( // here is our chatbox.
                     focusNode: _focusNode,
                     controller: _editingController,
                     textCapitalization: TextCapitalization.sentences,
@@ -137,14 +137,14 @@ class _ChatScreenState extends State<ChatScreen> {
                 IconButtonWidget(
                   icon: Icon(Icons.send),
                   iconSize: 30,
-                  onPressed: () async {
+                  onPressed: () async { // when we press this the information given below will be added to our firebase firestore
                     await _ref.add({
                       'sender_name': _auth.currentUser.email,
                       'sender_id': widget.userId,
                       'message': _editingController.text,
                       'timeStamp': DateTime.now(),
                     });
-                    _editingController.text = '';
+                    _editingController.text = ''; // when a message has sent it refreshes chat box
                   },
                 ),
               ]),
@@ -157,6 +157,7 @@ class _ChatScreenState extends State<ChatScreen> {
 }
 
 // ignore: must_be_immutable
+// we have defined a icon widget so that we can use its instance's over and over again without typing so much
 class IconButtonWidget extends StatelessWidget {
   Icon icon;
   double iconSize;

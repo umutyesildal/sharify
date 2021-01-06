@@ -3,6 +3,8 @@ import 'recent_chats.dart';
 import 'package:flutter/cupertino.dart';
 import '../constants.dart';
 
+// This page is actually just uı design when we open the chat screen
+// What we see here our appbar and combination with other pages
 class MessageHomeScreen extends StatefulWidget {
   @override
   _MessageHomeScreenState createState() => _MessageHomeScreenState();
