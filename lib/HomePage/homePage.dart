@@ -327,11 +327,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ],
       ),
       appBar: AppBar(
-        title: !isSearching
-            ? Text('')
-            : TextField(
-                decoration: InputDecoration(hintText: 'Search for items...'),
-              ),
+        centerTitle: true,
+        title: Text("Sharify"),
         bottom: TabBar(
           controller: _tabController,
           labelColor: Colors.green,
@@ -344,35 +341,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           tabs: myTabs,
         ),
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {},
-          color: Colors.teal,
-          icon: Icon(
-            Icons.location_on,
-            size: 25.0,
-          ),
-        ),
-        actions: <Widget>[
-          isSearching
-              ? IconButton(
-                  color: Colors.black,
-                  icon: Icon(Icons.cancel),
-                  iconSize: 30.0,
-                  onPressed: () {
-                    setState(() {
-                      this.isSearching = false;
-                    });
-                  })
-              : IconButton(
-                  color: Colors.black,
-                  icon: Icon(Icons.search),
-                  iconSize: 40.0,
-                  onPressed: () {
-                    setState(() {
-                      this.isSearching = true;
-                    });
-                  }),
-        ],
+        automaticallyImplyLeading: false,
+        actions: <Widget>[],
       ),
     );
   }

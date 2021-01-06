@@ -16,6 +16,11 @@ class _forumTabsState extends State<forumTabs> {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              "Sharify",
+              style: TextStyle(color: Colors.black),
+            ),
             backgroundColor: Colors.white,
             bottom: TabBar(
               indicatorColor: kalphaGreen,

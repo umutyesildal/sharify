@@ -201,7 +201,7 @@ class _profilePageState extends State<profilePage> {
                                                 "Phone Number",
                                                 style:
                                                     kSFProTextMedium.copyWith(
-                                                  color: Color(0xFF8E8080),
+                                                  color: kbetaGreen,
                                                 ),
                                               ),
                                               Text(
@@ -234,7 +234,7 @@ class _profilePageState extends State<profilePage> {
                                                 "Location",
                                                 style:
                                                     kSFProTextMedium.copyWith(
-                                                  color: Color(0xFF8E8080),
+                                                  color: kbetaGreen,
                                                 ),
                                               ),
                                               Text(
@@ -286,7 +286,7 @@ class _profilePageState extends State<profilePage> {
                                                 "E-Mail",
                                                 style:
                                                     kSFProTextMedium.copyWith(
-                                                  color: Color(0xFF8E8080),
+                                                  color: kbetaGreen,
                                                 ),
                                               ),
                                               Text(
@@ -319,7 +319,7 @@ class _profilePageState extends State<profilePage> {
                                                 "Password",
                                                 style:
                                                     kSFProTextMedium.copyWith(
-                                                  color: Color(0xFF8E8080),
+                                                  color: kbetaGreen,
                                                 ),
                                               ),
                                               Text(

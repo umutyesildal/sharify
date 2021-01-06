@@ -25,7 +25,8 @@ class _addBookState extends State<addBook> {
   TextEditingController titleOfItem = TextEditingController();
   TextEditingController descriptionOfItem = TextEditingController();
   TextEditingController location = TextEditingController();
-  TextEditingController pickUpTimes = TextEditingController();
+  TextEditingController pickUpTimes1 = TextEditingController();
+  TextEditingController pickUpTimes2 = TextEditingController();
 
   String imageURL;
   String userName;
@@ -130,7 +131,7 @@ class _addBookState extends State<addBook> {
                 try {
                   print(imageURL);
                   print(titleOfItem.text);
-                  print(pickUpTimes.text);
+                  print(pickUpTimes1.text);
                   print(location.text);
                   print(userName);
                   print(addBook.uid);
@@ -141,7 +142,7 @@ class _addBookState extends State<addBook> {
                       "date": DateTime.now().toString().substring(0, 16),
                       "photo": imageURL,
                       "header": titleOfItem.text,
-                      "pickUpTimes": pickUpTimes.text,
+                      "pickUpTimes": (pickUpTimes1.text + pickUpTimes2.text),
                       "location": location.text,
                       "tag": "book",
                       "username": userName,
@@ -191,41 +192,28 @@ class _addBookState extends State<addBook> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextFormField(
-                  controller: titleOfItem,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: '  Title of Item',
-                    hintStyle: TextStyle(
-                      fontSize: 40.0,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black26,
-                    ),
-                  ),
-                ),
-                TextFormField(
-                  controller: descriptionOfItem,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: '     Description of Item',
-                    hintStyle: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black26,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20.0),
+                Padding(
+                  padding: EdgeInsets.only(left: 15),
                   child: TextFormField(
-                    controller: pickUpTimes,
+                    controller: titleOfItem,
                     decoration: InputDecoration(
-                      icon: Icon(
-                        Icons.calendar_today,
-                        color: Colors.black,
-                      ),
                       border: InputBorder.none,
-                      hintText: ' Pick-up Times',
+                      hintText: 'Title of Item',
+                      hintStyle: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 15),
+                  child: TextFormField(
+                    controller: descriptionOfItem,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: 'Description of Item',
                       hintStyle: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
@@ -234,8 +222,88 @@ class _addBookState extends State<addBook> {
                     ),
                   ),
                 ),
+                Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 15.0),
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: TextFormField(
+                        onTap: () async {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          TimeOfDay picked = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.now(),
+                            builder: (BuildContext context, Widget child) {
+                              return MediaQuery(
+                                data: MediaQuery.of(context)
+                                    .copyWith(alwaysUse24HourFormat: false),
+                                child: child,
+                              );
+                            },
+                          );
+                          setState(() {
+                            pickUpTimes1.text =
+                                picked.toString().substring(10, 15);
+                          });
+                        },
+                        controller: pickUpTimes1,
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.calendar_today,
+                            color: Colors.black,
+                          ),
+                          border: InputBorder.none,
+                          hintText: 'From',
+                          hintStyle: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black26,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 15.0),
+                      width: MediaQuery.of(context).size.width / 3,
+                      child: TextFormField(
+                        onTap: () async {
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                          TimeOfDay picked = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.now(),
+                            builder: (BuildContext context, Widget child) {
+                              return MediaQuery(
+                                data: MediaQuery.of(context)
+                                    .copyWith(alwaysUse24HourFormat: false),
+                                child: child,
+                              );
+                            },
+                          );
+                          setState(() {
+                            pickUpTimes2.text =
+                                picked.toString().substring(10, 15);
+                          });
+                        },
+                        controller: pickUpTimes2,
+                        decoration: InputDecoration(
+                          icon: Icon(
+                            Icons.calendar_today,
+                            color: Colors.black,
+                          ),
+                          border: InputBorder.none,
+                          hintText: 'To',
+                          hintStyle: TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black26,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Container(
-                  margin: EdgeInsets.only(left: 20.0),
+                  margin: EdgeInsets.only(left: 15.0),
                   child: TextFormField(
                     controller: location,
                     decoration: InputDecoration(
@@ -244,7 +312,7 @@ class _addBookState extends State<addBook> {
                         color: Colors.black,
                       ),
                       border: InputBorder.none,
-                      hintText: ' Location',
+                      hintText: 'Location',
                       hintStyle: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.w400,
@@ -303,10 +371,15 @@ class _addBookState extends State<addBook> {
                       uploadImage();
                     },
                     // when image is added to database image will load up here
-                    child: CircleAvatar(
-                      backgroundImage: (imageURL != null)
-                          ? NetworkImage(imageURL)
-                          : AssetImage("assets/tapHere.png"),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: (imageURL != null)
+                              ? NetworkImage(imageURL)
+                              : AssetImage("assets/tapHere.png"),
+                        ),
+                      ),
                     ),
                   ),
                 ),
