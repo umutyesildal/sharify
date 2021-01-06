@@ -103,135 +103,140 @@ class _addNewPostState extends State<addNewPost> {
     } else {
       return Scaffold(
         resizeToAvoidBottomPadding: false,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        IconButton(
-                          icon: Icon(Icons.arrow_back_ios),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: Icon(Icons.arrow_back_ios),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                            Text(
+                              "New Post",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
-                        Text(
-                          "New Post",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          margin: EdgeInsets.all(20),
+                          child: FlatButton(
+                            child: Text('Post'),
+                            color: kalphaGreen,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            textColor: Colors.white,
+                            // adding post to database.
+                            onPressed: () async {
+                              print(titlePostController.text);
+                              print(contentPostController.text);
+                              await FirebaseFirestore.instance
+                                  .collection('forum')
+                                  .add(
+                                {
+                                  "header": titlePostController.text,
+                                  "content": contentPostController.text,
+                                  "date":
+                                      DateTime.now().toString().substring(0, 16),
+                                  "contentPhoto": imageURL,
+                                  "userName": userName,
+                                  "userUID": addNewPost.uid,
+                                },
+                              );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => forumTabs()));
+                            },
                           ),
                         ),
                       ],
                     ),
-                    Container(
-                      margin: EdgeInsets.all(20),
-                      child: FlatButton(
-                        child: Text('Post'),
-                        color: kalphaGreen,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: CircleAvatar(
+                          radius: 25.0,
+                          backgroundImage: NetworkImage(userPhoto),
+                          backgroundColor: Colors.transparent,
                         ),
-                        textColor: Colors.white,
-                        // adding post to database.
-                        onPressed: () async {
-                          print(titlePostController.text);
-                          print(contentPostController.text);
-                          await FirebaseFirestore.instance
-                              .collection('forum')
-                              .add(
-                            {
-                              "header": titlePostController.text,
-                              "content": contentPostController.text,
-                              "date":
-                                  DateTime.now().toString().substring(0, 16),
-                              "contentPhoto": imageURL,
-                              "userName": userName,
-                              "userUID": addNewPost.uid,
-                            },
-                          );
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => forumTabs()));
-                        },
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(
-                  padding: EdgeInsets.only(left: 20),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: CircleAvatar(
-                      radius: 25.0,
-                      backgroundImage: NetworkImage(userPhoto),
-                      backgroundColor: Colors.transparent,
                     ),
                   ),
-                ),
-              ),
-              Expanded(
-                flex: 7,
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(left: 20),
-                      child: TextFormField(
-                        controller: titlePostController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Title of Post',
-                          hintStyle: TextStyle(
-                              fontSize: 20.0, color: klikeAndCommentGrey),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.only(left: 20),
-                      child: TextFormField(
-                        controller: contentPostController,
-                        maxLength: 300,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                        decoration: InputDecoration(
-                          counterText: "",
-                          border: InputBorder.none,
-                          hintText: 'Write your post',
-                          hintStyle: TextStyle(
-                              fontSize: 17.0, color: klikeAndCommentGrey),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 60.0),
-                    GestureDetector(
-                      onTap: () {
-                        uploadImage();
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 4 / 5,
-                        height: MediaQuery.of(context).size.height * 75 / 203,
-                        decoration: new BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          image: new DecorationImage(
-                            fit: BoxFit.scaleDown,
-                            // when image is added to database image will load up here
-                            image: (imageURL != null)
-                                ? NetworkImage(imageURL)
-                                : AssetImage("assets/tapHere.png"),
+                  Expanded(
+                    flex: 7,
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left: 20),
+                          child: TextFormField(
+                            controller: titlePostController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Title of Post',
+                              hintStyle: TextStyle(
+                                  fontSize: 20.0, color: klikeAndCommentGrey),
+                            ),
                           ),
                         ),
-                      ),
+                        Container(
+                          padding: EdgeInsets.only(left: 20),
+                          child: TextFormField(
+                            controller: contentPostController,
+                            maxLength: 300,
+                            keyboardType: TextInputType.multiline,
+                            maxLines: null,
+                            decoration: InputDecoration(
+                              counterText: "",
+                              border: InputBorder.none,
+                              hintText: 'Write your post',
+                              hintStyle: TextStyle(
+                                  fontSize: 17.0, color: klikeAndCommentGrey),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 60.0),
+                        GestureDetector(
+                          onTap: () {
+                            uploadImage();
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width * 4 / 5,
+                            height: MediaQuery.of(context).size.height * 75 / 203,
+                            decoration: new BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              image: new DecorationImage(
+                                fit: BoxFit.scaleDown,
+                                // when image is added to database image will load up here
+                                image: (imageURL != null)
+                                    ? NetworkImage(imageURL)
+                                    : AssetImage("assets/tapHere.png"),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       );
