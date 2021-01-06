@@ -12,13 +12,13 @@ class RecentChats extends StatelessWidget {
       stream: FirebaseFirestore.instance
           .collection('conversations')
           .where('members', arrayContains: _auth.currentUser.uid)
-          .snapshots(),
+          .snapshots(), // we get our user information from conversations' members where we are the one of the user of course
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
+          return Text('Error: ${snapshot.error}'); // if there is none error
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text('Loading...');
+          return Text('Loading...'); // it is a async and it takes time so while loading it gives text to user that says loading
         }
         return Expanded(
           flex: 10,
@@ -31,14 +31,14 @@ class RecentChats extends StatelessWidget {
                   .map((doc) => ListTile(
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(
-                      'https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'),
+                      'https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'),// user image
                 ),
-                title: Text(doc['senderName']),
+                title: Text(doc['senderName']), //our user infos
                 subtitle: Text(doc['displayMessage']),
                 onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (content) => ChatScreen(
+                        builder: (content) => ChatScreen( // we have to pass these arguments to our chat_screen in order to get chat information of that user
                           userId: _auth.currentUser.uid,
                           conversationId: doc.id,
                           senderName: doc['senderName'],
@@ -46,11 +46,11 @@ class RecentChats extends StatelessWidget {
                         ))),
                 trailing: Column(
                   children: [
-                    Text('19:30'),
+                    Text('19:30'), // timestamp will be added
                   ],
                 ),
               ))
-                  .toList(),
+                  .toList(), // map function needs to be converted into list if we want to have listview.
             ),
           ),
         );
