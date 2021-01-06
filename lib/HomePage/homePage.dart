@@ -99,7 +99,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           return homeCardFood(
                             date: map['date'],
                             header: map['header'],
-                            userUID: "userUID",
+                            userUID: map["userUID"],
+                            userSenderName: map['username'],
                             expiryDate: map['expiryDate'],
                             location: map['location'],
                             photo: map['photo'],

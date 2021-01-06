@@ -33,7 +33,7 @@ class RecentChats extends StatelessWidget {
                   backgroundImage: NetworkImage(
                       'https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'),// user image
                 ),
-                title: Text(doc['senderName']), //our user infos
+                title: Text('denemelik'), //our user infos
                 subtitle: Text(doc['displayMessage']),
                 onTap: () => Navigator.push(
                     context,
@@ -41,7 +41,6 @@ class RecentChats extends StatelessWidget {
                         builder: (content) => ChatScreen( // we have to pass these arguments to our chat_screen in order to get chat information of that user
                           userId: _auth.currentUser.uid,
                           conversationId: doc.id,
-                          senderName: doc['senderName'],
                           senderId: _auth.currentUser.uid != doc['members'][0].toString() ? doc['members'][0].toString(): doc['members'][1].toString()
                         ))),
                 trailing: Column(

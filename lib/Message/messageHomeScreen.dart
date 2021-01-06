@@ -32,7 +32,7 @@ class _MessageHomeScreenState extends State<MessageHomeScreen> {
                         ),
                       ),
                       TextSpan(
-                        text: 'Kağıthane, İstanbul',
+                        text: 'Denemelik Konum',
                         style: kSFProRegular.copyWith(
                             color: kGreencolor, fontSize: 17),
                       ),

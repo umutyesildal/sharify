@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sharify/Message/chat_screen.dart';
+import 'package:sharify/Message/new_conversation.dart';
+import 'package:sharify/Message/recent_chats.dart';
 import 'package:sharify/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,6 +15,7 @@ class homeCardFood extends StatefulWidget {
   homeCardFood({
     @required this.header,
     this.userUID,
+    this.userSenderName,
     this.photo,
     this.location,
     this.pickUpTimes,
@@ -23,6 +27,7 @@ class homeCardFood extends StatefulWidget {
   final String date;
   final String header;
   final String userUID;
+  final String userSenderName;
   final String photo;
   final String location;
   final String pickUpTimes;
@@ -49,6 +54,7 @@ class _homeCardFoodState extends State<homeCardFood> {
 
     userName = result.data()['userName'];
     userPhoto = result.data()['userPhoto'];
+    userUID = result.data()['userUID'];
 
     setState(() {
       // when it is no longer waiting for a response, it returns not the circular indicator but it returns scaffold.
@@ -56,6 +62,7 @@ class _homeCardFoodState extends State<homeCardFood> {
     });
   }
 
+  String userUID;
   String userName;
   String userPhoto;
   // to check if awaiting response has came or not.
@@ -295,7 +302,7 @@ class _homeCardFoodState extends State<homeCardFood> {
                           Expanded(
                             flex: 5,
                             child: Text(
-                              userName,
+                              widget.userSenderName,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
@@ -306,6 +313,10 @@ class _homeCardFoodState extends State<homeCardFood> {
                               flex: 5,
                               child: Container(
                                 child: FlatButton(
+                                  onPressed: () {
+                                      newConversation(userUID, widget.userUID); // first one ise current user second one is the post owner
+                                      openChat(context, userUID, widget.userUID);
+                                  },
                                   height: 10.0,
                                   child: Center(
                                     child: Text(

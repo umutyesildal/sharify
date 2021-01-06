@@ -6,10 +6,9 @@ import '../constants.dart';
 class ChatScreen extends StatefulWidget {
   final String userId;
   final String conversationId;
-  final String senderName;
   final String senderId;
   // our needed instances when we want to talk with a person it has to have this properties
-  const ChatScreen({this.userId, this.conversationId, this.senderName, this.senderId});
+  const ChatScreen({this.userId, this.conversationId, this.senderId});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -42,7 +41,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 8),
-              child: Text(widget.senderName),),// we get from here which person sent the message
+              child: Text('denemelik'),),// we get from here which person sent the message
           ],
         ),
       ),
@@ -139,7 +138,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   iconSize: 30,
                   onPressed: () async { // when we press this the information given below will be added to our firebase firestore
                     await _ref.add({
-                      'sender_name': _auth.currentUser.email,
                       'sender_id': widget.userId,
                       'message': _editingController.text,
                       'timeStamp': DateTime.now(),
