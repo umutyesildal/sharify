@@ -99,7 +99,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                           return homeCardFood(
                             date: map['date'],
                             header: map['header'],
-                            userUID: map["userUID"],
+                            userUID: map['userUID'],
                             userSenderName: map['username'],
                             expiryDate: map['expiryDate'],
                             location: map['location'],
@@ -170,13 +170,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         openBuilder: (BuildContext context, VoidCallback _) {
                           final map = querySnapshot.docs[index].data();
                           return homeCardBook(
-                              header: map['header'],
-                              description: map['description'],
-                              photo: map["photo"],
-                              location: map['location'],
-                              pickUpTimes: map["pickUpTimes"],
-                              type: map["type"],
-                              userUID: map["userUID"]);
+                            date: map['date'],
+                            header: map['header'],
+                            description: map['description'],
+                            photo: map["photo"],
+                            location: map['location'],
+                            pickUpTimes: map["pickUpTimes"],
+                            type: map["type"],
+                            userUID: map['userUID'],
+                            userSenderName: map['username'],
+                          );
                         },
                       );
                     },
@@ -239,14 +242,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         openBuilder: (BuildContext context, VoidCallback _) {
                           final map = querySnapshot.docs[index].data();
                           return homeCardCloth(
+                            date: map['date'],
                             header: map['header'],
                             description: map["description"],
                             photo: map["photo"],
                             location: map["location"],
                             pickUpTimes: map["pickUpTimes"],
+                            category: map['category'],
                             gender: map["gender"],
                             size: map["size"],
-                            userUID: map["userUID"],
+                            userUID: map['userUID'],
+                            userSenderName: map['username'],
                           );
                         },
                       );
@@ -310,13 +316,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         openBuilder: (BuildContext context, VoidCallback _) {
                           final map = querySnapshot.docs[index].data();
                           return homeCardTech(
-                              header: map['header'],
-                              description: map["description"],
-                              photo: map["photo"],
-                              location: map["location"],
-                              pickUpTimes: map["pickUpTimes"],
-                              type: map["type"],
-                              userUID: map["userUID"]);
+                            date: map['date'],
+                            header: map['header'],
+                            description: map["description"],
+                            photo: map["photo"],
+                            location: map["location"],
+                            pickUpTimes: map["pickUpTimes"],
+                            type: map["type"],
+                            userUID: map['userUID'],
+                            userSenderName: map['username'],
+                          );
                         },
                       );
                     },
