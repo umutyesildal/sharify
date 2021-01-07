@@ -128,7 +128,7 @@ class _addTechsState extends State<addTechs> {
                 pr.show();
                 await FirebaseFirestore.instance.collection('items').add(
                   {
-                    "date": DateTime.now().toString().substring(0, 16),
+                    "date": await DateTime.now().toString().substring(0, 16),
                     "photo": imageURL,
                     "header": titleOfItem.text,
                     "pickUpTimes": pickUpTimes1.text + pickUpTimes2.text,

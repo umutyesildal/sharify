@@ -14,6 +14,7 @@ class homeCardBook extends StatefulWidget {
       this.description,
       this.photo,
       this.userUID,
+      this.userSenderName,
       this.location,
       this.pickUpTimes,
       this.type,
@@ -26,6 +27,7 @@ class homeCardBook extends StatefulWidget {
   final String pickUpTimes;
   final String type;
   final String userUID;
+  final String userSenderName;
 
   // a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
@@ -121,7 +123,7 @@ class _homeCardBookState extends State<homeCardBook> {
                       ),
                     ),
                     Text(
-                      widget.date.substring(0, 16),
+                      widget.date,
                       style: TextStyle(
                         fontSize: 11.0,
                         color: Colors.grey,
@@ -177,7 +179,7 @@ class _homeCardBookState extends State<homeCardBook> {
                         shape: BoxShape.rectangle,
                         image: new DecorationImage(
                           fit: BoxFit.scaleDown,
-                          image: AssetImage("assets/forumFoto.png"),
+                          image: NetworkImage(widget.photo),
                         ),
                       ),
                     ),
@@ -291,7 +293,7 @@ class _homeCardBookState extends State<homeCardBook> {
                           Expanded(
                             flex: 5,
                             child: Text(
-                              userName,
+                              widget.userSenderName,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
