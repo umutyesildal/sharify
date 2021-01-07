@@ -128,10 +128,11 @@ class _addTechsState extends State<addTechs> {
                 pr.show();
                 await FirebaseFirestore.instance.collection('items').add(
                   {
-                    "date": DateTime.now().toString().substring(0, 16),
+                    "date": await DateTime.now().toString().substring(0, 16),
                     "photo": imageURL,
                     "header": titleOfItem.text,
-                    "pickUpTimes": pickUpTimes1.text + pickUpTimes2.text,
+                    "pickUpTimes":
+                        pickUpTimes1.text + " - " + pickUpTimes2.text,
                     "location": location.text,
                     "tag": "tech",
                     "username": userName,
@@ -311,7 +312,7 @@ class _addTechsState extends State<addTechs> {
                   margin: EdgeInsets.only(left: 20.0),
                   child: DropdownButton<String>(
                     value: ddvalue3,
-                    dropdownColor: Colors.green,
+                    dropdownColor: Colors.white,
                     icon: Icon(
                       Icons.arrow_drop_down_outlined,
                       color: Colors.black,

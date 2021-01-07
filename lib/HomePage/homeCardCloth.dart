@@ -19,6 +19,7 @@ class homeCardCloth extends StatefulWidget {
     this.gender,
     this.size,
     this.userUID,
+    this.userSenderName,
     this.date,
   });
   final String date;
@@ -31,6 +32,7 @@ class homeCardCloth extends StatefulWidget {
   final String gender;
   final String size;
   final String userUID;
+  final String userSenderName;
 
   // a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
@@ -128,7 +130,7 @@ class _homeCardClothState extends State<homeCardCloth> {
                       ),
                     ),
                     Text(
-                      widget.date.substring(0, 16),
+                      widget.date,
                       style: TextStyle(
                         fontSize: 11.0,
                         color: Colors.grey,
@@ -348,7 +350,7 @@ class _homeCardClothState extends State<homeCardCloth> {
                           Expanded(
                             flex: 5,
                             child: Text(
-                              userName,
+                              widget.userSenderName,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),

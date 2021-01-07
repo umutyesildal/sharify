@@ -134,7 +134,8 @@ class _addFoodState extends State<addFood> {
                     "header": titleOfItem.text,
                     "quantity": quantity.text,
                     "expiryDate": expiryDate.text,
-                    "pickUpTimes": pickUpTimes1.text + pickUpTimes2.text,
+                    "pickUpTimes":
+                        pickUpTimes1.text + " - " + pickUpTimes2.text,
                     "location": location.text,
                     "tag": "food",
                     "username": userName,
@@ -222,7 +223,7 @@ class _addFoodState extends State<addFood> {
                   padding: EdgeInsets.only(left: 7),
                   child: Container(
                     margin: EdgeInsets.only(left: 15.0),
-                    width: MediaQuery.of(context).size.width / 3,
+                    width: MediaQuery.of(context).size.width / 2,
                     child: TextFormField(
                       onTap: () async {
                         FocusScope.of(context).requestFocus(new FocusNode());
@@ -239,7 +240,7 @@ class _addFoodState extends State<addFood> {
                             });
                         setState(() {
                           expiryDate.text =
-                              newSelectedDate.toString().substring(0, 9);
+                              newSelectedDate.toString().substring(0, 10);
                         });
                       },
                       controller: expiryDate,
@@ -249,7 +250,7 @@ class _addFoodState extends State<addFood> {
                           color: Colors.black,
                         ),
                         border: InputBorder.none,
-                        hintText: 'From',
+                        hintText: 'Expiry Date',
                         hintStyle: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.w400,

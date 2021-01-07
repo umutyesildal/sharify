@@ -17,6 +17,7 @@ class homeCardTech extends StatefulWidget {
     this.pickUpTimes,
     this.type,
     this.userUID,
+    this.userSenderName,
     this.date,
   });
   final String date;
@@ -27,6 +28,7 @@ class homeCardTech extends StatefulWidget {
   final String pickUpTimes;
   final String type;
   final String userUID;
+  final String userSenderName;
 
   // a code block to get current users user id.
   static final _auth = FirebaseAuth.instance;
@@ -125,7 +127,7 @@ class _homeCardTechState extends State<homeCardTech> {
                       ),
                     ),
                     Text(
-                      widget.date.substring(0, 16),
+                      widget.date,
                       style: TextStyle(
                         fontSize: 11.0,
                         color: Colors.grey,
@@ -295,7 +297,7 @@ class _homeCardTechState extends State<homeCardTech> {
                           Expanded(
                             flex: 5,
                             child: Text(
-                              userName,
+                              widget.userSenderName,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
                             ),
