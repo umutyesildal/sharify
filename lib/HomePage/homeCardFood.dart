@@ -314,8 +314,8 @@ class _homeCardFoodState extends State<homeCardFood> {
                               child: Container(
                                 child: FlatButton(
                                   onPressed: () {
-                                      newConversation(userUID, widget.userUID); // first one ise current user second one is the post owner
-                                      openChat(context, userUID, widget.userUID);
+                                    newConversation(userUID, widget.userUID); // first one ise current user second one is the post owner
+                                    openChat(context, userUID, widget.userUID) ;
                                   },
                                   height: 10.0,
                                   child: Center(

@@ -6,9 +6,10 @@ import '../constants.dart';
 class ChatScreen extends StatefulWidget {
   final String userId;
   final String conversationId;
-  final String senderId;
+  final String userName;
+  final String userPhoto;
   // our needed instances when we want to talk with a person it has to have this properties
-  const ChatScreen({this.userId, this.conversationId, this.senderId});
+  const ChatScreen({this.userId, this.conversationId, this.userName, this.userPhoto});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -36,12 +37,11 @@ class _ChatScreenState extends State<ChatScreen> {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: NetworkImage('https://www.addsystems.com/wp-content/uploads/2017/01/Anonym-e1491994623630.jpg'
-                  ), // example user photo
+              backgroundImage: NetworkImage(widget.userPhoto), // example user photo
             ),
             Padding(
               padding: EdgeInsets.only(left: 8),
-              child: Text('denemelik'),),// we get from here which person sent the message
+              child: Text(widget.userName),),// we get from here which person sent the message
           ],
         ),
       ),
