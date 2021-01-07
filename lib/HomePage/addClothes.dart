@@ -133,7 +133,8 @@ class _addClothesState extends State<addClothes> {
                       "date": DateTime.now().toString().substring(0, 16),
                       "photo": imageURL,
                       "header": titleOfItem.text,
-                      "pickUpTimes": pickUpTimes1.text + pickUpTimes2.text,
+                      "pickUpTimes":
+                          pickUpTimes1.text + " - " + pickUpTimes2.text,
                       "location": location.text,
                       "tag": "cloth",
                       "username": userName,

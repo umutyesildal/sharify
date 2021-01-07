@@ -226,12 +226,51 @@ class _signUpAddLocationAndPhotoState extends State<signUpAddLocationAndPhoto> {
                           try {
                             print(_selectedItem);
                             print(imageURL);
-                            await inputData(_selectedItem, imageURL);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => onBoarding()),
-                            );
+                            if (imageURL == null) {
+                              await showDialog(
+                                context: context,
+                                builder: (context) => new AlertDialog(
+                                  title: new Text('Error'),
+                                  content: Text("Please uploa Profile Picture"),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop(); // dismisses only the dialog and returns nothing
+                                      },
+                                      child: new Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else if (_selectedItem == null) {
+                              await showDialog(
+                                context: context,
+                                builder: (context) => new AlertDialog(
+                                  title: new Text('Error'),
+                                  content: Text("please select a location"),
+                                  actions: <Widget>[
+                                    new FlatButton(
+                                      onPressed: () {
+                                        Navigator.of(context,
+                                                rootNavigator: true)
+                                            .pop(); // dismisses only the dialog and returns nothing
+                                      },
+                                      child: new Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              await inputData(_selectedItem, imageURL);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => onBoarding()),
+                              );
+                            }
                           } catch (e) {
                             print(e);
                           }

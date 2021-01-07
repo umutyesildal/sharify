@@ -142,7 +142,8 @@ class _addBookState extends State<addBook> {
                       "date": DateTime.now().toString().substring(0, 16),
                       "photo": imageURL,
                       "header": titleOfItem.text,
-                      "pickUpTimes": (pickUpTimes1.text + pickUpTimes2.text),
+                      "pickUpTimes":
+                          (pickUpTimes1.text + " - " + pickUpTimes2.text),
                       "location": location.text,
                       "tag": "book",
                       "username": userName,
@@ -325,7 +326,7 @@ class _addBookState extends State<addBook> {
                   margin: EdgeInsets.only(left: 20.0),
                   child: DropdownButton<String>(
                     value: dropdownValue,
-                    dropdownColor: Colors.green,
+                    dropdownColor: Colors.white,
                     icon: Icon(
                       Icons.arrow_drop_down_outlined,
                       color: Colors.black,
