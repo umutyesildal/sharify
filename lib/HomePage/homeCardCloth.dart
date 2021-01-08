@@ -130,7 +130,7 @@ class _homeCardClothState extends State<homeCardCloth> {
                     Text(
                       widget.date,
                       style: TextStyle(
-                        fontSize: 11.0,
+                        fontSize: 12.0,
                         color: Colors.grey,
                       ),
                     ),
@@ -178,12 +178,10 @@ class _homeCardClothState extends State<homeCardCloth> {
                       );
                     },
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 4 / 5,
-                      height: MediaQuery.of(context).size.height * 75 / 203,
                       decoration: new BoxDecoration(
                         shape: BoxShape.rectangle,
                         image: new DecorationImage(
-                          fit: BoxFit.scaleDown,
+                          fit: BoxFit.cover,
                           image: NetworkImage(widget.photo),
                         ),
                       ),
@@ -344,13 +342,12 @@ class _homeCardClothState extends State<homeCardCloth> {
                       flex: 2,
                       child: Row(
                         children: <Widget>[
-                          Expanded(flex: 1, child: SizedBox()),
                           Expanded(
                             flex: 5,
                             child: Text(
                               widget.userSenderName,
                               style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
                           ),
                           Container(

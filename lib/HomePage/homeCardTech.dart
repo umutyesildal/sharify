@@ -126,7 +126,7 @@ class _homeCardTechState extends State<homeCardTech> {
                     Text(
                       widget.date,
                       style: TextStyle(
-                        fontSize: 11.0,
+                        fontSize: 12.0,
                         color: Colors.grey,
                       ),
                     ),
@@ -174,12 +174,10 @@ class _homeCardTechState extends State<homeCardTech> {
                       );
                     },
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 4 / 5,
-                      height: MediaQuery.of(context).size.height * 75 / 203,
                       decoration: new BoxDecoration(
                         shape: BoxShape.rectangle,
                         image: new DecorationImage(
-                          fit: BoxFit.scaleDown,
+                          fit: BoxFit.cover,
                           image: NetworkImage(widget.photo),
                         ),
                       ),
@@ -207,76 +205,82 @@ class _homeCardTechState extends State<homeCardTech> {
                 flex: 3,
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/placeholder.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.location,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/placeholder.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.location,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/clock.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.pickUpTimes,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/clock.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.pickUpTimes,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/hashtag.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.type,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/hashtag.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.type,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -290,7 +294,6 @@ class _homeCardTechState extends State<homeCardTech> {
                       flex: 2,
                       child: Row(
                         children: <Widget>[
-                          Expanded(flex: 1, child: SizedBox()),
                           Expanded(
                             flex: 5,
                             child: Text(
