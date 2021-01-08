@@ -2,42 +2,55 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
-
+var deneme;
+var senderID;
+AsyncSnapshot<QuerySnapshot> snapshot;
 class RecentChats extends StatefulWidget {
   @override
   _RecentChatsState createState() => _RecentChatsState();
 }
 
 class _RecentChatsState extends State<RecentChats> {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
   Future giver() async {
-    DocumentSnapshot result = await FirebaseFirestore.instance
-        .collection('users')
-        .doc('Q3YDJJ8ya4WR6Q4J13QLSDHVXDj1')
-        .get();
-    userName = result.data()['userName'];
-    userPhoto = result.data()['userPhoto'];
-
+    deneme = await FirebaseFirestore.instance
+        .collection('conversations').where('members', arrayContains: _auth.currentUser.uid).get();
+    senderID = deneme.docs.map((doc) => _auth.currentUser.uid != doc['members'][0] ? senderID = doc['members'][0]: senderID = doc['members'][1]).toList();
+    for(String sender in senderID){
+      DocumentSnapshot result = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(sender)
+          .get();
+      userName = result.data()['userName'];
+      userPhoto = result.data()['userPhoto'];
+    } // actually we had to build it with properity stream but we didnt have enought time to make it
+    // so we made it with init state since we initialize at the beginning
+    // it cant have more than one person's variables so it gets the last person that it can
+    // find in the list senderID. Their message page's and their message streams are different from each other
+    // but their username or userphoto properties are similar
     setState(() {
       // when it is no longer waiting for a response, it returns not the circular indicator but it returns scaffold.
       isLoading = true;
     });
-    }
+  }
+
   String userName;
   String userPhoto;
   // to check if awaiting response has came or not.
   bool isLoading = false;
 
   void initState(){
-    giver();
+      giver();
   }
 
   @override
   Widget build(BuildContext context) {
     if (isLoading == false) {
       return Expanded(
+        flex: 9,
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: Center(
             child: CircularProgressIndicator(),
           ),
