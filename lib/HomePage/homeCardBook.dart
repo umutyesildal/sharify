@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sharify/Message/new_conversation.dart';
 import 'package:sharify/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -47,6 +48,7 @@ class _homeCardBookState extends State<homeCardBook> {
 
     userName = result.data()['userName'];
     userPhoto = result.data()['userPhoto'];
+    userUID = result.data()['userUID'];
 
     setState(() {
       // when it is no longer waiting for a response, it returns not the circular indicator but it returns scaffold.
@@ -54,6 +56,7 @@ class _homeCardBookState extends State<homeCardBook> {
     });
   }
 
+  String userUID;
   String userName;
   String userPhoto;
   // to check if awaiting response has came or not.
@@ -307,6 +310,10 @@ class _homeCardBookState extends State<homeCardBook> {
                               flex: 5,
                               child: Container(
                                 child: FlatButton(
+                                  onPressed: () {
+                                    newConversation(userUID, widget.userUID); // first one ise current user second one is the post owner
+                                    openChat(context, userUID, widget.userUID) ;
+                                  },
                                   height: 10.0,
                                   child: Center(
                                     child: Text(

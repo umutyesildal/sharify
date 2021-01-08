@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sharify/HomePage/navigator.dart';
 import 'recent_chats.dart';
 import 'package:flutter/cupertino.dart';
 import '../constants.dart';
