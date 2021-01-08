@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sharify/constants.dart';
 import 'chat_screen.dart';
 var deneme;
 var senderID;
@@ -52,7 +53,9 @@ class _RecentChatsState extends State<RecentChats> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: Center(
-            child: CircularProgressIndicator(),
+            child: Text('You have no message',
+              style: kSFProTextSemibold.copyWith(color: kGreencolor)
+            ),
           ),
         ),
       );
