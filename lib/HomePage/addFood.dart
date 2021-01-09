@@ -27,8 +27,7 @@ class _addFoodState extends State<addFood> {
   TextEditingController expiryDate = TextEditingController();
   TextEditingController pickUpTimes1 = TextEditingController();
   TextEditingController pickUpTimes2 = TextEditingController();
-
-  TextEditingController location = TextEditingController();
+  String locationDropdownValue = 'Location';
   String userName;
   String imageURL;
 
@@ -136,7 +135,7 @@ class _addFoodState extends State<addFood> {
                     "expiryDate": expiryDate.text,
                     "pickUpTimes":
                         pickUpTimes1.text + " - " + pickUpTimes2.text,
-                    "location": location.text,
+                    "location": locationDropdownValue,
                     "tag": "food",
                     "username": userName,
                     "userUID": addFood.uid,
@@ -345,13 +344,38 @@ class _addFoodState extends State<addFood> {
                     ],
                   ),
                 ),
-                addTextField(
-                  controller: location,
-                  givenIcon: Icon(
-                    Icons.location_on_outlined,
-                    color: Colors.black,
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
+                  child: DropdownButton<String>(
+                    value: locationDropdownValue,
+                    dropdownColor: Colors.white,
+                    icon: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      color: Colors.black,
+                    ),
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        locationDropdownValue = newValue;
+                      });
+                    },
+                    items: <String>[
+                      'Location',
+                      'İstanbul/Avrupa',
+                      'İstanbul/Anadolu',
+                      'Kocaeli',
+                      'Edirne',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
                   ),
-                  givenText: "Location",
                 ),
                 SizedBox(
                   height: 20.0,

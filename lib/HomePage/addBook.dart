@@ -20,11 +20,11 @@ class addBook extends StatefulWidget {
 }
 
 class _addBookState extends State<addBook> {
-  String dropdownValue = 'Type';
+  String typeDropdownValue = 'Type';
+  String locationDropdownValue = 'Location';
 // text editing controllers to control and initialize the data inside textformfields(textfields).
   TextEditingController titleOfItem = TextEditingController();
   TextEditingController descriptionOfItem = TextEditingController();
-  TextEditingController location = TextEditingController();
   TextEditingController pickUpTimes1 = TextEditingController();
   TextEditingController pickUpTimes2 = TextEditingController();
 
@@ -132,10 +132,10 @@ class _addBookState extends State<addBook> {
                   print(imageURL);
                   print(titleOfItem.text);
                   print(pickUpTimes1.text);
-                  print(location.text);
+                  print(locationDropdownValue);
                   print(userName);
                   print(addBook.uid);
-                  print(dropdownValue);
+                  print(typeDropdownValue);
                   print(descriptionOfItem.text);
                   await FirebaseFirestore.instance.collection('items').add(
                     {
@@ -144,11 +144,11 @@ class _addBookState extends State<addBook> {
                       "header": titleOfItem.text,
                       "pickUpTimes":
                           (pickUpTimes1.text + " - " + pickUpTimes2.text),
-                      "location": location.text,
+                      "location": locationDropdownValue,
                       "tag": "book",
                       "username": userName,
                       "userUID": addBook.uid,
-                      "type": dropdownValue,
+                      "type": typeDropdownValue,
                       "description": descriptionOfItem.text,
                     },
                   );
@@ -304,28 +304,9 @@ class _addBookState extends State<addBook> {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 15.0),
-                  child: TextFormField(
-                    controller: location,
-                    decoration: InputDecoration(
-                      icon: Icon(
-                        Icons.location_on_outlined,
-                        color: Colors.black,
-                      ),
-                      border: InputBorder.none,
-                      hintText: 'Location',
-                      hintStyle: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black26,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
                   margin: EdgeInsets.only(left: 20.0),
                   child: DropdownButton<String>(
-                    value: dropdownValue,
+                    value: locationDropdownValue,
                     dropdownColor: Colors.white,
                     icon: Icon(
                       Icons.arrow_drop_down_outlined,
@@ -338,7 +319,40 @@ class _addBookState extends State<addBook> {
                     ),
                     onChanged: (String newValue) {
                       setState(() {
-                        dropdownValue = newValue;
+                        locationDropdownValue = newValue;
+                      });
+                    },
+                    items: <String>[
+                      'Location',
+                      'İstanbul/Avrupa',
+                      'İstanbul/Anadolu',
+                      'Kocaeli',
+                      'Edirne',
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 20.0),
+                  child: DropdownButton<String>(
+                    value: typeDropdownValue,
+                    dropdownColor: Colors.white,
+                    icon: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      color: Colors.black,
+                    ),
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black26,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        typeDropdownValue = newValue;
                       });
                     },
                     items: <String>[

@@ -18,32 +18,7 @@ class _MessageHomeScreenState extends State<MessageHomeScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      WidgetSpan(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                          child: kLocationIcon,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'Denemelik Konum',
-                        style: kSFProRegular.copyWith(
-                            color: kGreencolor, fontSize: 17),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        backgroundColor: Colors.white,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
