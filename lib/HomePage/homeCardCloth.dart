@@ -60,6 +60,7 @@ class _homeCardClothState extends State<homeCardCloth> {
       isLoading = true;
     });
   }
+
   String userUID;
   String userName;
   String userPhoto;
@@ -211,126 +212,141 @@ class _homeCardClothState extends State<homeCardCloth> {
                 flex: 4,
                 child: Column(
                   children: <Widget>[
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/placeholder.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.location,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/placeholder.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.location,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/clock.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.pickUpTimes,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/clock.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.pickUpTimes,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/hashtag.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.category,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/hashtag.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.category,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/clothGender.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.gender,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/clothGender.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.gender,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 10.0,
                     ),
-                    Container(
-                      child: Row(
-                        children: <Widget>[
-                          Image(
-                            image: new AssetImage("assets/clothSize.png"),
-                            color: null,
-                            width: 20.49,
-                            height: 25.71,
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          Text(
-                            widget.size,
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            Image(
+                              image: new AssetImage("assets/clothSize.png"),
+                              color: null,
+                              width: 20.49,
+                              height: 25.71,
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 15.0,
+                            ),
+                            Text(
+                              widget.size,
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -358,9 +374,12 @@ class _homeCardClothState extends State<homeCardCloth> {
                               flex: 5,
                               child: Container(
                                 child: FlatButton(
-                                  onPressed: (){
-                                    newConversation(userUID, widget.userUID); // first one ise current user second one is the post owner
-                                    openChat(context, userUID, widget.userUID) ;
+                                  onPressed: () {
+                                    newConversation(
+                                        userUID,
+                                        widget
+                                            .userUID); // first one ise current user second one is the post owner
+                                    openChat(context, userUID, widget.userUID);
                                   },
                                   height: 10.0,
                                   child: Center(

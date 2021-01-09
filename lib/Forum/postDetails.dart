@@ -82,8 +82,7 @@ class _postDetailsState extends State<postDetails> {
             Expanded(
               flex: 2,
               child: Text(
-                widget.forumContentText +
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever",
+                widget.forumContentText,
                 style: TextStyle(
                   fontSize: 10.0,
                   color: Colors.green,
